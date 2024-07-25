@@ -1,4 +1,4 @@
-package com.example.poo_p2_g01_android;
+package app.poo_p2_g01_android;
 
 import org.junit.Test;
 
