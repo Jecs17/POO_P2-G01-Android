@@ -1,4 +1,4 @@
-package app.modelo.Banco;
+package app.modelo.banco;
 
 import app.enums.TipoCuenta;
 import java.time.LocalDate;

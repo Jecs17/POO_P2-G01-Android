@@ -1,4 +1,4 @@
-package app.modelo.Banco;
+package app.modelo.banco;
 
 import app.modelo.persona.Persona;
 import java.time.LocalDate;

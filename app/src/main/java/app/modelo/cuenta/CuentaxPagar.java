@@ -1,6 +1,6 @@
 
 package app.modelo.cuenta;
-import app.modelo.Banco.Banco;
+import app.modelo.banco.Banco;
 import app.modelo.persona.Persona;
 import java.time.LocalDate;
 
