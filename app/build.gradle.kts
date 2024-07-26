@@ -33,10 +33,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
     implementation(libs.appcompat)
