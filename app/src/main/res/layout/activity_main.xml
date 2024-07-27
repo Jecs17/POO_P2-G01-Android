@@ -42,7 +42,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -76,20 +76,19 @@
                 android:id="@+id/cvIngresos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
                 android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:paddingBottom="10dp">
 
                     <ImageView
                         android:layout_width="98dp"
@@ -104,9 +103,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:gravity="center"
-                        android:textSize="18sp"
                         android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -122,7 +121,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,7 +161,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -202,7 +201,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -242,7 +241,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -282,7 +281,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -322,7 +321,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -362,7 +361,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -402,7 +401,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="@color/acento">
 
                 <LinearLayout
                     android:layout_width="match_parent"
