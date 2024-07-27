@@ -13,6 +13,30 @@
         android:theme="@style/Theme.POO_P2G01Android"
         tools:targetApi="31">
         <activity
+            android:name=".ProyeccionGastoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReporteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PersonaBancoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InversionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CuentaBancariaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CuentaxPagarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CuentaxCobrarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GastoActivity"
+            android:exported="false" />
+        <activity
             android:name=".IngresoActivity"
             android:exported="false" />
         <activity

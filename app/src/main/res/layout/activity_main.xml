@@ -112,6 +112,328 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvGastos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="#D242EB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="98dp"
+                        android:layout_height="106dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:src="@drawable/category_img"
+                        app:tint="@color/texto" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="CATEGORIAS"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCuentaxCobrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="#D242EB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="98dp"
+                        android:layout_height="106dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:src="@drawable/category_img"
+                        app:tint="@color/texto" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="CATEGORIAS"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCuentaxPagar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="#D242EB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="98dp"
+                        android:layout_height="106dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:src="@drawable/category_img"
+                        app:tint="@color/texto" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="CATEGORIAS"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCuentaBancaria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="#D242EB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="98dp"
+                        android:layout_height="106dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:src="@drawable/category_img"
+                        app:tint="@color/texto" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="CATEGORIAS"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvInversiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="#D242EB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="98dp"
+                        android:layout_height="106dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:src="@drawable/category_img"
+                        app:tint="@color/texto" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="CATEGORIAS"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvPersonaBanco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="#D242EB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="98dp"
+                        android:layout_height="106dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:src="@drawable/category_img"
+                        app:tint="@color/texto" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="CATEGORIAS"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvReportes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="#D242EB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="98dp"
+                        android:layout_height="106dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:src="@drawable/category_img"
+                        app:tint="@color/texto" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="CATEGORIAS"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvProyeccionGastos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_columnWeight="1"
+                app:cardBackgroundColor="#D242EB">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="98dp"
+                        android:layout_height="106dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:src="@drawable/category_img"
+                        app:tint="@color/texto" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="CATEGORIAS"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
         </GridLayout>
 
     </LinearLayout>
