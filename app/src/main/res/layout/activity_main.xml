@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -15,424 +14,699 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bienvenido"
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"
-            />
+            android:layout_height="64dp"
+            android:background="#03b8ee"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/oswald_light"
+                android:text="FINANZA PERSONAL"
+                android:textColor="#FFF"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/user1_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#FFF" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:useDefaultMargins="true"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
             android:alignmentMode="alignMargins"
-            android:rowOrderPreserved="false"
-            >
+            android:columnCount="2"
+            android:rowOrderPreserved="false">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCategoria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#91cb5d"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                   >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="5"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/category_img"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="0dp"
+                            android:layout_height="84dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/tag_img"
+                            app:layout_constraintBottom_toTopOf="@+id/textView3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="CATEGORIAS"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvIngresos"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#02b4ea"
+                app:cardElevation="8dp"
+                >
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/ingreso_img"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/ingreso_img"
+
+                            app:layout_constraintBottom_toTopOf="@+id/textView4"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="INGRESOS"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvGastos"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#ff6884"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/gastos_img"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/gastos_img"
+                            app:layout_constraintBottom_toTopOf="@+id/textView5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="GASTOS"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCuentaxCobrar"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#76b0c3"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/cuentaxcobrar"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="84dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/cuentaxcobrar"
+                            app:layout_constraintBottom_toTopOf="@+id/textView6"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="CUENTAS POR COBRAR"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCuentaxPagar"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#ff8d3c"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/cuentaxpagar"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/cuentaxpagar"
+                            app:layout_constraintBottom_toTopOf="@+id/textView7"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="CUENTAS POR PAGAR"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCuentaBancaria"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#47abba"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/cuenta_bancaria"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/cuenta_bancaria"
+                            app:layout_constraintBottom_toTopOf="@+id/textView8"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+
+                            android:id="@+id/textView8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="CUENTAS BANCARIAS"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvInversiones"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#be68bf"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/inversiones"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/inversiones"
+                            app:layout_constraintBottom_toTopOf="@+id/textView9"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="INVERSIONES"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvPersonaBanco"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#fcba58"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/banco"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/banco"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="BANCO / PERSONA"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvReportes"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#cbc062"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/reporte"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="110dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/reporte"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+
+                            android:id="@+id/textView10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="REPORTE"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvProyeccionGastos"
-                android:layout_width="wrap_content"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="12dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#D242EB">
+                app:cardBackgroundColor="#397985"
+                app:cardElevation="8dp">
 
-                <LinearLayout
+
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    >
+                    android:layout_height="149dp"
+                    android:paddingBottom="10dp">
 
                     <ImageView
-                        android:layout_width="98dp"
-                        android:layout_height="106dp"
-                        android:layout_gravity="center"
-                        android:padding="0dp"
-                        android:src="@drawable/category_img"
-                        app:tint="@color/texto" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:text="CATEGORIAS"
-                        android:textColor="#FFFFFF" />
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/proyeccion_gasto"
+                        app:tint="#FFF" />
 
-                </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/proyeccion_gasto"
+
+                            app:layout_constraintBottom_toTopOf="@+id/textView11"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+
+                            android:id="@+id/textView11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:textAlignment="center"
+                            android:text="PROYECCION GASTO"
+                            android:textColor="#FFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
-
-
 
         </GridLayout>
 
