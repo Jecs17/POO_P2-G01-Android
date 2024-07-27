@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "app.poo_p2_g01_android"
+    namespace = "com.example.poo_p2_g01_android"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "app.poo_p2_g01_android"
+        applicationId = "com.example.poo_p2_g01_android"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

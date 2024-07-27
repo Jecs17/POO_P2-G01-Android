@@ -138,10 +138,11 @@
                 app:cardElevation="8dp"
                 >
 
+
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="149dp"
-                    android:paddingBottom="10dp">
+                    android:layout_height="149dp">
+
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -185,7 +186,6 @@
                             app:layout_constraintBottom_toBottomOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
                 </FrameLayout>
 
 
@@ -204,6 +204,7 @@
                 android:focusable="true"
                 app:cardBackgroundColor="#ff6884"
                 app:cardElevation="8dp">
+
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -269,6 +270,7 @@
                 app:cardBackgroundColor="#76b0c3"
                 app:cardElevation="8dp">
 
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="149dp"
@@ -333,6 +335,7 @@
                 app:cardBackgroundColor="#ff8d3c"
                 app:cardElevation="8dp">
 
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="149dp"
@@ -396,6 +399,7 @@
                 android:focusable="true"
                 app:cardBackgroundColor="#47abba"
                 app:cardElevation="8dp">
+
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -462,6 +466,7 @@
                 app:cardBackgroundColor="#be68bf"
                 app:cardElevation="8dp">
 
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="149dp"
@@ -527,6 +532,7 @@
                 app:cardBackgroundColor="#fcba58"
                 app:cardElevation="8dp">
 
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="149dp"
@@ -589,6 +595,7 @@
                 android:focusable="true"
                 app:cardBackgroundColor="#cbc062"
                 app:cardElevation="8dp">
+
 
 
                 <FrameLayout
@@ -656,6 +663,7 @@
                 app:cardElevation="8dp">
 
 
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="149dp"
@@ -711,6 +719,5 @@
         </GridLayout>
 
     </LinearLayout>
-
 
 </ScrollView>
