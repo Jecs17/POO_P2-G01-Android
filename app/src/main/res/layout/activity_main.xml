@@ -35,16 +35,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/user1_img"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="#FFF" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -52,13 +42,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="15dp"
             android:alignmentMode="alignMargins"
             android:columnCount="2"
             android:rowOrderPreserved="false">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCategoria"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_columnWeight="1"
@@ -66,7 +58,9 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#91cb5d"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
 
                 <FrameLayout
@@ -88,13 +82,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/imageView"
                             android:layout_width="0dp"
-                            android:layout_height="84dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/tag_img"
@@ -112,7 +105,7 @@
                             android:gravity="center"
                             android:text="CATEGORIAS"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +119,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvIngresos"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -134,9 +126,10 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#02b4ea"
-                app:cardElevation="8dp"
-                >
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
 
 
                 <FrameLayout
@@ -162,7 +155,7 @@
                         <ImageView
                             android:id="@+id/imageView2"
                             android:layout_width="0dp"
-                            android:layout_height="90dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/ingreso_img"
@@ -181,9 +174,12 @@
                             android:gravity="center"
                             android:text="INGRESOS"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </FrameLayout>
@@ -193,7 +189,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvGastos"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -202,7 +197,9 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#ff6884"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
 
 
@@ -228,7 +225,7 @@
 
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="90dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/gastos_img"
@@ -246,7 +243,7 @@
                             android:gravity="center"
                             android:text="GASTOS"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -258,7 +255,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCuentaxCobrar"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -267,7 +263,9 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#76b0c3"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
 
 
@@ -293,7 +291,7 @@
 
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="84dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/cuentaxcobrar"
@@ -311,7 +309,7 @@
                             android:gravity="center"
                             android:text="CUENTAS POR COBRAR"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -323,7 +321,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCuentaxPagar"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -332,7 +329,9 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#ff8d3c"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
 
 
@@ -358,7 +357,7 @@
 
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="90dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/cuentaxpagar"
@@ -376,7 +375,7 @@
                             android:gravity="center"
                             android:text="CUENTAS POR PAGAR"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -388,7 +387,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCuentaBancaria"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -397,7 +395,9 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#47abba"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
 
 
@@ -423,7 +423,7 @@
 
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="90dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/cuenta_bancaria"
@@ -442,7 +442,7 @@
                             android:gravity="center"
                             android:text="CUENTAS BANCARIAS"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -454,7 +454,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvInversiones"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -463,7 +462,9 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#be68bf"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
 
 
@@ -489,7 +490,7 @@
 
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="90dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/inversiones"
@@ -507,7 +508,7 @@
                             android:gravity="center"
                             android:text="INVERSIONES"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -520,7 +521,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvPersonaBanco"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -529,7 +529,9 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#fcba58"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
 
 
@@ -555,10 +557,11 @@
 
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="90dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/banco"
+                            app:layout_constraintBottom_toTopOf="@+id/textView18"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -566,13 +569,14 @@
 
                         <TextView
 
+                            android:id="@+id/textView18"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oswald_regular"
                             android:gravity="center"
                             android:text="BANCO / PERSONA"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -584,7 +588,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvReportes"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -593,9 +596,10 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#cbc062"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
-
 
 
                 <FrameLayout
@@ -620,10 +624,11 @@
 
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_height="110dp"
+                            android:layout_height="80dp"
                             android:layout_gravity="center"
                             android:padding="0dp"
                             android:src="@drawable/reporte"
+                            app:layout_constraintBottom_toTopOf="@+id/textView10"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -638,7 +643,7 @@
                             android:gravity="center"
                             android:text="REPORTE"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -650,7 +655,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvProyeccionGastos"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -659,9 +663,10 @@
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:cardBackgroundColor="#397985"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
                 app:cardElevation="8dp">
-
 
 
                 <FrameLayout
@@ -703,10 +708,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oswald_regular"
-                            android:textAlignment="center"
                             android:text="PROYECCION GASTO"
+                            android:textAlignment="center"
                             android:textColor="#FFF"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent" />
 

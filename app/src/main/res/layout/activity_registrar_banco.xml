@@ -5,10 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrarPersona">
+    tools:context=".RegistrarBanco">
 
     <ImageButton
-        android:id="@+id/btnRegresar"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@android:color/transparent"
@@ -39,20 +38,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guiaBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <TextView
         android:id="@+id/TituloRegistroPersona"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/tituloRegistroPersona"
+        android:text="@string/tituloRegistroBanco"
         android:textAlignment="center"
         android:textSize="24dp"
         android:textStyle="bold"
@@ -102,10 +101,31 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
-        app:layout_constraintBottom_toBottomOf="@id/guiaBottom"
+        app:layout_constraintBottom_toTopOf="@+id/txtNombreOficial"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toBottomOf="@id/txtEmail" />
+
+    <EditText
+        android:id="@+id/txtNombreOficial"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/txtTelefonoOficial"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtTelefono" />
+    <EditText
+        android:id="@+id/txtTelefonoOficial"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="@id/guiaBottom"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtNombreOficial" />
 
     <Button
         android:id="@+id/button"
@@ -116,7 +136,7 @@
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toTopOf="@id/guiaBottom"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/textView12"
@@ -168,6 +188,32 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/guiaStart"
         app:layout_constraintTop_toBottomOf="@id/txtEmail"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/txtNombreOficial"
+        android:text="Nombre Oficial Crédito:"
+        app:layout_constraintBottom_toTopOf="@id/txtNombreOficial"
+        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtTelefono"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/txtTelefonoOficial"
+        android:text="Teléfono Oficial Crédito:"
+        app:layout_constraintBottom_toTopOf="@id/txtTelefonoOficial"
+        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtNombreOficial"
         app:layout_constraintVertical_bias="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
