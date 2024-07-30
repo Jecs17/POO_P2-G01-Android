@@ -13,6 +13,9 @@
         android:theme="@style/Theme.POO_P2G01Android"
         tools:targetApi="31">
         <activity
+            android:name=".RegistrarPersona"
+            android:exported="false" />
+        <activity
             android:name=".ProyeccionGastoActivity"
             android:exported="false" />
         <activity
