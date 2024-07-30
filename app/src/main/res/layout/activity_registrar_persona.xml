@@ -11,14 +11,15 @@
         android:id="@+id/guiaStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.15"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guiaEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.85"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guiaTop"
@@ -26,12 +27,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guiaBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.8"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
 
     <TextView
         android:id="@+id/TituloRegistroPersona"
@@ -65,10 +67,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/txtCedula"
-        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintBottom_toTopOf="@id/txtEmail"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
-        app:layout_constraintBottom_toTopOf="@id/txtEmail"/>
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@+id/txtCedula" />
 
     <EditText
         android:id="@+id/txtEmail"
@@ -76,10 +78,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/txtNombre"
-        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintBottom_toTopOf="@id/txtTelefono"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
-        app:layout_constraintBottom_toTopOf="@id/txtTelefono"/>
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtNombre" />
 
     <EditText
         android:id="@+id/txtTelefono"
@@ -87,10 +89,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
-        app:layout_constraintTop_toBottomOf="@id/txtEmail"
-        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintBottom_toBottomOf="@id/guiaBottom"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
-        app:layout_constraintBottom_toBottomOf="@id/guiaBottom"/>
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtEmail" />
 
     <Button
         android:id="@+id/button"
@@ -107,53 +109,52 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cédula:"
         android:labelFor="@id/txtCedula"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0.9"
-        app:layout_constraintTop_toTopOf="@id/guiaTop"
-        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
-        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        android:text="Cédula:"
         app:layout_constraintBottom_toTopOf="@id/txtCedula"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        app:layout_constraintTop_toTopOf="@id/guiaTop"
+        app:layout_constraintVertical_bias="0.9" />
+
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre y Apellido:"
         android:labelFor="@id/txtNombre"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0.9"
-        app:layout_constraintTop_toBottomOf="@id/txtCedula"
-        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
-        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        android:text="Nombre y Apellido:"
         app:layout_constraintBottom_toTopOf="@id/txtNombre"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtCedula"
+        app:layout_constraintVertical_bias="0.9" />
+
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email:"
         android:labelFor="@id/txtEmail"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0.9"
-        app:layout_constraintTop_toBottomOf="@id/txtNombre"
-        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
-        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        android:text="Email:"
         app:layout_constraintBottom_toTopOf="@id/txtEmail"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtNombre"
+        app:layout_constraintVertical_bias="0.9" />
+
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Teléfono"
         android:labelFor="@id/txtTelefono"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0.9"
-        app:layout_constraintTop_toBottomOf="@id/txtEmail"
-        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
-        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        android:text="Teléfono"
         app:layout_constraintBottom_toTopOf="@id/txtTelefono"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtEmail"
+        app:layout_constraintVertical_bias="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
