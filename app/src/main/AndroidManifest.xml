@@ -13,10 +13,7 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".RegistrarBanco"
-            android:exported="false" />
-        <activity
-            android:name=".RegistrarPersona"
+            android:name=".RegistrarPersonaBanco"
             android:exported="false" />
         <activity
             android:name=".ProyeccionGastoActivity"

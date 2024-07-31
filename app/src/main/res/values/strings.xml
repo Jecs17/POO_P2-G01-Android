@@ -6,7 +6,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="tituloRegistroPersona">Registrar Persona</string>
-    <string name="tituloRegistroBanco">Registrar Banco</string>
+    <string name="tituloRegistroBanco">Registrar Banco</string>}
+    <string name="texto_cedula">Cédula:</string>
+    <string name="texto_ruc">RUC:</string>
+    <string name="texto_nombrePersona">Nombre Completo:</string>
+    <string name="texto_nombreBanco">Entidad Bancaria:</string>
     <string name="btnRegistro">Registrar</string>
 
 </resources>

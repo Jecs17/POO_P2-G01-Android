@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i;
         int vistaId = view.getId();
         if(vistaId == R.id.cvCategoria){
-            i = new Intent(this, RegistrarPersona.class);
+            i = new Intent(this, CategoryActivity.class);
         }else if(vistaId == R.id.cvIngresos) {
             i = new Intent(this, IngresoActivity.class);
         }else if(vistaId == R.id.cvGastos){
