@@ -8,12 +8,11 @@
     tools:context=".RegistrarPersonaBanco">
 
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@android:color/transparent"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="?attr/homeAsUpIndicator"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/round_2_corner_shape"
+        android:src="@drawable/turn_back_arrow"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintBottom_toBottomOf="@+id/guiaTop"
         app:layout_constraintEnd_toEndOf="@id/guiaStart"
         app:layout_constraintStart_toStartOf="parent"
