@@ -1,5 +1,14 @@
 
 package modelo.movimiento;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import enums.TipoCategoria;
 
 /**
@@ -18,7 +27,7 @@ import enums.TipoCategoria;
  * </ul>
  * @author Grupo1
  */
-public class Categoria {
+public class Categoria implements Serializable {
     /**
      * El nombre de la categoría.
      */
@@ -28,7 +37,12 @@ public class Categoria {
      * El tipo de categoría, representado por un valor de la enumeración {@link TipoCategoria}.
      */
     private TipoCategoria tipoCategoria;
-    
+
+    /**
+     * El nombre del archivo, donde se almacenará información
+     */
+    private static final String nomArchivo = "categorias.ser";
+
     /**
      * <h3>Constructor de la clase Categoria</h3>
      * <h3>Constructor de la clase Categoria.</h3>
@@ -96,5 +110,59 @@ public class Categoria {
         }
         Categoria otro = (Categoria) o;
         return otro.getNombre().equalsIgnoreCase(this.getNombre()) && otro.getTipoCategoria() == this.getTipoCategoria();
-    }  
+    }
+
+    /**
+     * <p>Devuele una lista de objetos Categorias</p>
+     * @return lista de categorias
+     */
+    public static List<Categoria> obtenerCategorias(){
+        List<Categoria> lstCategoria = new ArrayList<>();
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        return lstCategoria;
+    }
+
+    /**
+     * Devuelve una lista de categorias, la cual se obtiene de un archivo serializado. Sino existe el archivo, se crea la lista.
+     * @param directorio directorio en android donde se leerá el archivo
+     * @return una lista de objetos categorias
+     * @throws Exception lanza una excepción si hay algun error inesperado
+     */
+    public static List<Categoria> cargarCategorias(File directorio) throws Exception{
+        List<Categoria> listaCategoria = new ArrayList<>();
+        File file = new File(directorio, nomArchivo);
+        if (file.exists()) {
+            try(ObjectInputStream os = new ObjectInputStream(new FileInputStream(file))){
+                listaCategoria = (List<Categoria>) os.readObject();
+            } catch(Exception e) {
+                new Exception(e.getMessage());
+            }
+        }
+        return listaCategoria;
+    }
+
+    /**
+     * Devuelve booleano si esta creado el archivo con sus datos, por lo contrario lo crea;
+     * @param directorio directorio en android donde se guardará el archivo
+     * @return true si se pudo crear el archivo o ya existe.
+     */
+    public static boolean crearDatosIniciales(File directorio){
+        List<Categoria> lstCategoria = Categoria.obtenerCategorias();
+        boolean guardado = false;
+        File file = new File(directorio, nomArchivo);
+
+        if(!file.exists()) {
+            try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
+                os.writeObject(lstCategoria);
+                guardado = true;
+            } catch(Exception e) {
+                new Exception(e.getMessage());
+            }
+        } else guardado = true;
+        return guardado;
+    }
+
 }
