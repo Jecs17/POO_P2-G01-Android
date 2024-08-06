@@ -1,8 +1,11 @@
 
 package modelo.movimiento;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -101,8 +104,8 @@ public class Categoria implements Serializable {
      * @return true si son iguales, false en caso contrario
      */
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if(this == o) {
             return true;
         }
         if(o == null || getClass() != o.getClass()){
@@ -113,10 +116,20 @@ public class Categoria implements Serializable {
     }
 
     /**
+     * toString que devuelve solo el nombre del objeto
+     * @return nombre del objeto en formato String
+     */
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
+
+    /**
      * <p>Devuele una lista de objetos Categorias</p>
      * @return lista de categorias
      */
-    public static List<Categoria> obtenerCategorias(){
+    public static List<Categoria> obtenerCategorias() {
         List<Categoria> lstCategoria = new ArrayList<>();
         lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
         lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
@@ -131,14 +144,12 @@ public class Categoria implements Serializable {
      * @return una lista de objetos categorias
      * @throws Exception lanza una excepción si hay algun error inesperado
      */
-    public static List<Categoria> cargarCategorias(File directorio) throws Exception{
+    public static List<Categoria> cargarCategorias(File directorio) throws IOException, ClassNotFoundException{
         List<Categoria> listaCategoria = new ArrayList<>();
         File file = new File(directorio, nomArchivo);
         if (file.exists()) {
-            try(ObjectInputStream os = new ObjectInputStream(new FileInputStream(file))){
+            try(ObjectInputStream os = new ObjectInputStream(new FileInputStream(file))) {
                 listaCategoria = (List<Categoria>) os.readObject();
-            } catch(Exception e) {
-                new Exception(e.getMessage());
             }
         }
         return listaCategoria;
@@ -158,8 +169,8 @@ public class Categoria implements Serializable {
             try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
                 os.writeObject(lstCategoria);
                 guardado = true;
-            } catch(Exception e) {
-                new Exception(e.getMessage());
+            } catch(IOException e) {
+                Log.d("App escritura", "Error al escribir el archivo");
             }
         } else guardado = true;
         return guardado;

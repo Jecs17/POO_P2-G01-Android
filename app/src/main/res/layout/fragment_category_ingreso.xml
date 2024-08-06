@@ -6,12 +6,10 @@
     tools:context=".ControladorCategoria.CategoryIngreso">
 
 
-    <TextView
+    <ListView
+        android:id="@+id/listViewIngreso"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:gravity="center"
-
-        />
+        android:layout_height="wrap_content">
+    </ListView>
 
 </LinearLayout>
