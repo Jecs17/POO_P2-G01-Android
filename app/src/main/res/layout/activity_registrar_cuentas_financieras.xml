@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vistaRegistrarCuentaFinanciera"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrarCuentasFinancieras">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia15horizontalCF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia85horizontalCF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia15verticalCF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia85VerticalCF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registrar Cuenta"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/guia15horizontalCF"
+                app:layout_constraintEnd_toStartOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtvewIdentificacionCF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Identificacion"
+                app:layout_constraintBottom_toTopOf="@id/txtIdentificacionObjeto"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/guia15horizontalCF"
+                app:layout_constraintVertical_bias="0.9" />
+
+            <EditText
+                android:id="@+id/txtIdentificacionObjeto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:ems="10"
+                android:inputType="text"
+                app:layout_constraintBottom_toTopOf="@id/txtCantidad"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toTopOf="@id/guia15horizontalCF"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad"
+                app:layout_constraintBottom_toTopOf="@id/txtCantidad"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtIdentificacionObjeto"
+                app:layout_constraintVertical_bias="0.9" />
+
+            <EditText
+                android:id="@+id/txtCantidad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintBottom_toTopOf="@id/txtDescripcion"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtIdentificacionObjeto" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                app:layout_constraintBottom_toTopOf="@id/txtDescripcion"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtCantidad"
+                app:layout_constraintVertical_bias="0.9" />
+
+            <EditText
+                android:id="@+id/txtDescripcion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                app:layout_constraintBottom_toTopOf="@id/txtFechaPrestamo"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtCantidad" />
+
+            <TextView
+                android:id="@+id/txtFechaPrestamo"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/txtCuota"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toEndOf="@id/btnFechaPrestamo"
+                app:layout_constraintTop_toBottomOf="@id/txtDescripcion" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cuota"
+                app:layout_constraintBottom_toTopOf="@id/txtCuota"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtFechaPrestamo"
+                app:layout_constraintVertical_bias="0.9" />
+
+            <EditText
+                android:id="@+id/txtCuota"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toTopOf="@id/txtFechaInicioPago"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtFechaPrestamo" />
+
+            <TextView
+                android:id="@+id/txtFechaInicioPago"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/txtFechaFinPago"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toEndOf="@id/btnFechaInicioPago"
+                app:layout_constraintTop_toBottomOf="@id/txtCuota" />
+
+            <TextView
+                android:id="@+id/txtFechaFinPago"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/txtInteres"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toEndOf="@id/btnFechaFinPago"
+                app:layout_constraintTop_toBottomOf="@id/txtFechaInicioPago" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Interes"
+                app:layout_constraintBottom_toTopOf="@id/txtInteres"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtFechaFinPago"
+                app:layout_constraintVertical_bias="0.9" />
+
+            <EditText
+                android:id="@+id/txtInteres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toTopOf="@id/guia85horizontalCF"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtFechaFinPago" />
+
+            <Button
+                android:id="@+id/btnRegistrarCF"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Registrar Cuenta"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toTopOf="@id/guia85horizontalCF" />
+
+            <Button
+                android:id="@+id/btnFechaPrestamo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:drawableTint="@color/md_theme_onPrimary"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Fecha Prestamo"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/txtCuota"
+                app:layout_constraintEnd_toStartOf="@id/txtFechaPrestamo"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtDescripcion" />
+            <Button
+                android:id="@+id/btnFechaInicioPago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:drawableTint="@color/md_theme_onPrimary"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Fecha Incio Pago"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/txtFechaFinPago"
+                app:layout_constraintEnd_toStartOf="@id/txtFechaInicioPago"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtCuota" />
+            <Button
+                android:id="@+id/btnFechaFinPago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:drawableTint="@color/md_theme_onPrimary"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Fecha Fin Pago"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/txtInteres"
+                app:layout_constraintEnd_toStartOf="@id/txtFechaFinPago"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtFechaInicioPago" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
