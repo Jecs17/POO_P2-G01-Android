@@ -1,7 +1,16 @@
 package modelo.banco;
 
 import modelo.persona.Persona;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -22,7 +31,7 @@ import java.util.Objects;
  *
  * @author Grupo1
  */
-public class Banco {
+public class Banco implements Serializable {
     /**
      * Nombre de la entidad bancaria.
      */
@@ -47,6 +56,8 @@ public class Banco {
      * Fecha en la que el banco es registrado.
      */
     private LocalDate fechaRegistro;
+
+    public static final String nomArchivo = "bancos.ser";
     
     /**
      * Constructor de la clase Banco.
@@ -144,6 +155,45 @@ public class Banco {
     @Override
     public String toString() {
         return String.format("%-18s %-20s %-24s %-23s Oficial: %-15s Teléfono: %-12s", fechaRegistro, ruc, entidadBancaria, email, oficialCredito.getNombre(), oficialCredito.getTelefono());
+    }
+
+    public static ArrayList<Banco> obtenerBancosInciales(){
+        ArrayList<Banco> lista = new ArrayList<>();
+        // TODO: Cambiar esto
+        Persona oficial = new Persona("Mario Duarte", "0994312563");
+        lista.add(new Banco("Banco del Pacífico", "2341654582001", "pacif@banco.com", oficial));
+        return lista;
+    }
+
+    public static boolean crearDatosInciales(File directorio){
+        ArrayList<Banco> lista = Banco.obtenerBancosInciales();
+        boolean guardado = false;
+        File f = new File(directorio, nomArchivo);
+
+        if(! f.exists()){
+            try (ObjectOutputStream os= new ObjectOutputStream(new FileOutputStream(f))){
+                os.writeObject(lista);
+                guardado = true;
+            }catch (IOException e){
+                //TODO: Cambiar esto
+                new Exception(e.getMessage());
+            }
+        } else guardado = true;
+        return guardado;
+    }
+
+    public static ArrayList<Banco> cargarBanco(File directorio){
+        ArrayList<Banco> lista = new ArrayList<>();
+        File f = new File(directorio, nomArchivo);
+        if(f.exists()){
+            try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(f))){
+                lista = (ArrayList<Banco>) is.readObject();
+            }catch (Exception e){
+                //TODO : Cambiar esto
+                new Exception(e.getMessage());
+            }
+        }
+        return lista;
     }
 
     /**

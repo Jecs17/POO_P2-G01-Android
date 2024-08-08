@@ -1,7 +1,15 @@
 
 package modelo.persona;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -20,7 +28,12 @@ import java.util.Objects;
  * </p>
  * @author Grupo1
  */
-public class Persona {
+public class Persona implements Serializable {
+    /**
+     * Identificación de las personas en la lista.
+     */
+    private int id;
+
     /**
      * Cédula de identidad de la persona.
      */
@@ -45,6 +58,16 @@ public class Persona {
      * Fecha en la que la persona fue registrada en el sistema.
      */
     private LocalDate fechaRegistro;
+
+    /**
+     * Nombre del Archivo serializado de las Personas
+     */
+    public static final String nomArchivo = "personas.ser";
+
+    /**
+     *  Guarda el último id inicializado.
+     */
+    public static int ultimoId = 0;
     
     /**
      * <h3>Constructor clase Persona(Oficial Crédito)</h3>
@@ -55,10 +78,12 @@ public class Persona {
      * @param telefono Número de teléfono de la persona.
      */
     public Persona(String nombre, String telefono){
+        this.id = ultimoId + 1;
         this.cedula = " ";
         this.nombre = nombre;
         this.telefono = telefono;
         this.fechaRegistro = LocalDate.now();
+        ultimoId = id;
     }
     
     /**
@@ -72,12 +97,20 @@ public class Persona {
      * @param email Correo electrónico de la persona.
      */
     public Persona(String cedula, String nombre, String telefono, String email){
+        this.id = ultimoId + 1;
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.fechaRegistro = LocalDate.now();
+        ultimoId = id;
     }
+
+    /**
+     * Retorna el id de la persona
+     * @return ID de la persona.
+     */
+    public int getId(){ return this.id;}
     
     /**
      * Retorna la cédula de la persona.
@@ -122,7 +155,7 @@ public class Persona {
      * @return El número de teléfono de la persona.
      */
     public String getTelefono(){
-        return this.telefono;
+        return "Tel: " + this.telefono;
     }
     
     /**
@@ -169,6 +202,45 @@ public class Persona {
     @Override
     public String toString() {
         return String.format("%-18s %-20s %-24s %-23s Telf: %-30s", fechaRegistro, cedula, nombre, email, telefono);
+    }
+
+    public static ArrayList<Persona> obtenerPersonasIniciales(){
+        ArrayList<Persona> lista = new ArrayList<>();
+        lista.add(new Persona("094232152", "Pedro Lopéz", "0994354621", "pedrol12@gmail.com"));
+        lista.add(new Persona("045613445", "Luis Correa", "075389753", "luisco@gmail.com"));
+        //lista.add(new Persona("Mario Duarte", "0994312563"));
+        return lista;
+    }
+
+    public static boolean crearDatosIniciales(File directorio){
+        ArrayList<Persona> lista = Persona.obtenerPersonasIniciales();
+        boolean guardado = false;
+        File f = new File(directorio, nomArchivo);
+
+        if(! f.exists()){
+            try (ObjectOutputStream os= new ObjectOutputStream(new FileOutputStream(f))){
+                os.writeObject(lista);
+                guardado = true;
+            }catch (IOException e){
+                //TODO: Cambiar esto
+                new Exception(e.getMessage());
+            }
+        } else guardado = true;
+        return guardado;
+    }
+
+    public static ArrayList<Persona> cargarPersonas(File directorio){
+        ArrayList<Persona> lista = new ArrayList<>();
+        File f = new File(directorio, nomArchivo);
+        if(f.exists()){
+            try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(f))){
+                lista = (ArrayList<Persona>) is.readObject();
+            }catch (Exception e){
+                //TODO : Cambiar esto
+                new Exception(e.getMessage());
+            }
+        }
+        return lista;
     }
     
     /**

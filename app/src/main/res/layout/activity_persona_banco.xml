@@ -166,6 +166,13 @@
                     android:layout_height="wrap_content"
                     android:padding="10sp"
                     android:text="Otros datos" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="" />
             </TableRow>
         </TableLayout>
     </HorizontalScrollView>
