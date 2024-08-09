@@ -25,6 +25,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
+import modelo.banco.Banco;
 import modelo.persona.Persona;
 
 public class PersonaBancoActivity extends AppCompatActivity {
@@ -66,8 +67,8 @@ public class PersonaBancoActivity extends AppCompatActivity {
     }
 
     public void registrarBanco(){
-        btnPersona = findViewById(R.id.btnRegistrarBanco);
-        btnPersona.setOnClickListener(new View.OnClickListener() {
+        btnBanco = findViewById(R.id.btnRegistrarBanco);
+        btnBanco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PersonaBancoActivity.this, RegistrarPersonaBanco.class);
@@ -78,32 +79,44 @@ public class PersonaBancoActivity extends AppCompatActivity {
     }
 
     private void cargarDatos(){
-        boolean guardado = false;
+        boolean guardadoPersona = false;
+        boolean guardadoBanco = false;
+//        boolean guardado = false;
         try {
-            guardado = Persona.crearDatosIniciales(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+//            guardado = Persona.crearDatosIniciales(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            guardadoPersona = Persona.crearDatosIniciales(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            guardadoBanco = Banco.crearDatosIniciales(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+
         } catch(Exception e){
-            guardado = false;
+//            guardado = false;
+            guardadoPersona = false;
+            guardadoBanco = false;
             Log.d("ActivityPersonaBanco", "Error al cargar los datos iniciales"+ e.getMessage());
         }
 
-        if(guardado){
+//        if(guardado){
+//            Log.d("ActivityPersonaBanco","Datos iniciales guardados");
+//        }
+        if(guardadoPersona && guardadoBanco){
             Log.d("ActivityPersonaBanco","Datos iniciales guardados");
         }
     }
 
     private  void llenarTabla(){
-        ArrayList<Persona> lista = new ArrayList<>();
+        ArrayList<Persona> listaPersona = new ArrayList<>();
+        ArrayList<Banco> listaBanco = new ArrayList<>();
         try {
-            lista = Persona.cargarPersonas(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            listaPersona = Persona.cargarPersonas(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            listaBanco = Banco.cargarBanco(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
         } catch(Exception e){
             Log.d("ActivityPersonaBanco", "Error al cargar los datos"+ e.getMessage());
         }
 
         TableLayout tabla = findViewById(R.id.tablaPersonaBanco);
-        Log.d("ActivityPersonaBanco", lista.toString());
+        Log.d("ActivityPersonaBanco", listaPersona.toString() + listaBanco.toString());
         cleanTable(tabla);
 
-        for(Persona persona: lista){
+        for(Persona persona: listaPersona){
 
             if(!persona.getCedula().equals(" ")){
                 TableRow tr = new TableRow(this);
@@ -159,6 +172,62 @@ public class PersonaBancoActivity extends AppCompatActivity {
                 //agregar al Tableview
                 tabla.addView(tr);
             }
+        }
+
+        for(Banco banco: listaBanco){
+
+            TableRow tr = new TableRow(this);
+
+            TextView tvCodigo = new TextView(this);
+            tvCodigo.setTextColor(ContextCompat.getColor(this,R.color.md_theme_background));
+            tvCodigo.setPadding(8,10,8,10);
+            tvCodigo.setText(banco.getId()+"");
+
+            TextView tvFechaRegistro = new TextView(this);
+            tvFechaRegistro.setTextColor(ContextCompat.getColor(this,R.color.md_theme_background));
+            tvFechaRegistro.setPadding(8,10,8,10);
+            tvFechaRegistro.setText(banco.getFechaRegistro().toString());
+
+            TextView tvIdentificacion = new TextView(this);
+            tvIdentificacion.setTextColor(ContextCompat.getColor(this,R.color.md_theme_background));
+            tvIdentificacion.setPadding(8,10,8,10);
+            tvIdentificacion.setText(banco.getRuc());
+
+            TextView tvNombre = new TextView(this);
+            tvNombre.setTextColor(ContextCompat.getColor(this,R.color.md_theme_background));
+            tvNombre.setPadding(8,10,8,10);
+            tvNombre.setText(banco.getEntidadBancaria());
+
+            TextView tvEmail = new TextView(this);
+            tvEmail.setTextColor(ContextCompat.getColor(this,R.color.md_theme_background));
+            tvEmail.setPadding(8,10,10,10);
+            tvEmail.setText(banco.getEmail());
+
+            TextView tvOtrosDatos = new TextView(this);
+            tvOtrosDatos.setTextColor(ContextCompat.getColor(this,R.color.md_theme_background));
+            tvOtrosDatos.setPadding(8,10,8,10);
+            tvOtrosDatos.setText(banco.toString());
+
+
+            ImageButton btnEliminar = new ImageButton(this);
+            btnEliminar.setAdjustViewBounds(true);
+            btnEliminar.setMaxWidth(100);
+            btnEliminar.setMaxHeight(100);
+            btnEliminar.setBackgroundResource(R.drawable.buttonstyle);
+            btnEliminar.setPadding(5,10,5,10);
+            btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.x_mark));
+
+            //agregar al TableRow
+            tr.addView(tvCodigo);
+            tr.addView(tvFechaRegistro);
+            tr.addView(tvIdentificacion);
+            tr.addView(tvNombre);
+            tr.addView(tvEmail);
+            tr.addView(tvOtrosDatos);
+            tr.addView(btnEliminar);
+            tr.setPadding(0,15,0,0);
+            //agregar al Tableview
+            tabla.addView(tr);
         }
 
 

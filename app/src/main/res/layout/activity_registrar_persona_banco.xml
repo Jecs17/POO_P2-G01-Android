@@ -11,10 +11,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/round_2_corner_shape"
+        android:contentDescription="@string/btnRegresar"
         android:src="@drawable/turn_back_arrow"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintBottom_toBottomOf="@+id/guiaTop"
         app:layout_constraintEnd_toEndOf="@id/guiaStart"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +53,7 @@
         android:layout_height="wrap_content"
         android:text="@string/tituloRegistroBanco"
         android:textAlignment="center"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/guiaTop"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
@@ -63,68 +64,75 @@
     <EditText
         android:id="@+id/txtCodigo"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@id/txtNombreObjeto"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toBottomOf="@id/guiaTop"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintVertical_chainStyle="spread"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/txtNombreObjeto"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@id/txtEmail"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
-        app:layout_constraintTop_toBottomOf="@+id/txtCodigo" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCodigo"
+        tools:ignore="Autofill"/>
 
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@id/txtTelefono"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
-        app:layout_constraintTop_toBottomOf="@id/txtNombreObjeto" />
+        app:layout_constraintTop_toBottomOf="@id/txtNombreObjeto"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/txtTelefono"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@id/txtNombreOficial"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
-        app:layout_constraintTop_toBottomOf="@id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@id/txtEmail"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/txtNombreOficial"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@id/txtTelefonoOficial"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
-        app:layout_constraintTop_toBottomOf="@id/txtTelefono" />
+        app:layout_constraintTop_toBottomOf="@id/txtTelefono"
+        tools:ignore="Autofill" />
+
     <EditText
         android:id="@+id/txtTelefonoOficial"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="phone"
         app:layout_constraintBottom_toBottomOf="@id/guiaBottom"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
-        app:layout_constraintTop_toBottomOf="@id/txtNombreOficial" />
+        app:layout_constraintTop_toBottomOf="@id/txtNombreOficial"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/button"
@@ -142,7 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@id/txtCodigo"
-        android:text="RUC:"
+        android:text="@string/texto_ruc"
         app:layout_constraintBottom_toTopOf="@id/txtCodigo"
         app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
         app:layout_constraintHorizontal_bias="0"
@@ -155,7 +163,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@id/txtNombreObjeto"
-        android:text="Entidad Bancaria:"
+        android:text="@string/texto_nombreBanco"
         app:layout_constraintBottom_toTopOf="@id/txtNombreObjeto"
         app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
         app:layout_constraintHorizontal_bias="0"

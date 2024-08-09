@@ -33,6 +33,11 @@ import java.util.Objects;
  */
 public class Banco implements Serializable {
     /**
+     * Identificación de los bancos en la lista.
+     */
+    private int id;
+
+    /**
      * Nombre de la entidad bancaria.
      */
     private String entidadBancaria;
@@ -57,7 +62,15 @@ public class Banco implements Serializable {
      */
     private LocalDate fechaRegistro;
 
+    /**
+     * Nombre del Archivo serializado de los Bancos.
+     */
     public static final String nomArchivo = "bancos.ser";
+
+    /**
+     *  Guarda el último id inicializado.
+     */
+    public static int ultimoId = 0;
     
     /**
      * Constructor de la clase Banco.
@@ -68,12 +81,20 @@ public class Banco implements Serializable {
      * @param oficialCredito Persona encargada del crédito.
      */
     public Banco(String entidadBancaria, String ruc, String email, Persona oficialCredito) {
+        this.id = ultimoId + 1;
+        ultimoId = id;
         this.entidadBancaria = entidadBancaria;
         this.ruc = ruc;
         this.email = email;
         this.oficialCredito = oficialCredito;
         this.fechaRegistro = LocalDate.now();
     }
+
+    /**
+     * Retorna el id del banco
+     * @return ID del banco.
+     */
+    public int getId(){ return this.id;}
 
     /**
      * Obtiene el nombre de la entidad bancaria.
@@ -154,7 +175,7 @@ public class Banco implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("%-18s %-20s %-24s %-23s Oficial: %-15s Teléfono: %-12s", fechaRegistro, ruc, entidadBancaria, email, oficialCredito.getNombre(), oficialCredito.getTelefono());
+        return String.format("Oficial: %s\n%s",oficialCredito.getNombre(), oficialCredito.getTelefono());
     }
 
     public static ArrayList<Banco> obtenerBancosInciales(){
@@ -165,7 +186,7 @@ public class Banco implements Serializable {
         return lista;
     }
 
-    public static boolean crearDatosInciales(File directorio){
+    public static boolean crearDatosIniciales(File directorio){
         ArrayList<Banco> lista = Banco.obtenerBancosInciales();
         boolean guardado = false;
         File f = new File(directorio, nomArchivo);
