@@ -128,23 +128,41 @@
                 android:layout_marginBottom="40dp"
                 android:ems="10"
                 android:inputType="textMultiLine"
-                app:layout_constraintBottom_toTopOf="@id/txtFechaPrestamo"
+                app:layout_constraintBottom_toTopOf="@id/layoutFechaPrestamo"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
                 app:layout_constraintTop_toBottomOf="@id/txtCantidad" />
 
-            <TextView
-                android:id="@+id/txtFechaPrestamo"
+            <LinearLayout
+                android:id="@+id/layoutFechaPrestamo"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_marginBottom="40dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="18sp"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@id/txtCuota"
-                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
-                app:layout_constraintStart_toEndOf="@id/btnFechaPrestamo"
-                app:layout_constraintTop_toBottomOf="@id/txtDescripcion" />
+                app:layout_constraintEnd_toStartOf="@+id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtDescripcion">
+
+                <Button
+                    android:id="@+id/btnFechaPrestamo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableEnd="@android:drawable/arrow_down_float"
+                    android:drawableTint="@color/md_theme_onPrimary"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Fecha Prestamo"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtFechaPrestamo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView7"
@@ -155,7 +173,7 @@
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtFechaPrestamo"
+                app:layout_constraintTop_toBottomOf="@id/layoutFechaPrestamo"
                 app:layout_constraintVertical_bias="0.9" />
 
             <EditText
@@ -165,39 +183,13 @@
                 android:layout_marginBottom="40dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                app:layout_constraintBottom_toTopOf="@id/txtFechaInicioPago"
-                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
-                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtFechaPrestamo" />
-
-            <TextView
-                android:id="@+id/txtFechaInicioPago"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginBottom="40dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@id/txtFechaFinPago"
-                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
-                app:layout_constraintStart_toEndOf="@id/btnFechaInicioPago"
-                app:layout_constraintTop_toBottomOf="@id/txtCuota" />
-
-            <TextView
-                android:id="@+id/txtFechaFinPago"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginBottom="40dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/txtInteres"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
-                app:layout_constraintStart_toEndOf="@id/btnFechaFinPago"
-                app:layout_constraintTop_toBottomOf="@id/txtFechaInicioPago" />
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/layoutFechaPrestamo" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/txtviewInteres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Interes"
@@ -205,7 +197,7 @@
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtFechaFinPago"
+                app:layout_constraintTop_toBottomOf="@id/txtCuota"
                 app:layout_constraintVertical_bias="0.9" />
 
             <EditText
@@ -215,10 +207,72 @@
                 android:layout_marginBottom="40dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
+                app:layout_constraintBottom_toTopOf="@id/layoutFechaInicio"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtCuota" />
+
+            <LinearLayout
+                android:id="@+id/layoutFechaInicio"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/layoutFechaFin"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@id/txtInteres">
+
+                <Button
+                    android:id="@+id/btnFechaInicioPago"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableEnd="@android:drawable/arrow_down_float"
+                    android:drawableTint="@color/md_theme_onPrimary"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Fecha Incio Pago"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtFechaInicioPago"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutFechaFin"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@id/guia85horizontalCF"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtFechaFinPago" />
+                app:layout_constraintTop_toBottomOf="@id/layoutFechaInicio">
+
+                <Button
+                    android:id="@+id/btnFechaFinPago"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableEnd="@android:drawable/arrow_down_float"
+                    android:drawableTint="@color/md_theme_onPrimary"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Fecha Fin Pago"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtFechaFinPago"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnRegistrarCF"
@@ -230,51 +284,6 @@
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
                 app:layout_constraintTop_toTopOf="@id/guia85horizontalCF" />
 
-            <Button
-                android:id="@+id/btnFechaPrestamo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:drawableEnd="@android:drawable/arrow_down_float"
-                android:drawableTint="@color/md_theme_onPrimary"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="Fecha Prestamo"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/txtCuota"
-                app:layout_constraintEnd_toStartOf="@id/txtFechaPrestamo"
-                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtDescripcion" />
-            <Button
-                android:id="@+id/btnFechaInicioPago"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:drawableEnd="@android:drawable/arrow_down_float"
-                android:drawableTint="@color/md_theme_onPrimary"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="Fecha Incio Pago"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/txtFechaFinPago"
-                app:layout_constraintEnd_toStartOf="@id/txtFechaInicioPago"
-                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtCuota" />
-            <Button
-                android:id="@+id/btnFechaFinPago"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:drawableEnd="@android:drawable/arrow_down_float"
-                android:drawableTint="@color/md_theme_onPrimary"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="Fecha Fin Pago"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/txtInteres"
-                app:layout_constraintEnd_toStartOf="@id/txtFechaFinPago"
-                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtFechaInicioPago" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

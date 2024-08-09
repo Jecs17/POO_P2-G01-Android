@@ -28,6 +28,9 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
     int dia, mes, anio;
     Dialog dialog;
     Button btnNingunaFecha, btnAbrirCalendario;
+    boolean esAcreedor = false;
+    TextView txtviewInteres;
+    EditText txtIntereses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,21 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        cambiarCuenta();
         dialogFechaFin();
         colocarFecha();
+    }
+
+    private void cambiarCuenta(){
+        txtviewInteres = findViewById(R.id.txtviewInteres);
+        txtIntereses = findViewById(R.id.txtInteres);
+        if(!esAcreedor){
+            txtIntereses.setVisibility(View.GONE);
+            txtviewInteres.setVisibility(View.GONE);
+        }else{
+            txtviewInteres.setVisibility(View.VISIBLE);
+            txtIntereses.setVisibility(View.VISIBLE);
+        }
     }
 
     private void dialogFechaFin(){
