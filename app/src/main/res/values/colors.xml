@@ -140,4 +140,10 @@
     <color name="md_theme_surfaceContainer_highContrast">#F2ECF4</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#ECE6EE</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#E6E0E9</color>
+
+    <!-- Prueba de colores para themas en blanco y negro-->
+    <color name="theme_color">#424242</color>
+    <color name="theme_background">#FEF7FF</color>
+
+    <color name="theme_fondo_secundario">#FEF7FF</color>
 </resources>

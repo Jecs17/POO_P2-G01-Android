@@ -1,16 +1,27 @@
 package com.example.poo_p2_g01_android.ControladorCategoria;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 import com.example.poo_p2_g01_android.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.util.ArrayList;
 import java.util.List;
 import enums.TipoCategoria;
@@ -26,6 +37,9 @@ public class CategoryActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_category);
         inicializarTabLayout();
         cargarDatos();
+        eventoBotonRetroceso();
+        eventoBotonAgregarCategoria();
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -34,6 +48,48 @@ public class CategoryActivity extends AppCompatActivity  {
         });
     }
 
+    // Método para configurar el botón de retroceso
+    private void eventoBotonRetroceso() {
+        ImageButton backButton = findViewById(R.id.btnAtras);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    //Método donde se configura el evento del boton agregar Categoria
+    private void eventoBotonAgregarCategoria(){
+        CardView cvAgregarCategoria = findViewById(R.id.cardViewAgregarCategoria);
+
+
+        cvAgregarCategoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View view1 = LayoutInflater.from(CategoryActivity.this).inflate(R.layout.dialog_seleccion_categorias, null);
+                //falta controlar eventos
+                TextInputEditText etNombreCategoria = findViewById(R.id.textNombreCategoria);
+                Spinner spinner = findViewById(R.id.spinner_categorias);
+
+                AlertDialog alertDialog = new MaterialAlertDialogBuilder(CategoryActivity.this)
+                        .setTitle("Agregar Categoría")
+                        .setView(view1)
+                        .setPositiveButton("Agregar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).create();
+                alertDialog.show();
+            }
+        });
+    }
 
     private void inicializarTabLayout() {
         TabLayout tabLayout = findViewById(R.id.tabLCategoria);

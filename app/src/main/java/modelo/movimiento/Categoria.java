@@ -135,6 +135,38 @@ public class Categoria implements Serializable {
         lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
         lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
         lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
+        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
+        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
         return lstCategoria;
     }
 
@@ -165,7 +197,7 @@ public class Categoria implements Serializable {
         boolean guardado = false;
         File file = new File(directorio, nomArchivo);
 
-        if(!file.exists()) {
+        if(file.exists()) {
             try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
                 os.writeObject(lstCategoria);
                 guardado = true;

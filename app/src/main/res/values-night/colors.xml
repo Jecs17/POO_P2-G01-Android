@@ -140,4 +140,11 @@
     <color name="md_theme_surfaceContainer_highContrast">#211F24</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#2B292F</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#36343A</color>
+
+    <!-- Color para el boton de retroceder-->
+    <color name="theme_color">#E0E0E0</color>
+    <color name="theme_background">#121212</color>
+
+
+    <color name="theme_fondo_secundario">#1E1E1E</color>
 </resources>

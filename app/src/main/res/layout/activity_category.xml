@@ -1,21 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginEnd="15dp"
-    android:layout_marginStart="15dp"
-    android:layout_marginBottom="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     tools:context=".ControladorCategoria.CategoryActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
+        >
+
+        <ImageButton
+            android:id="@+id/btnAtras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/theme_color"
+            android:background="@color/theme_background"
+            android:src="@drawable/turn_back_arrow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:text="LISTADO DE CATEGORIAS"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+
+        </TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/viewLinea"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="13dp"
+        android:background="@color/theme_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorFullWidth="true">
+        android:layout_marginTop="1dp"
+        android:background="@color/theme_fondo_secundario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewLinea"
+        app:tabIndicatorColor="@color/theme_color"
+        app:tabIndicatorFullWidth="true"
+        app:tabTextAppearance="@style/CustomTabTextStyle"
+        app:tabTextColor="@color/theme_color">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -35,8 +91,35 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
+        app:layout_constraintTop_toBottomOf="@id/tabLCategoria"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewAgregarCategoria"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="0dp">
     </androidx.viewpager2.widget.ViewPager2>
-</LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewAgregarCategoria"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:background="@color/theme_fondo_secundario"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text=" + Añadir nueva categoría" />
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

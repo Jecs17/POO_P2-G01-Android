@@ -27,8 +27,8 @@
     <string name="txtProyeccionGasto">PROYECCION GASTO</string>
 
     <!-- String activity category-->
-    <string name="txtIngresos">Ingresos</string>
-    <string name="txtGastos">Gastos</string>
+    <string name="txtIngresos">INGRESOS</string>
+    <string name="txtGastos">GASTOS</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
