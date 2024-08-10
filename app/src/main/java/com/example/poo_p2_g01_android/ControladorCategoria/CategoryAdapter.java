@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class CategoryAdapter extends FragmentStateAdapter {
+    private CategoryGasto categoryGastoFragment;
+    private CategoryIngreso categoryIngresoFragment;
 
     public CategoryAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -14,17 +16,32 @@ public class CategoryAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        if(position == 0) {
-            return new CategoryIngreso();
-        } else if (position == 1) {
-            return new CategoryGasto();
+        switch (position) {
+            case 0:
+                if (categoryIngresoFragment == null) {
+                    categoryIngresoFragment = new CategoryIngreso();
+                }
+                return categoryIngresoFragment;
+            case 1:
+                if (categoryGastoFragment == null) {
+                    categoryGastoFragment = new CategoryGasto();
+                }
+                return categoryGastoFragment;
+            default:
+                return new Fragment();
         }
-        return new CategoryIngreso();
     }
-
 
     @Override
     public int getItemCount() {
         return 2;
+    }
+
+    public CategoryGasto getCategoryGastoFragment() {
+        return categoryGastoFragment;
+    }
+
+    public CategoryIngreso getCategoryIngresoFragment() {
+        return categoryIngresoFragment;
     }
 }

@@ -112,7 +112,7 @@ public class Categoria implements Serializable {
             return false;
         }
         Categoria otro = (Categoria) o;
-        return otro.getNombre().equalsIgnoreCase(this.getNombre()) && otro.getTipoCategoria() == this.getTipoCategoria();
+        return otro.getNombre().equalsIgnoreCase(this.getNombre());
     }
 
     /**
@@ -131,38 +131,6 @@ public class Categoria implements Serializable {
      */
     public static List<Categoria> obtenerCategorias() {
         List<Categoria> lstCategoria = new ArrayList<>();
-        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
-        lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
-        lstCategoria.add(new Categoria("Transporte", TipoCategoria.GASTO));
         lstCategoria.add(new Categoria("Salario", TipoCategoria.INGRESO));
         lstCategoria.add(new Categoria("Alquiler", TipoCategoria.INGRESO));
         lstCategoria.add(new Categoria("Comida", TipoCategoria.GASTO));
@@ -192,20 +160,46 @@ public class Categoria implements Serializable {
      * @param directorio directorio en android donde se guardará el archivo
      * @return true si se pudo crear el archivo o ya existe.
      */
-    public static boolean crearDatosIniciales(File directorio){
+    public static boolean crearDatosIniciales(File directorio) {
         List<Categoria> lstCategoria = Categoria.obtenerCategorias();
         boolean guardado = false;
         File file = new File(directorio, nomArchivo);
-
-        if(file.exists()) {
-            try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
-                os.writeObject(lstCategoria);
-                guardado = true;
-            } catch(IOException e) {
-                Log.d("App escritura", "Error al escribir el archivo");
-            }
+        if(!file.exists()) {
+           Categoria.escribirArchivo(file, lstCategoria);
+           guardado = true;
         } else guardado = true;
         return guardado;
+    }
+
+    private static void escribirArchivo(File file, List<Categoria> lstCategoria) {
+        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
+            os.writeObject(lstCategoria);
+            os.flush();
+        } catch(IOException e) {
+            Log.d("Categoria", "Error al escribir el archivo");
+        }
+    }
+
+    public static void actualizarDatos(File directorio, Categoria categoria) {
+        try {
+            List<Categoria> listaCategorias = Categoria.cargarCategorias(directorio);
+            listaCategorias.add(categoria);
+            File file = new File(directorio, nomArchivo);
+            escribirArchivo(file, listaCategorias);
+        } catch (Exception e) {
+            Log.e("Categoria", "Error al leer el archivo categorias.ser" + e.getMessage());
+        }
+    }
+
+    public static void eliminarDatos(File directorio, Categoria categoria)  {
+        try {
+            File file = new File(directorio, nomArchivo);
+            List<Categoria> lstCategoria = cargarCategorias(directorio);
+            lstCategoria.remove(categoria);
+            Categoria.escribirArchivo(file, lstCategoria);
+        } catch (Exception e) {
+            Log.e("Categoria", "Error al leer el archivo categorias.ser" + e.getMessage());
+        }
     }
 
 }
