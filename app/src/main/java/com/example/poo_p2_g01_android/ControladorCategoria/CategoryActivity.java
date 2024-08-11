@@ -103,8 +103,9 @@ public class CategoryActivity extends AppCompatActivity  {
         View dialogView = LayoutInflater.from(CategoryActivity.this).inflate(R.layout.dialog_seleccion_categorias, null);
         Spinner spinnerCategoria = dialogView.findViewById(R.id.spinner_categorias);
         TextInputEditText etNombreCategoria = dialogView.findViewById(R.id.textNombreCategoria);
-
-        inicializarSpinner(spinnerCategoria);
+        ViewPager2 viewPager2 = findViewById(R.id.viewPager);
+        int posicionActual =  viewPager2.getCurrentItem();
+        inicializarSpinner(spinnerCategoria, posicionActual);
 
         AlertDialog alertDialog = new MaterialAlertDialogBuilder(CategoryActivity.this)
                 .setTitle("Agregar Categoría")
@@ -172,7 +173,6 @@ public class CategoryActivity extends AppCompatActivity  {
 
                 actualizarVista(categoryIngresoFrag, categoryGastoFrag, nuevaCategoria);
 
-                cambiarViewPager2(nuevaCategoria);
 
             }
         } catch (Exception e) {
@@ -197,21 +197,6 @@ public class CategoryActivity extends AppCompatActivity  {
         }
     }
 
-    /**
-     * Cambia la pestaña actual del ViewPager2 según el tipo de categoría.
-     *
-     * @param nuevaCategoria La nueva categoría para determinar la pestaña.
-     */
-    private void cambiarViewPager2(Categoria nuevaCategoria) {
-        ViewPager2 viewPager2 = findViewById(R.id.viewPager);
-        if (nuevaCategoria.getTipoCategoria() == TipoCategoria.GASTO) {
-            viewPager2.setCurrentItem(1);
-
-        } else if (nuevaCategoria.getTipoCategoria() == TipoCategoria.INGRESO) {
-            viewPager2.setCurrentItem(0);
-
-        }
-    }
 
     /**
      * Valida si una categoría ya existe en el archivo.
@@ -328,22 +313,15 @@ public class CategoryActivity extends AppCompatActivity  {
      *
      * @param spinner El Spinner que se debe inicializar.
      */
-    private void inicializarSpinner(Spinner spinner) {
-        List<TipoCategoria> opciones = obtenerOpcionesSpinner();
+    private void inicializarSpinner(Spinner spinner, int valor) {
+        List<TipoCategoria> opciones = new ArrayList<>();
+        if (valor == 0) {
+            opciones.add(TipoCategoria.INGRESO);
+        } else if (valor == 1) {
+            opciones.add(TipoCategoria.GASTO);
+        }
         ArrayAdapter<TipoCategoria> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         spinner.setAdapter(adapter);
-    }
-
-    /**
-     * Obtiene la lista de opciones para el Spinner.
-     *
-     * @return Una lista de opciones para el Spinner.
-     */
-    private List<TipoCategoria> obtenerOpcionesSpinner() {
-        List<TipoCategoria> opciones = new ArrayList<>();
-        opciones.add(TipoCategoria.INGRESO);
-        opciones.add(TipoCategoria.GASTO);
-        return opciones;
     }
 }

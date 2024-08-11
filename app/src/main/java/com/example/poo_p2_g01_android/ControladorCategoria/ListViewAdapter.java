@@ -69,6 +69,13 @@ public class ListViewAdapter extends ArrayAdapter<Categoria> {
             view = LayoutInflater.from(context).inflate(resource, null);
         }
 
+        if (convertView != null) {
+            convertView.setOnClickListener(null);
+        }
+        if (convertView != null) {
+            convertView.setClickable(false);
+        }
+
         Categoria categoria = lstCategorias.get(position);
         TextView textView = view.findViewById(R.id.textViewCategoria);
         ImageView imageView = view.findViewById(R.id.imageView);

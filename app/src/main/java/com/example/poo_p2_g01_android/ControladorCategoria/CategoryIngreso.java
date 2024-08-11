@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Spinner;
+
 import com.example.poo_p2_g01_android.R;
 
 import java.util.ArrayList;
@@ -41,7 +43,6 @@ public class CategoryIngreso extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_ingreso, container, false);
         ListView listViewI = view.findViewById(R.id.listViewIngreso);
-
         categoriasIngresos = new ArrayList<>();
         adapter = new ListViewAdapter(getContext(), R.layout.item_row, categoriasIngresos);
         listViewI.setAdapter(adapter);

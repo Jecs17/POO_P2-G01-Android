@@ -206,6 +206,7 @@ public class Categoria implements Serializable {
             List<Categoria> listaCategorias = Categoria.cargarCategorias(directorio);
             listaCategorias.add(categoria);
             escribirArchivo(directorio, listaCategorias);
+            Log.d("Categoria añadir Datos", listaCategorias.toString());
         } catch (Exception e) {
             Log.e("Categoria", "Error al leer el archivo categorias.ser" + e.getMessage());
         }
@@ -222,6 +223,7 @@ public class Categoria implements Serializable {
             List<Categoria> lstCategoria = cargarCategorias(directorio);
             lstCategoria.remove(categoria);
             Categoria.escribirArchivo(directorio, lstCategoria);
+            Log.d("Categoria eliminar Datos", lstCategoria.toString());
         } catch (Exception e) {
             Log.e("Categoria", "Error al leer el archivo categorias.ser" + e.getMessage());
         }
