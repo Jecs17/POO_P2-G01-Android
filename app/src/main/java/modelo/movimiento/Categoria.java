@@ -35,7 +35,7 @@ public class Categoria implements Serializable {
      * El nombre de la categoría.
      */
     private String nombre;
-    
+
     /**
      * El tipo de categoría, representado por un valor de la enumeración {@link TipoCategoria}.
      */
@@ -44,7 +44,7 @@ public class Categoria implements Serializable {
     /**
      * El nombre del archivo, donde se almacenará información
      */
-    private static final String nomArchivo = "categorias.ser";
+    private static final String nomArchivo = "category.ser";
 
     /**
      * <h3>Constructor de la clase Categoria</h3>
@@ -164,15 +164,30 @@ public class Categoria implements Serializable {
         List<Categoria> lstCategoria = Categoria.obtenerCategorias();
         boolean guardado = false;
         File file = new File(directorio, nomArchivo);
-        if(!file.exists()) {
-           Categoria.escribirArchivo(file, lstCategoria);
-           guardado = true;
-        } else guardado = true;
+
+        if (!file.exists()) {
+            Categoria.escribirArchivo(directorio, lstCategoria);
+            Log.d("Categoriasssss", "archivo creado por primera vez");
+            guardado = true;
+
+        } else {
+            guardado = true;
+        }
+        if(guardado) {
+            Log.d("Categoria", "se creo el archivo correctamente");
+        }
         return guardado;
     }
 
-    private static void escribirArchivo(File file, List<Categoria> lstCategoria) {
-        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
+    /**
+     * Escribe una lista de categorías en un archivo.
+     *
+     * @param file El directorio donde se almacenará el archivo.
+     * @param lstCategoria La lista de categorías a escribir en el archivo.
+     */
+    public static void escribirArchivo(File file, List<Categoria> lstCategoria) {
+        File file1 = new File(file, nomArchivo);
+        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file1))) {
             os.writeObject(lstCategoria);
             os.flush();
         } catch(IOException e) {
@@ -180,23 +195,33 @@ public class Categoria implements Serializable {
         }
     }
 
+    /**
+     * Añade una categoría a la lista y actualiza el archivo correspondiente.
+     *
+     * @param directorio El directorio del archivo de categorías.
+     * @param categoria La categoría a añadir.
+     */
     public static void actualizarDatos(File directorio, Categoria categoria) {
         try {
             List<Categoria> listaCategorias = Categoria.cargarCategorias(directorio);
             listaCategorias.add(categoria);
-            File file = new File(directorio, nomArchivo);
-            escribirArchivo(file, listaCategorias);
+            escribirArchivo(directorio, listaCategorias);
         } catch (Exception e) {
             Log.e("Categoria", "Error al leer el archivo categorias.ser" + e.getMessage());
         }
     }
 
+    /**
+     * Elimina una categoría de la lista y actualiza el archivo correspondiente.
+     *
+     * @param directorio El directorio del archivo de categorías.
+     * @param categoria La categoría a eliminar.
+     */
     public static void eliminarDatos(File directorio, Categoria categoria)  {
         try {
-            File file = new File(directorio, nomArchivo);
             List<Categoria> lstCategoria = cargarCategorias(directorio);
             lstCategoria.remove(categoria);
-            Categoria.escribirArchivo(file, lstCategoria);
+            Categoria.escribirArchivo(directorio, lstCategoria);
         } catch (Exception e) {
             Log.e("Categoria", "Error al leer el archivo categorias.ser" + e.getMessage());
         }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,9 +31,22 @@ import java.util.List;
 import enums.TipoCategoria;
 import modelo.movimiento.Categoria;
 
-
+/**
+ * Activity para gestionar las categorías de ingresos y gastos.
+ * Proporciona funcionalidades para agregar, eliminar categorías y navegar entre ellas.
+ */
 public class CategoryActivity extends AppCompatActivity  {
+    /**
+     * Adaptador utilizado para gestionar y mostrar las categorías en el ViewPager2.
+     */
     CategoryAdapter categoryAdapter;
+
+    /**
+     * Se llama cuando la actividad es creada. Inicializa los componentes de la interfaz de usuario y
+     * configura los eventos de los botones.
+     *
+     * @param savedInstanceState El estado guardado de la instancia, si está disponible.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +64,9 @@ public class CategoryActivity extends AppCompatActivity  {
         });
     }
 
-    // Método para configurar el botón de retroceso
+    /**
+     * Configura el evento del botón de retroceso para finalizar la actividad.
+     */
     private void eventoBotonRetroceso() {
         ImageButton backButton = findViewById(R.id.btnAtras);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +77,10 @@ public class CategoryActivity extends AppCompatActivity  {
         });
     }
 
+    /**
+     * Configura el evento del botón para agregar una categoría.
+     * Muestra un diálogo para agregar una nueva categoría.
+     */
     private void eventoBotonAgregarCategoria() {
         CardView cvAgregarCategoria = findViewById(R.id.cardViewAgregarCategoria);
         File directorio = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
@@ -72,6 +92,13 @@ public class CategoryActivity extends AppCompatActivity  {
         });
     }
 
+    /**
+     * Muestra un diálogo para agregar una nueva categoría.
+     *
+     * @param directorio El directorio donde se guardarán los datos de la categoría.
+     * @param categoryGastoFrag Fragmento que maneja las categorías de gasto.
+     * @param categoryIngresoFrag Fragmento que maneja las categorías de ingreso.
+     */
     private void mostrarDialogoAgregarCategoria(File directorio, CategoryGasto categoryGastoFrag, CategoryIngreso categoryIngresoFrag) {
         View dialogView = LayoutInflater.from(CategoryActivity.this).inflate(R.layout.dialog_seleccion_categorias, null);
         Spinner spinnerCategoria = dialogView.findViewById(R.id.spinner_categorias);
@@ -98,8 +125,26 @@ public class CategoryActivity extends AppCompatActivity  {
                 .create();
 
         alertDialog.show();
+        Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        if (positiveButton != null) {
+            positiveButton.setTextSize(18);
+        }
+
+        Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        if (negativeButton != null) {
+            negativeButton.setTextSize(18);
+        }
     }
 
+    /**
+     * Agrega una nueva categoría a la lista y guarda los datos.
+     *
+     * @param directorio El directorio donde se guardarán los datos de la categoría.
+     * @param spinnerCategoria El spinner que contiene el tipo de categoría.
+     * @param etNombreCategoria El campo de texto con el nombre de la categoría.
+     * @param categoryGastoFrag Fragmento que maneja las categorías de gasto.
+     * @param categoryIngresoFrag Fragmento que maneja las categorías de ingreso.
+     */
     private void agregarCategoria(File directorio, Spinner spinnerCategoria, TextInputEditText etNombreCategoria, CategoryGasto categoryGastoFrag, CategoryIngreso categoryIngresoFrag) {
         String nombreCategoria = String.valueOf(etNombreCategoria.getText()).trim();
         TipoCategoria tipoCategoria = (TipoCategoria) spinnerCategoria.getSelectedItem();
@@ -111,6 +156,14 @@ public class CategoryActivity extends AppCompatActivity  {
         }
     }
 
+    /**
+     * Guarda una nueva categoría en el archivo y actualiza la vista.
+     *
+     * @param directorio El directorio donde se guardarán los datos de la categoría.
+     * @param nuevaCategoria La nueva categoría a guardar.
+     * @param categoryGastoFrag Fragmento que maneja las categorías de gasto.
+     * @param categoryIngresoFrag Fragmento que maneja las categorías de ingreso.
+     */
     private void guardarCategoria(File directorio, Categoria nuevaCategoria, CategoryGasto categoryGastoFrag, CategoryIngreso categoryIngresoFrag) {
         try {
             boolean siExiste = validarCategoriaSiExiste(nuevaCategoria);
@@ -120,36 +173,52 @@ public class CategoryActivity extends AppCompatActivity  {
                 actualizarVista(categoryIngresoFrag, categoryGastoFrag, nuevaCategoria);
 
                 cambiarViewPager2(nuevaCategoria);
-                //actualizar adaptador
-                if (categoryGastoFrag != null) {
-                    categoryGastoFrag.actualizarListaG();
-                }
-                if (categoryIngresoFrag != null) {
-                    categoryIngresoFrag.actualizarListaI();
-                }
+
             }
         } catch (Exception e) {
             Log.d("Category Activity", "Error al escribir el archivo");
         }
     }
 
+    /**
+     * Actualiza la vista de las categorías en los fragmentos y notifica al adaptador.
+     *
+     * @param categoryIngresoFrag Fragmento que maneja las categorías de ingreso.
+     * @param categoryGastoFrag Fragmento que maneja las categorías de gasto.
+     * @param nuevaCategoria La nueva categoría agregada.
+     */
     private void actualizarVista(CategoryIngreso categoryIngresoFrag, CategoryGasto categoryGastoFrag, Categoria nuevaCategoria){
         if (categoryGastoFrag != null && nuevaCategoria.getTipoCategoria() == TipoCategoria.GASTO) {
             categoryGastoFrag.agregarCategoriaG(nuevaCategoria);
+            categoryAdapter.notifyDataSetChanged();
         } else if (categoryIngresoFrag != null && nuevaCategoria.getTipoCategoria() == TipoCategoria.INGRESO) {
             categoryIngresoFrag.agregarCategoriaI(nuevaCategoria);
+            categoryAdapter.notifyDataSetChanged();
         }
     }
 
+    /**
+     * Cambia la pestaña actual del ViewPager2 según el tipo de categoría.
+     *
+     * @param nuevaCategoria La nueva categoría para determinar la pestaña.
+     */
     private void cambiarViewPager2(Categoria nuevaCategoria) {
         ViewPager2 viewPager2 = findViewById(R.id.viewPager);
         if (nuevaCategoria.getTipoCategoria() == TipoCategoria.GASTO) {
             viewPager2.setCurrentItem(1);
+
         } else if (nuevaCategoria.getTipoCategoria() == TipoCategoria.INGRESO) {
             viewPager2.setCurrentItem(0);
+
         }
     }
 
+    /**
+     * Valida si una categoría ya existe en el archivo.
+     *
+     * @param nuevaCategoria La categoría a validar.
+     * @return `true` si la categoría ya existe, `false` en caso contrario.
+     */
     private boolean validarCategoriaSiExiste(Categoria nuevaCategoria) {
         boolean siExiste = false;
         try {
@@ -166,6 +235,9 @@ public class CategoryActivity extends AppCompatActivity  {
         return siExiste;
     }
 
+    /**
+     * Inicializa el TabLayout y ViewPager2 para la navegación entre pestañas.
+     */
     private void inicializarTabLayout() {
         TabLayout tabLayout = findViewById(R.id.tabLCategoria);
         ViewPager2 viewPager2 = findViewById(R.id.viewPager);
@@ -197,11 +269,14 @@ public class CategoryActivity extends AppCompatActivity  {
         });
     }
 
-    //escribe el archivo con las categorias.
+    /**
+     * Carga los datos iniciales de las categorías desde el archivo.
+     */
     private void cargarDatos(){
         boolean guardado = false;
+        File directorio = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         try {
-            guardado = Categoria.crearDatosIniciales(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            guardado = Categoria.crearDatosIniciales(directorio);
         } catch(Exception e) {
             Log.d("App", "Error al crear los datos iniciales" + e.getMessage());
         }
@@ -210,7 +285,12 @@ public class CategoryActivity extends AppCompatActivity  {
         }
     }
 
-    // Lee el archivo de categorías según el tipo especificado
+    /**
+     * Lee las categorías del archivo filtrando por el tipo especificado.
+     *
+     * @param tipoCategoria El tipo de categoría para filtrar.
+     * @return Una lista de categorías que coinciden con el tipo especificado.
+     */
     public List<Categoria> leerDatosPorTipo(TipoCategoria tipoCategoria) {
         List<Categoria> lstCategoriaPorTipo = new ArrayList<>();
         try {
@@ -225,16 +305,29 @@ public class CategoryActivity extends AppCompatActivity  {
         return lstCategoriaPorTipo;
     }
 
-    // Lee las categorías de tipo ingreso
+    /**
+     * Lee las categorías de tipo ingreso desde el archivo.
+     *
+     * @return Una lista de categorías de tipo ingreso.
+     */
     public List<Categoria> leerDatosIngreso() {
         return leerDatosPorTipo(TipoCategoria.INGRESO);
     }
 
-    // Lee las categorías de tipo gasto
+    /**
+     * Lee las categorías de tipo gasto desde el archivo.
+     *
+     * @return Una lista de categorías de tipo gasto.
+     */
     public List<Categoria> leerDatosGasto() {
         return leerDatosPorTipo(TipoCategoria.GASTO);
     }
 
+    /**
+     * Inicializa el Spinner con las opciones disponibles para las categorías.
+     *
+     * @param spinner El Spinner que se debe inicializar.
+     */
     private void inicializarSpinner(Spinner spinner) {
         List<TipoCategoria> opciones = obtenerOpcionesSpinner();
         ArrayAdapter<TipoCategoria> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
@@ -242,6 +335,11 @@ public class CategoryActivity extends AppCompatActivity  {
         spinner.setAdapter(adapter);
     }
 
+    /**
+     * Obtiene la lista de opciones para el Spinner.
+     *
+     * @return Una lista de opciones para el Spinner.
+     */
     private List<TipoCategoria> obtenerOpcionesSpinner() {
         List<TipoCategoria> opciones = new ArrayList<>();
         opciones.add(TipoCategoria.INGRESO);

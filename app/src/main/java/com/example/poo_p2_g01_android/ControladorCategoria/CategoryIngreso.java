@@ -12,12 +12,30 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.movimiento.Categoria;
 
+/**
+ * Fragmento que muestra las categorías de ingreso en una vista de lista.
+ */
 public class CategoryIngreso extends Fragment {
 
+    /**
+     * Lista de categorías de ingreso que se muestran en el fragmento.
+     */
     private List<Categoria> categoriasIngresos;
+
+    /**
+     * Adaptador para vincular los datos de categorías de ingreso con la vista ListView.
+     */
     private ListViewAdapter adapter;
 
 
+    /**
+     * Infla la vista del fragmento y configura el adaptador para la lista de categorías de ingreso.
+     *
+     * @param inflater El objeto LayoutInflater utilizado para inflar el diseño del fragmento.
+     * @param container El contenedor en el que el fragmento se inserta.
+     * @param savedInstanceState El estado previamente guardado del fragmento.
+     * @return La vista inflada del fragmento.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,12 +49,20 @@ public class CategoryIngreso extends Fragment {
         return view;
     }
 
+    /**
+     * Agrega una nueva categoría de ingreso a la lista y actualiza la vista.
+     *
+     * @param nuevaCategoria La categoría de ingreso que se desea agregar.
+     */
     public void agregarCategoriaI(Categoria nuevaCategoria) {
         categoriasIngresos.add(nuevaCategoria);
         adapter.notifyDataSetChanged();
 
     }
 
+    /**
+     * Llena la lista de categorías de ingreso con los datos obtenidos de la actividad.
+     */
     private void llenarListaI() {
         CategoryActivity categoryActivity = (CategoryActivity) getActivity();
         categoriasIngresos.clear();
@@ -45,9 +71,4 @@ public class CategoryIngreso extends Fragment {
             adapter.notifyDataSetChanged();
         }
     }
-
-    public void actualizarListaI() {
-        llenarListaI();
-    }
-
 }
