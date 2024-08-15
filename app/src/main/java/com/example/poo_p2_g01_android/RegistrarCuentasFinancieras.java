@@ -3,7 +3,10 @@ package com.example.poo_p2_g01_android;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +24,19 @@ import androidx.core.view.WindowInsetsCompat;
 import java.time.LocalDate;
 import java.util.Calendar;
 
+import modelo.banco.Banco;
+import modelo.persona.Persona;
+
 public class RegistrarCuentasFinancieras extends AppCompatActivity implements View.OnClickListener {
 
-    TextView txtFechaPrestamo, txtFechaInicioPago, txtFechaFinPago;
-    Button btnFechaPrestamo, btnFechaInicioPago, btnFechaFinPago;
-    int dia, mes, anio;
-    Dialog dialog;
-    Button btnNingunaFecha, btnAbrirCalendario;
-    boolean esAcreedor = false;
-    TextView txtviewInteres;
-    EditText txtIntereses;
+    private TextView txtFechaPrestamo, txtFechaInicioPago, txtFechaFinPago;
+    private Button btnFechaPrestamo, btnFechaInicioPago, btnFechaFinPago, btnNingunaFecha, btnAbrirCalendario;
+    private int dia, mes, anio;
+    private Dialog dialog;
+    private TextView txtviewInteres;
+    private EditText editIntereses, editIdentificacion;
+    private Button btnRegistrarPersonaBanco;
+    public static boolean esAcreedor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +48,27 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        visualizarBotonPersonaBanco(false);
         cambiarCuenta();
         dialogFechaFin();
         colocarFecha();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        comprobarIdentificacion();
+    }
+
     private void cambiarCuenta(){
         txtviewInteres = findViewById(R.id.txtviewInteres);
-        txtIntereses = findViewById(R.id.txtInteres);
+        editIntereses = findViewById(R.id.txtInteres);
         if(!esAcreedor){
-            txtIntereses.setVisibility(View.GONE);
+            editIntereses.setVisibility(View.GONE);
             txtviewInteres.setVisibility(View.GONE);
         }else{
             txtviewInteres.setVisibility(View.VISIBLE);
-            txtIntereses.setVisibility(View.VISIBLE);
+            editIntereses.setVisibility(View.VISIBLE);
         }
     }
 
@@ -128,5 +141,53 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         } else if (v.equals(btnFechaFinPago)) {
             dialog.show();
         }
+    }
+
+    //Registro
+    private void comprobarIdentificacion(){
+        Context context = this;
+        editIdentificacion = findViewById(R.id.txtIdentificacionObjeto);
+        editIdentificacion.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                    String identificacion = editIdentificacion.getText().toString();
+                    Persona persona = PersonaBancoActivity.buscarPersona(identificacion, context);
+                    Log.i("Identificacion", "onFocusChange: " + persona);
+                    Banco banco = PersonaBancoActivity.buscarBanco(identificacion, context);
+                    Log.i("Identificacion", "onFocusChange: " + banco);
+                    if (persona == null && banco == null) {
+                        //TODO: Cambiar el valor de esPersona
+                        visualizarBotonPersonaBanco(true, identificacion, true);
+                    } else if(persona != null || banco != null){
+                        visualizarBotonPersonaBanco(false);
+                    }
+                }
+            }
+        });
+    }
+
+    private void visualizarBotonPersonaBanco(boolean ver){
+        btnRegistrarPersonaBanco = findViewById(R.id.btnRegistrarPersonaBanco);
+        if(!ver){
+            btnRegistrarPersonaBanco.setVisibility(View.GONE);
+        }else {
+            btnRegistrarPersonaBanco.setVisibility(View.VISIBLE);
+        }
+    }
+    private void visualizarBotonPersonaBanco(boolean ver, String identificacion, boolean esPersona){
+        btnRegistrarPersonaBanco = findViewById(R.id.btnRegistrarPersonaBanco);
+        if(!ver){
+            btnRegistrarPersonaBanco.setVisibility(View.GONE);
+        }else {
+            btnRegistrarPersonaBanco.setVisibility(View.VISIBLE);
+            btnRegistrarPersonaBanco.setOnClickListener(v -> {
+                Intent intent = new Intent( RegistrarCuentasFinancieras.this, RegistrarPersonaBanco.class);
+                intent.putExtra("identificacion", identificacion);
+                RegistrarPersonaBanco.esPersona = esPersona;
+                startActivity(intent);
+            });
+        }
+
     }
 }

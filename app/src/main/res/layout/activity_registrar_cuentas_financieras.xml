@@ -85,6 +85,18 @@
                 app:layout_constraintTop_toTopOf="@id/guia15horizontalCF"
                 app:layout_constraintVertical_chainStyle="spread_inside" />
 
+            <Button
+                android:id="@+id/btnRegistrarPersonaBanco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp"
+                android:text="Registrar Acreedor"
+                app:layout_constraintBottom_toTopOf="@+id/txtCantidad"
+                app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
+                app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
+                app:layout_constraintTop_toBottomOf="@+id/txtIdentificacionObjeto" />
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
