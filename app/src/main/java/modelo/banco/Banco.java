@@ -32,10 +32,6 @@ import java.util.Objects;
  * @author Grupo1
  */
 public class Banco implements Serializable {
-    /**
-     * Identificación de los bancos en la lista.
-     */
-    private int id;
 
     /**
      * Nombre de la entidad bancaria.
@@ -66,11 +62,6 @@ public class Banco implements Serializable {
      * Nombre del Archivo serializado de los Bancos.
      */
     public static final String nomArchivo = "bancos.ser";
-
-    /**
-     *  Guarda el último id inicializado.
-     */
-    public static int ultimoId = 0;
     
     /**
      * Constructor de la clase Banco.
@@ -81,20 +72,12 @@ public class Banco implements Serializable {
      * @param oficialCredito Persona encargada del crédito.
      */
     public Banco(String entidadBancaria, String ruc, String email, Persona oficialCredito) {
-        this.id = ultimoId + 1;
-        ultimoId = id;
         this.entidadBancaria = entidadBancaria;
         this.ruc = ruc;
         this.email = email;
         this.oficialCredito = oficialCredito;
         this.fechaRegistro = LocalDate.now();
     }
-
-    /**
-     * Retorna el id del banco
-     * @return ID del banco.
-     */
-    public int getId(){ return this.id;}
 
     /**
      * Obtiene el nombre de la entidad bancaria.
@@ -215,6 +198,23 @@ public class Banco implements Serializable {
             }
         }
         return lista;
+    }
+
+    public static boolean guardarBanco(File directorio, Banco banco){
+        boolean guardado = false;
+        ArrayList<Banco> listaBanco = Banco.cargarBanco(directorio);
+        File f = new File(directorio, nomArchivo);
+        if(f.exists()){
+            try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f))){
+                listaBanco.add(banco);
+                os.writeObject(listaBanco);
+                guardado = true;
+            }catch (Exception e){
+                //TODO : Cambiar esto
+                new Exception(e.getMessage());
+            }
+        }
+        return guardado;
     }
 
     /**

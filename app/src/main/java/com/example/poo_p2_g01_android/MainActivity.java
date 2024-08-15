@@ -1,7 +1,10 @@
 package com.example.poo_p2_g01_android;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.poo_p2_g01_android.ControladorCategoria.CategoryActivity;
 
+import modelo.banco.Banco;
+import modelo.persona.Persona;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         inicializarCardViews();
+        cargarDatos(this);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (id == R.id.cvGastos) {
             intent = new Intent(this, GastoActivity.class);
         } else if (id == R.id.cvCuentaxCobrar) {
-            intent = new Intent(this, CuentaxCobrarActivity.class);
+            intent = new Intent(this, RegistrarCuentasFinancieras.class);
         } else if (id == R.id.cvCuentaxPagar) {
             intent = new Intent(this, CuentaxPagarActivity.class);
         } else if (id == R.id.cvCuentaBancaria) {
@@ -77,6 +84,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (intent != null) {
             startActivity(intent);
+        }
+    }
+
+    public static void cargarDatos(Context context){
+        boolean guardadoPersona = false;
+        boolean guardadoBanco = false;
+
+        try {
+            guardadoPersona = Persona.crearDatosIniciales(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            guardadoBanco = Banco.crearDatosIniciales(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+
+        } catch(Exception e){
+            guardadoPersona = false;
+            guardadoBanco = false;
+            Log.d("ActivityPersonaBanco", "Error al cargar los datos iniciales"+ e.getMessage());
+        }
+
+        if(guardadoPersona && guardadoBanco){
+            Log.d("ActivityPersonaBanco","Datos iniciales guardados");
         }
     }
 }

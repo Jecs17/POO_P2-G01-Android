@@ -29,10 +29,6 @@ import java.util.Objects;
  * @author Grupo1
  */
 public class Persona implements Serializable {
-    /**
-     * Identificación de las personas en la lista.
-     */
-    private int id;
 
     /**
      * Cédula de identidad de la persona.
@@ -63,11 +59,6 @@ public class Persona implements Serializable {
      * Nombre del Archivo serializado de las Personas
      */
     public static final String nomArchivo = "personas.ser";
-
-    /**
-     *  Guarda el último id inicializado.
-     */
-    public static int ultimoId = 0;
     
     /**
      * <h3>Constructor clase Persona(Oficial Crédito)</h3>
@@ -78,12 +69,10 @@ public class Persona implements Serializable {
      * @param telefono Número de teléfono de la persona.
      */
     public Persona(String nombre, String telefono){
-        this.id = ultimoId + 1;
         this.cedula = " ";
         this.nombre = nombre;
         this.telefono = telefono;
         this.fechaRegistro = LocalDate.now();
-        ultimoId = id;
     }
     
     /**
@@ -97,20 +86,12 @@ public class Persona implements Serializable {
      * @param email Correo electrónico de la persona.
      */
     public Persona(String cedula, String nombre, String telefono, String email){
-        this.id = ultimoId + 1;
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.fechaRegistro = LocalDate.now();
-        ultimoId = id;
     }
-
-    /**
-     * Retorna el id de la persona
-     * @return ID de la persona.
-     */
-    public int getId(){ return this.id;}
     
     /**
      * Retorna la cédula de la persona.
@@ -241,6 +222,23 @@ public class Persona implements Serializable {
             }
         }
         return lista;
+    }
+
+    public static boolean guardarPersona(File directorio, Persona persona){
+        boolean guardado = false;
+        ArrayList<Persona> listaPersona = Persona.cargarPersonas(directorio);
+        File f = new File(directorio, nomArchivo);
+        if(f.exists()){
+            try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f))){
+                listaPersona.add(persona);
+                os.writeObject(listaPersona);
+                guardado = true;
+            }catch (Exception e){
+                //TODO : Cambiar esto
+                new Exception(e.getMessage());
+            }
+        }
+        return guardado;
     }
     
     /**
