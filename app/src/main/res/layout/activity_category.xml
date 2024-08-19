@@ -23,7 +23,7 @@
 
         <ImageButton
             android:id="@+id/btnAtras"
-            android:contentDescription="@string/btnRegresar"
+            android:contentDescription="@string/btn_regresar_content"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"

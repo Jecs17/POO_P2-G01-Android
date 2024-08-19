@@ -73,7 +73,7 @@
                 android:id="@+id/btnRegresarIngreso"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:contentDescription="@string/btnRegresar"
+                android:contentDescription="@string/btn_regresar_content"
                 android:background="@drawable/round_2_corner_shape"
                 app:layout_constraintBottom_toBottomOf="@id/guia10horizontal"
                 app:layout_constraintEnd_toEndOf="@id/guia15vertical"
