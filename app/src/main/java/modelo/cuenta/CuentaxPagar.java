@@ -2,6 +2,8 @@
 package modelo.cuenta;
 import modelo.banco.Banco;
 import modelo.persona.Persona;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -10,7 +12,7 @@ import java.time.LocalDate;
  * que puede ser a una persona o a un banco.</p>
  * @author Grupo1
  */
-public class CuentaxPagar extends CuentaFinanciera{
+public class CuentaxPagar extends CuentaFinanciera implements Serializable {
     /**
      * El acreedor al que se le debe el pago.
      */

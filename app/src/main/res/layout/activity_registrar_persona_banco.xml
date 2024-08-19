@@ -8,10 +8,11 @@
     tools:context=".RegistrarPersonaBanco">
 
     <ImageButton
+        android:id="@+id/btnRegresarRegistroPB"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/round_2_corner_shape"
-        android:contentDescription="@string/btnRegresar"
+        android:contentDescription="@string/btn_regresar_content"
         android:src="@drawable/turn_back_arrow"
         app:layout_constraintBottom_toBottomOf="@+id/guiaTop"
         app:layout_constraintEnd_toEndOf="@id/guiaStart"
@@ -72,7 +73,7 @@
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toBottomOf="@id/guiaTop"
         app:layout_constraintVertical_chainStyle="spread"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/txtNombreObjeto"
@@ -84,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toBottomOf="@+id/txtCodigo"
-        tools:ignore="Autofill"/>
+        tools:ignore="Autofill,VisualLintTextFieldSize"/>
 
     <EditText
         android:id="@+id/txtEmail"
@@ -96,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toBottomOf="@id/txtNombreObjeto"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/txtTelefono"
@@ -108,7 +109,7 @@
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toBottomOf="@id/txtEmail"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/txtNombreOficial"
@@ -120,7 +121,7 @@
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toBottomOf="@id/txtTelefono"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/txtTelefonoOficial"
@@ -132,7 +133,7 @@
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toBottomOf="@id/txtNombreOficial"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <Button
         android:id="@+id/btnActivityRegistrarPB"
@@ -143,7 +144,8 @@
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
         app:layout_constraintTop_toTopOf="@id/guiaBottom"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="VisualLintButtonSize" />
 
     <TextView
         android:id="@+id/txtviewCodigo"
@@ -176,7 +178,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@id/txtEmail"
-        android:text="Email:"
+        android:text="@string/texto_email"
         app:layout_constraintBottom_toTopOf="@id/txtEmail"
         app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
         app:layout_constraintHorizontal_bias="0"
@@ -185,11 +187,11 @@
         app:layout_constraintVertical_bias="0.9" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/textviewTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@id/txtTelefono"
-        android:text="Teléfono"
+        android:text="@string/texto_telefono"
         app:layout_constraintBottom_toTopOf="@id/txtTelefono"
         app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
         app:layout_constraintHorizontal_bias="0"
@@ -202,7 +204,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@id/txtNombreOficial"
-        android:text="Nombre Oficial Crédito:"
+        android:text="@string/texto_nombre_oficial"
         app:layout_constraintBottom_toTopOf="@id/txtNombreOficial"
         app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
         app:layout_constraintHorizontal_bias="0"
@@ -215,7 +217,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@id/txtTelefonoOficial"
-        android:text="Teléfono Oficial Crédito:"
+        android:text="@string/texto_telefono_oficial"
         app:layout_constraintBottom_toTopOf="@id/txtTelefonoOficial"
         app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
         app:layout_constraintHorizontal_bias="0"

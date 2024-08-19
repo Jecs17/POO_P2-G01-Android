@@ -2,13 +2,9 @@ package com.example.poo_p2_g01_android;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
@@ -16,16 +12,13 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 import modelo.banco.Banco;
 import modelo.persona.Persona;
@@ -33,6 +26,7 @@ import modelo.persona.Persona;
 public class PersonaBancoActivity extends AppCompatActivity {
 
     private Button btnPersona, btnBanco;
+    private ImageButton btnRegresar;
     private ArrayList<Object> listaPersonasBancos;
 
     @Override
@@ -45,8 +39,10 @@ public class PersonaBancoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        RegistrarPersonaBanco.clase = PersonaBancoActivity.class;
         registrarPersona();
         registrarBanco();
+        regresar();
     }
 
     @Override
@@ -55,27 +51,28 @@ public class PersonaBancoActivity extends AppCompatActivity {
         llenarTabla();
     }
 
+    private void regresar(){
+        btnRegresar = findViewById(R.id.btnRegresarPersonaBanco);
+        btnRegresar.setOnClickListener(v -> {
+            finish();
+        });
+    }
+
     public void registrarPersona(){
         btnPersona = findViewById(R.id.btnRegistrarPersona);
-        btnPersona.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(PersonaBancoActivity.this, RegistrarPersonaBanco.class);
-                RegistrarPersonaBanco.esPersona = true;
-                startActivity(i);
-            }
+        btnPersona.setOnClickListener(v -> {
+            Intent i = new Intent(PersonaBancoActivity.this, RegistrarPersonaBanco.class);
+            RegistrarPersonaBanco.esPersona = true;
+            startActivity(i);
         });
     }
 
     public void registrarBanco(){
         btnBanco = findViewById(R.id.btnRegistrarBanco);
-        btnBanco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(PersonaBancoActivity.this, RegistrarPersonaBanco.class);
-                RegistrarPersonaBanco.esPersona = false;
-                startActivity(i);
-            }
+        btnBanco.setOnClickListener(v -> {
+            Intent i = new Intent(PersonaBancoActivity.this, RegistrarPersonaBanco.class);
+            RegistrarPersonaBanco.esPersona = false;
+            startActivity(i);
         });
     }
 

@@ -72,7 +72,6 @@ public class Persona implements Serializable {
         this.cedula = " ";
         this.nombre = nombre;
         this.telefono = telefono;
-        this.fechaRegistro = LocalDate.now();
     }
     
     /**
@@ -189,7 +188,6 @@ public class Persona implements Serializable {
         ArrayList<Persona> lista = new ArrayList<>();
         lista.add(new Persona("094232152", "Pedro Lopéz", "0994354621", "pedrol12@gmail.com"));
         lista.add(new Persona("045613445", "Luis Correa", "075389753", "luisco@gmail.com"));
-        //lista.add(new Persona("Mario Duarte", "0994312563"));
         return lista;
     }
 

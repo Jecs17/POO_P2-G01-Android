@@ -74,7 +74,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/round_2_corner_shape"
-                android:contentDescription="Botón de Regresar a la pestaña principal"
+                android:contentDescription="@string/btn_regresar_content"
                 app:layout_constraintBottom_toBottomOf="@id/guia10horizontal"
                 app:layout_constraintEnd_toEndOf="@id/guia15vertical"
                 app:layout_constraintHorizontal_bias="0"
@@ -87,7 +87,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Personas y Bancos"
+                android:text="@string/tituloPersonaBanco"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/guia10horizontal"
@@ -99,22 +99,24 @@
                 android:id="@+id/btnRegistrarPersona"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Registrar Persona"
+                android:text="@string/btn_RegistrarPersona"
                 app:layout_constraintBottom_toTopOf="@+id/btnRegistrarBanco"
                 app:layout_constraintEnd_toEndOf="@id/guia85vertical"
                 app:layout_constraintStart_toStartOf="@id/guia15vertical"
                 app:layout_constraintTop_toBottomOf="@id/guia80horizontal"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:ignore="VisualLintButtonSize" />
 
             <Button
                 android:id="@+id/btnRegistrarBanco"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Registrar Banco"
+                android:text="@string/btn_RegistrarBanco"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guia85vertical"
                 app:layout_constraintStart_toStartOf="@id/guia15vertical"
-                app:layout_constraintTop_toBottomOf="@id/btnRegistrarPersona" />
+                app:layout_constraintTop_toBottomOf="@id/btnRegistrarPersona"
+                tools:ignore="VisualLintButtonSize" />
 
             <HorizontalScrollView
                 android:layout_width="0dp"
@@ -145,42 +147,42 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10sp"
-                            android:text="Código" />
+                            android:text="@string/tabla_codigo" />
 
                         <TextView
                             android:id="@+id/textView14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10sp"
-                            android:text="Fecha Registro" />
+                            android:text="@string/tabla_fecha_registro" />
 
                         <TextView
                             android:id="@+id/textView15"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10sp"
-                            android:text="Identificación" />
+                            android:text="@string/tabla_identificacion" />
 
                         <TextView
                             android:id="@+id/textView16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10sp"
-                            android:text="Nombre" />
+                            android:text="@string/tabla_nombre" />
 
                         <TextView
                             android:id="@+id/textView17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10sp"
-                            android:text="Email" />
+                            android:text="@string/tabla_email" />
 
                         <TextView
                             android:id="@+id/textView18"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10sp"
-                            android:text="Otros datos" />
+                            android:text="@string/tabla_otros_datos" />
 
                         <TextView
                             android:id="@+id/textView20"
