@@ -3,6 +3,7 @@ package modelo.movimiento;
 
 import enums.TipoRepeticion;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * <h3>Clase Gasto</h3>
@@ -35,8 +36,7 @@ public class Gasto extends Movimiento{
      */
     public Gasto(Categoria categoria, double valorNeto, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, TipoRepeticion repeticion){
       super(categoria, valorNeto, descripcion, fechaInicio, fechaFin, repeticion);
-      //se suma 1 de la variable heredada de movimiento la cual es estática, y realiza que cada Gasto tenga código único.
-      this.codigoUnicoGasto = codigo++;
+      this.codigoUnicoGasto = generarCodigoUnico();
     }
     
     /**
@@ -70,6 +70,21 @@ public class Gasto extends Movimiento{
      */
     @Override
     public String toString(){
-        return String.format("%-13s %-16s %-16s %-13.2f %-23s %-16s %-16s",   this.getCodigoUnico(), this.getFechaInicio(), this.getCategoria().getNombre(),this.getValorNeto(), this.getDescripcion(), this.getFechaFin(), this.getRepeticion());
+        //return String.format("%-13s %-16s %-16s %-13.2f %-23s %-16s %-16s",   this.getCodigoUnico(), this.getFechaInicio(), this.getCategoria().getNombre(),this.getValorNeto(), this.getDescripcion(), this.getFechaFin(), this.getRepeticion());
+        return this.getCategoria().getNombre() + this.getCodigoUnico();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Gasto gasto = (Gasto) o;
+        return codigoUnicoGasto == gasto.codigoUnicoGasto;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigoUnicoGasto);
+    }
+
 }

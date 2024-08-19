@@ -188,6 +188,5 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
                 startActivity(intent);
             });
         }
-
     }
 }

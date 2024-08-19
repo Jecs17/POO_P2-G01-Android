@@ -3,6 +3,7 @@ package modelo.movimiento;
 
 import enums.TipoRepeticion;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * <h3>Clase Ingreso</h3>
@@ -35,10 +36,9 @@ public class Ingreso extends Movimiento{
      */
     public Ingreso(Categoria categoria, double valorNeto, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, TipoRepeticion repeticion){
       super(categoria, valorNeto, descripcion, fechaInicio, fechaFin, repeticion);
-      //se suma 1 de la variable heredada de movimiento la cual es estática, y realiza que cada Ingreso tenga código único.
-      this.codigoUnicoIngreso = codigo++;
+        this.codigoUnicoIngreso = generarCodigoUnico();
     }
-    
+
     /**
      * Obtiene el código único asignado a este ingreso.
      * 
@@ -62,7 +62,6 @@ public class Ingreso extends Movimiento{
         }
         return this.fechaFin.toString();
     }
-    
     /**
      * Devuelve una representación en forma de cadena de la instancia de Ingreso.
      * 
@@ -70,7 +69,22 @@ public class Ingreso extends Movimiento{
      */
     @Override
     public String toString(){
-        return String.format("%-13s %-16s %-16s %-13.2f %-23s %-16s %-16s",this.getCodigoUnico(), this.getFechaInicio(), this.getCategoria().getNombre(),this.getValorNeto(), this.getDescripcion(), this.getFechaFin(), this.getRepeticion());
+        //return String.format("%-13s %-16s %-16s %-13.2f %-23s %-16s %-16s",this.getCodigoUnico(), this.getFechaInicio(), this.getCategoria().getNombre(),this.getValorNeto(), this.getDescripcion(), this.getFechaFin(), this.getRepeticion());
+        return this.getCategoria().getNombre() + this.getCodigoUnico();
     }
-   
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ingreso ingreso = (Ingreso) o;
+        return codigoUnicoIngreso == ingreso.codigoUnicoIngreso;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigoUnicoIngreso);
+    }
+
 }

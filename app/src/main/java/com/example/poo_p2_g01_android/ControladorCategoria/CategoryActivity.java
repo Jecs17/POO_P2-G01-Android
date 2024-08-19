@@ -1,5 +1,6 @@
 package com.example.poo_p2_g01_android.ControladorCategoria;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
@@ -57,7 +58,7 @@ public class CategoryActivity extends AppCompatActivity  {
         eventoBotonRetroceso();
         eventoBotonAgregarCategoria();
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.vistaCategory), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -276,10 +277,10 @@ public class CategoryActivity extends AppCompatActivity  {
      * @param tipoCategoria El tipo de categoría para filtrar.
      * @return Una lista de categorías que coinciden con el tipo especificado.
      */
-    public List<Categoria> leerDatosPorTipo(TipoCategoria tipoCategoria) {
+    public static List<Categoria> leerDatosPorTipo(TipoCategoria tipoCategoria, Context context) {
         List<Categoria> lstCategoriaPorTipo = new ArrayList<>();
         try {
-            List<Categoria> lstCategoria = Categoria.cargarCategorias(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            List<Categoria> lstCategoria = Categoria.cargarCategorias(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
             for (Categoria categoria : lstCategoria) {
                 if (categoria.getTipoCategoria() == tipoCategoria)
                     lstCategoriaPorTipo.add(categoria);
@@ -295,8 +296,8 @@ public class CategoryActivity extends AppCompatActivity  {
      *
      * @return Una lista de categorías de tipo ingreso.
      */
-    public List<Categoria> leerDatosIngreso() {
-        return leerDatosPorTipo(TipoCategoria.INGRESO);
+    public static List<Categoria> leerDatosIngreso(Context context) {
+        return leerDatosPorTipo(TipoCategoria.INGRESO, context);
     }
 
     /**
@@ -304,8 +305,20 @@ public class CategoryActivity extends AppCompatActivity  {
      *
      * @return Una lista de categorías de tipo gasto.
      */
-    public List<Categoria> leerDatosGasto() {
-        return leerDatosPorTipo(TipoCategoria.GASTO);
+    public static List<Categoria> leerDatosGasto(Context context) {
+        return leerDatosPorTipo(TipoCategoria.GASTO, context);
+    }
+
+    /**
+     * Lista de todas las categorias existentes;
+     * @param context context donde es utilizado
+     * @return lista de objetos categorias
+     */
+    public static List<Categoria> listaCategoriasUnidas(Context context) {
+        List<Categoria> listaCategoria = new ArrayList<>();
+        listaCategoria.addAll(leerDatosIngreso(context));
+        listaCategoria.addAll(leerDatosGasto(context));
+        return listaCategoria;
     }
 
     /**
@@ -323,5 +336,21 @@ public class CategoryActivity extends AppCompatActivity  {
         ArrayAdapter<TipoCategoria> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         spinner.setAdapter(adapter);
+    }
+
+    /**
+     * Busca una categoría por su nombre dentro de la lista de categorías.
+     *
+     * @param nombre El nombre de la categoría a buscar.
+     * @return La categoría encontrada o null si no se encuentra.
+     */
+    public static Categoria buscarCategoriaPorNombre(String nombre, Context context){
+        List<Categoria> listaCategoria = CategoryActivity.listaCategoriasUnidas(context);
+        for(Categoria categoria: listaCategoria){
+            if(categoria!=null && categoria.getNombre().equalsIgnoreCase(nombre)){
+                return categoria;
+            }
+        }
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.poo_p2_g01_android.ControladorCategoria;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -65,10 +66,11 @@ public class CategoryIngreso extends Fragment {
      * Llena la lista de categorías de ingreso con los datos obtenidos de la actividad.
      */
     private void llenarListaI() {
+        Context context = getContext();
         CategoryActivity categoryActivity = (CategoryActivity) getActivity();
         categoriasIngresos.clear();
         if(categoryActivity != null) {
-            categoriasIngresos.addAll(categoryActivity.leerDatosIngreso());
+            categoriasIngresos.addAll(categoryActivity.leerDatosIngreso(context));
             adapter.notifyDataSetChanged();
         }
     }

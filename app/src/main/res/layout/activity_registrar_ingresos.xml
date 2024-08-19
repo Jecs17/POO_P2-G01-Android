@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vistaRegistrarIngresos"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrarIngresos">
+
+    <ImageButton
+        android:id="@+id/btnRetrocesoRegistroIngreso"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/round_2_corner_shape"
+        android:contentDescription="@string/btnRegresar"
+        android:src="@drawable/turn_back_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/guiaTop"
+        app:layout_constraintEnd_toEndOf="@id/guiaStart"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <TextView
+        android:id="@+id/tituloRegistrar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/txtTituloRegistrarIngreso"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/guiaTop"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.384" />
+
+    <Button
+        android:id="@+id/btnActivityRegistrarIngresos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:text="@string/btnRegistro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toTopOf="@id/guiaBottom"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/guiaTop"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        android:text="Categoría"/>
+
+    <Spinner
+        android:id="@+id/spinner_ingresos"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="@id/guiaTop"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"/>
+
+    <TextView
+        android:id="@+id/txtValorIngreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/spinner_ingresos"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"/>
+
+    <EditText
+        android:id="@+id/edValorIngresos"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:hint="Ingrese un número"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/txtValorIngreso"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"/>
+
+    <TextView
+        android:id="@+id/txtDescripcionIngreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripción"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/edValorIngresos"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"/>
+
+    <EditText
+        android:id="@+id/edDescripcionIngresos"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:hint="Ingrese una descripción"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/txtDescripcionIngreso"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
+        />
+
+
+    <TextView
+        android:id="@+id/txtRepeticiónIngreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repetición"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/edDescripcionIngresos"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"/>
+
+
+    <Spinner
+        android:id="@+id/spinner_ingresos_repeticion"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/txtRepeticiónIngreso"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guiaBottom"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/spinner_ingresos_repeticion">
+
+        <LinearLayout
+            android:id="@+id/layoutFechaInicioIngreso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnInicioIngreso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:drawableTint="@color/md_theme_onPrimary"
+                android:paddingVertical="17dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Fecha de Inicio"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtFechaInicioIngreso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutFechaFinIngreso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnFinIngreso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:drawableTint="@color/md_theme_onPrimary"
+                android:paddingVertical="18dp"
+                android:paddingStart="17dp"
+                android:paddingEnd="15dp"
+                android:text="Fecha de Fin"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtFechaFinIngreso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.poo_p2_g01_android.ControladorCategoria;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
@@ -69,8 +70,9 @@ public class CategoryGasto extends Fragment  {
      */
     private void llenarListaG() {
         CategoryActivity categoryActivity = (CategoryActivity) getActivity();
+        Context context = getContext();
         if(categoryActivity != null) {
-            categoriasGastos.addAll(categoryActivity.leerDatosGasto());
+            categoriasGastos.addAll(categoryActivity.leerDatosGasto(context));
             adapter.notifyDataSetChanged();
         }
     }

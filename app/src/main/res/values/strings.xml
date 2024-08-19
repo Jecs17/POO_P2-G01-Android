@@ -30,10 +30,23 @@
     <string name="txtReporte">REPORTE</string>
     <string name="txtProyeccionGasto">PROYECCION GASTO</string>
 
-    <!-- String activity category-->
+    <!-- String in the activity category-->
+    <string name="txtTituloCategorias">LISTADO DE CATEGORIAS</string>
     <string name="txtIngresos">INGRESOS</string>
     <string name="txtGastos">GASTOS</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- String in the activity ingreso-->
+    <string name="txtTituloIngresos">LISTADO DE INGRESOS</string>
+
+    <!-- String in the activity registrar ingresos -->
+    <string name="txtTituloRegistrarIngreso">REGISTRAR INGRESO</string>
+
+    <!-- String in the activity registrar gastos -->
+    <string name="txtTituloRegistrarGasto">REGISTRAR GASTO</string>
+
+    <!-- String in the activity gasto-->
+    <string name="txtTituloGastos">LISTADO DE GASTOS</string>
+    
+
 
 </resources>

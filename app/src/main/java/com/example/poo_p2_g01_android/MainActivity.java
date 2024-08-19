@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.poo_p2_g01_android.ControladorCategoria.CategoryActivity;
 
 import modelo.banco.Banco;
+import modelo.movimiento.Movimiento;
 import modelo.persona.Persona;
 
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         inicializarCardViews();
         cargarDatos(this);
-
+        cargarMovimientosIniciales(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public static void cargarDatos(Context context){
+    public static void cargarDatos(Context context) {
         boolean guardadoPersona = false;
         boolean guardadoBanco = false;
 
@@ -95,14 +96,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             guardadoPersona = Persona.crearDatosIniciales(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
             guardadoBanco = Banco.crearDatosIniciales(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
 
-        } catch(Exception e){
+        } catch (Exception e) {
             guardadoPersona = false;
             guardadoBanco = false;
-            Log.d("ActivityPersonaBanco", "Error al cargar los datos iniciales"+ e.getMessage());
+            Log.d("ActivityPersonaBanco", "Error al cargar los datos iniciales" + e.getMessage());
         }
 
-        if(guardadoPersona && guardadoBanco){
-            Log.d("ActivityPersonaBanco","Datos iniciales guardados");
+        if (guardadoPersona && guardadoBanco) {
+            Log.d("ActivityPersonaBanco", "Datos iniciales guardados");
         }
     }
+
+    private static void cargarMovimientosIniciales(Context context) {
+        boolean guardado;
+        try {
+            guardado = Movimiento.crearDatosIniciales(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), context);
+        } catch (Exception e) {
+            guardado = false;
+            Log.d("Main Activity", "Error al cargar los datos iniciales de movimiento" + e.getMessage());
+        }
+        if(guardado){
+            Log.d("Main Activity", "Datos iniciales de movimentos agregados exitosamente");
+        }
+    }
+
 }

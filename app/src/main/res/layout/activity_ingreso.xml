@@ -2,20 +2,221 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/vistaIngreso"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".IngresoActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingresos"
-        android:textStyle="bold"
-        android:textSize="20sp"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia10horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia15horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia80horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.70" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia05vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia95vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia15vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guia85vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+
+            <ImageButton
+                android:id="@+id/btnRegresarIngreso"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/btnRegresar"
+                android:background="@drawable/round_2_corner_shape"
+                app:layout_constraintBottom_toBottomOf="@id/guia10horizontal"
+                app:layout_constraintEnd_toEndOf="@id/guia15vertical"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/turn_back_arrow" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/txtTituloIngresos"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guia10horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guia85vertical"
+                app:layout_constraintStart_toStartOf="@+id/guia15vertical"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <Button
+                android:id="@+id/btnRegistrarIngreso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Registrar Ingreso"
+                app:layout_constraintEnd_toEndOf="@id/guia85vertical"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guia15vertical"
+                app:layout_constraintTop_toBottomOf="@id/guia80horizontal"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <Button
+                android:id="@+id/btnFinalizarIngreso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Finalizar Ingreso"
+                app:layout_constraintEnd_toEndOf="@id/guia85vertical"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@id/guia15vertical"
+                app:layout_constraintTop_toBottomOf="@id/btnRegistrarIngreso"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <HorizontalScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_rect"
+                android:padding="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/guia80horizontal"
+                app:layout_constraintEnd_toEndOf="@id/guia95vertical"
+                app:layout_constraintStart_toStartOf="@id/guia05vertical"
+                app:layout_constraintTop_toTopOf="@id/guia15horizontal"
+                app:layout_constraintVertical_bias="0">
+
+                <TableLayout
+                    android:id="@+id/tablaIngreso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/md_theme_inverseSurface"
+                    android:paddingBottom="20dp"
+                    tools:ignore="VisualLintBounds">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/md_theme_inverseOnSurface">
+
+                        <TextView
+                            android:id="@+id/textViewCodigo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="Código" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:paddingEnd="15dp"
+                            android:paddingStart="15dp"
+                            android:text="Fecha Inicio" />
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:paddingEnd="15dp"
+                            android:paddingStart="15dp"
+                            android:text="Categoría" />
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:paddingEnd="15dp"
+                            android:paddingStart="15dp"
+                            android:text="Valor Neto" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:paddingEnd="90dp"
+                            android:paddingStart="35dp"
+                            android:text="Descripción" />
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:paddingEnd="25dp"
+                            android:paddingStart="10dp"
+                            android:text="Fecha Fin" />
+
+                        <TextView
+                            android:id="@+id/textView20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:paddingEnd="45dp"
+                            android:paddingStart="45dp"
+                            android:text="Repetición" />
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="" />
+
+                    </TableRow>
+
+                </TableLayout>
+            </HorizontalScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
