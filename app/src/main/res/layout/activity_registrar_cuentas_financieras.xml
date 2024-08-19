@@ -52,7 +52,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registrar Cuenta"
+                android:text="@string/btn_registrar_cuenta_financiera"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/guia15horizontalCF"
@@ -61,10 +61,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtvewIdentificacionCF"
+                android:id="@+id/txtviewIdentificacionCF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Identificacion"
+                android:text="@string/texto_deudor"
                 app:layout_constraintBottom_toTopOf="@id/txtIdentificacionObjeto"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintHorizontal_bias="0"
@@ -75,15 +75,18 @@
             <EditText
                 android:id="@+id/txtIdentificacionObjeto"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="40dp"
                 android:ems="10"
                 android:inputType="text"
+                android:hint="@string/hint_deudor"
+                android:textColorHint="@color/md_theme_outline"
                 app:layout_constraintBottom_toTopOf="@id/txtCantidad"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
                 app:layout_constraintTop_toTopOf="@id/guia15horizontalCF"
-                app:layout_constraintVertical_chainStyle="spread_inside" />
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                tools:ignore="Autofill,VisualLintTextFieldSize" />
 
             <Button
                 android:id="@+id/btnRegistrarPersonaBanco"
@@ -91,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="40dp"
-                android:text="Registrar Acreedor"
+                android:text="@string/btn_deudor"
                 app:layout_constraintBottom_toTopOf="@+id/txtCantidad"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
@@ -101,7 +104,8 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cantidad"
+                android:labelFor="@id/txtCantidad"
+                android:text="@string/texto_cantidad"
                 app:layout_constraintBottom_toTopOf="@id/txtCantidad"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintHorizontal_bias="0"
@@ -112,20 +116,22 @@
             <EditText
                 android:id="@+id/txtCantidad"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="40dp"
                 android:ems="10"
                 android:inputType="number"
                 app:layout_constraintBottom_toTopOf="@id/txtDescripcion"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtIdentificacionObjeto" />
+                app:layout_constraintTop_toBottomOf="@id/txtIdentificacionObjeto"
+                tools:ignore="Autofill,VisualLintTextFieldSize" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripción"
+                android:labelFor="@id/txtDescripcion"
+                android:text="@string/texto_descripcion"
                 app:layout_constraintBottom_toTopOf="@id/txtDescripcion"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintHorizontal_bias="0"
@@ -136,14 +142,15 @@
             <EditText
                 android:id="@+id/txtDescripcion"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="40dp"
                 android:ems="10"
                 android:inputType="textMultiLine"
                 app:layout_constraintBottom_toTopOf="@id/layoutFechaPrestamo"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtCantidad" />
+                app:layout_constraintTop_toBottomOf="@id/txtCantidad"
+                tools:ignore="Autofill,VisualLintTextFieldSize" />
 
             <LinearLayout
                 android:id="@+id/layoutFechaPrestamo"
@@ -164,7 +171,7 @@
                     android:drawableTint="@color/md_theme_onPrimary"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
-                    android:text="Fecha Prestamo"
+                    android:text="@string/btn_fecha_prestamo"
                     android:textSize="12sp" />
 
                 <TextView
@@ -180,7 +187,8 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cuota"
+                android:labelFor="@id/txtCuota"
+                android:text="@string/texto_cuota"
                 app:layout_constraintBottom_toTopOf="@id/txtCuota"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintHorizontal_bias="0"
@@ -191,20 +199,22 @@
             <EditText
                 android:id="@+id/txtCuota"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="40dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
                 app:layout_constraintBottom_toTopOf="@id/txtInteres"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/layoutFechaPrestamo" />
+                app:layout_constraintTop_toBottomOf="@id/layoutFechaPrestamo"
+                tools:ignore="Autofill,VisualLintTextFieldSize" />
 
             <TextView
                 android:id="@+id/txtviewInteres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Interes"
+                android:labelFor="@id/txtInteres"
+                android:text="@string/texto_interes"
                 app:layout_constraintBottom_toTopOf="@id/txtInteres"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintHorizontal_bias="0"
@@ -215,14 +225,15 @@
             <EditText
                 android:id="@+id/txtInteres"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="40dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
                 app:layout_constraintBottom_toTopOf="@id/layoutFechaInicio"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toBottomOf="@id/txtCuota" />
+                app:layout_constraintTop_toBottomOf="@id/txtCuota"
+                tools:ignore="Autofill,VisualLintTextFieldSize" />
 
             <LinearLayout
                 android:id="@+id/layoutFechaInicio"
@@ -243,7 +254,7 @@
                     android:drawableTint="@color/md_theme_onPrimary"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
-                    android:text="Fecha Incio Pago"
+                    android:text="@string/btn_fecha_inicio"
                     android:textSize="12sp" />
 
                 <TextView
@@ -274,7 +285,7 @@
                     android:drawableTint="@color/md_theme_onPrimary"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
-                    android:text="Fecha Fin Pago"
+                    android:text="@string/btn_fecha_fin"
                     android:textSize="12sp" />
 
                 <TextView
@@ -290,11 +301,12 @@
                 android:id="@+id/btnRegistrarCF"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Registrar Cuenta"
+                android:text="@string/btnRegistro"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guia85VerticalCF"
                 app:layout_constraintStart_toStartOf="@id/guia15verticalCF"
-                app:layout_constraintTop_toTopOf="@id/guia85horizontalCF" />
+                app:layout_constraintTop_toTopOf="@id/guia85horizontalCF"
+                tools:ignore="VisualLintButtonSize" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

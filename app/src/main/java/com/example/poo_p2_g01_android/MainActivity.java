@@ -16,7 +16,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.poo_p2_g01_android.ControladorCategoria.CategoryActivity;
 
+import java.io.File;
+
 import modelo.banco.Banco;
+import modelo.cuenta.CuentaFinanciera;
 import modelo.persona.Persona;
 
 
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (id == R.id.cvGastos) {
             intent = new Intent(this, GastoActivity.class);
         } else if (id == R.id.cvCuentaxCobrar) {
-            intent = new Intent(this, RegistrarCuentasFinancieras.class);
+            intent = new Intent(this, CuentaxCobrarActivity.class);
         } else if (id == R.id.cvCuentaxPagar) {
             intent = new Intent(this, CuentaxPagarActivity.class);
         } else if (id == R.id.cvCuentaBancaria) {
@@ -90,19 +93,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static void cargarDatos(Context context){
         boolean guardadoPersona = false;
         boolean guardadoBanco = false;
+        boolean guardadoCuentaFinanciera = false;
+
+        File file = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
 
         try {
-            guardadoPersona = Persona.crearDatosIniciales(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
-            guardadoBanco = Banco.crearDatosIniciales(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            guardadoPersona = Persona.crearDatosIniciales(file);
+            guardadoBanco = Banco.crearDatosIniciales(file);
+            guardadoCuentaFinanciera = CuentaFinanciera.crearDatosIniciales(file, context);
 
         } catch(Exception e){
             guardadoPersona = false;
             guardadoBanco = false;
-            Log.d("ActivityPersonaBanco", "Error al cargar los datos iniciales"+ e.getMessage());
+            guardadoCuentaFinanciera = false;
+            Log.d("Datos", "Error al cargar los datos iniciales"+ e.getMessage());
         }
 
         if(guardadoPersona && guardadoBanco){
-            Log.d("ActivityPersonaBanco","Datos iniciales guardados");
+            Log.d("Datos","Datos iniciales de Persona y Banco - guardados");
+        }
+        if(guardadoCuentaFinanciera){
+            Log.d("Datos","Datos iniciales de Cuenta Financiera - guardados");
         }
     }
 }

@@ -6,17 +6,6 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="btnRegresar">Regresar a la anterior Pantalla</string>
-
-    <!--  String in the activity registrar_persona_banco  -->
-    <string name="tituloRegistroPersona">Registrar Persona</string>
-    <string name="tituloRegistroBanco">Registrar Banco</string>}
-    <string name="texto_cedula">Cédula:</string>
-    <string name="texto_ruc">RUC:</string>
-    <string name="texto_nombrePersona">Nombre Completo:</string>
-    <string name="texto_nombreBanco">Entidad Bancaria:</string>
-    <string name="btnRegistro">Registrar</string>
-
     <!-- String in the activity main-->
     <string name="txtFinanzaPersonal">FINANZA PERSONAL</string>
     <string name="txtCategory">CATEGORIAS</string>
@@ -33,6 +22,65 @@
     <!-- String activity category-->
     <string name="txtIngresos">INGRESOS</string>
     <string name="txtGastos">GASTOS</string>
+
+    <!--  String in the activity persona_banco  -->
+    <string name="tituloPersonaBanco">Personas y Bancos</string>
+    <string name="btn_RegistrarPersona">Registrar Persona</string>
+    <string name="btn_RegistrarBanco">Registrar Banco</string>
+
+    <!--  String in the activity registrar_persona_banco  -->
+    <string name="tituloRegistroPersona">Registrar Persona</string>
+    <string name="tituloRegistroBanco">Registrar Banco</string>}
+    <string name="texto_cedula">Cédula:</string>
+    <string name="texto_ruc">RUC:</string>
+    <string name="texto_nombrePersona">Nombre Completo:</string>
+    <string name="texto_nombreBanco">Entidad Bancaria:</string>
+    <string name="texto_email">Email:</string>
+    <string name="texto_telefono">Teléfono:</string>
+    <string name="texto_nombre_oficial">Nombre Oficial Crédito:</string>
+    <string name="texto_telefono_oficial">Teléfono Oficial Crédito:</string>
+    <string name="btnRegistro">Registrar</string>
+
+    <!--  String in the activity cuentax_cobrar  -->
+    <string name="tituloCuentaCobrar">Cuentas por Cobrar</string>
+    <string name="btn_registrar_cuenta_financiera">Registrar Cuenta</string>
+
+    <!--  String in the activity cuentax_pagar  -->
+    <string name="tituloCuentaPagar">Cuentas por Pagar</string>
+
+    <!--  String in the activity registra_registrar_cuenta_financiera  -->
+    <string name="hint_deudor">Nombre o Cédula</string>
+    <string name="hint_acreedor">Nombre o Cédula o RUC</string>
+    <string name="texto_deudor">Deudor (Persona):</string>
+    <string name="texto_acreedor">Acreedor (Persona/Banco):</string>
+    <string name="texto_cantidad">Cantidad:</string>
+    <string name="texto_descripcion">Descripción:</string>
+    <string name="texto_interes">Interes:</string>
+    <string name="texto_cuota">Cuota:</string>
+    <string name="btn_deudor">Registrar Deudor</string>
+    <string name="btn_acreedor">Registrar Acreedor</string>
+    <string name="btn_fecha_prestamo">Fecha Préstamo</string>
+    <string name="btn_fecha_inicio">Fecha Inicio Pago</string>
+    <string name="btn_fecha_fin">Fecha Fin Pago</string>
+
+
+    <!--  String in the tablelayout  -->
+    <string name="tabla_codigo">Código</string>
+    <string name="tabla_fecha_registro">Fecha Registro</string>
+    <string name="tabla_identificacion">Identificación</string>
+    <string name="tabla_nombre">Nombre</string>
+    <string name="tabla_email">Email</string>
+    <string name="tabla_otros_datos">Otros datos</string>
+    <string name="tabla_deudor">Deudor</string>
+    <string name="tabla_acreedor">Acreedor</string>
+    <string name="tabla_valor">Valor</string>
+    <string name="tabla_descripcion">Descripción</string>
+    <string name="tabla_fecha_prestamo">Fecha Préstamo</string>
+    <string name="tabla_cuota">Cuota</string>
+
+    <!--  String in the accesibility button  -->
+    <string name="btn_regresar_content">Botón de Regresar a la pestaña principal</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -1,6 +1,8 @@
 
 package modelo.cuenta;
 import modelo.persona.Persona;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 /**
  * <h3>Clase CuentaxCobrar</h3>
@@ -9,7 +11,7 @@ import java.time.LocalDate;
  * 
  * @author Grupo1
  */
-public class CuentaxCobrar extends CuentaFinanciera{
+public class CuentaxCobrar extends CuentaFinanciera implements Serializable {
     /**
      * La persona que debe el pago.
      */
