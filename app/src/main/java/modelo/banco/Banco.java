@@ -1,5 +1,7 @@
 package modelo.banco;
 
+import android.util.Log;
+
 import modelo.persona.Persona;
 
 import java.io.File;
@@ -163,7 +165,6 @@ public class Banco implements Serializable {
 
     public static ArrayList<Banco> obtenerBancosInciales(){
         ArrayList<Banco> lista = new ArrayList<>();
-        // TODO: Cambiar esto
         Persona oficial = new Persona("Mario Duarte", "0994312563");
         lista.add(new Banco("Banco del Pacífico", "2341654582001", "pacif@banco.com", oficial));
         return lista;
@@ -179,8 +180,7 @@ public class Banco implements Serializable {
                 os.writeObject(lista);
                 guardado = true;
             }catch (IOException e){
-                //TODO: Cambiar esto
-                new Exception(e.getMessage());
+                Log.e("Banco", "Crear Datos Iniciales: " + e.getMessage() );
             }
         } else guardado = true;
         return guardado;
@@ -193,8 +193,7 @@ public class Banco implements Serializable {
             try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(f))){
                 lista = (ArrayList<Banco>) is.readObject();
             }catch (Exception e){
-                //TODO : Cambiar esto
-                new Exception(e.getMessage());
+                Log.e("Banco", "cargarBanco: " + e.getMessage() );
             }
         }
         return lista;
@@ -210,8 +209,23 @@ public class Banco implements Serializable {
                 os.writeObject(listaBanco);
                 guardado = true;
             }catch (Exception e){
-                //TODO : Cambiar esto
-                new Exception(e.getMessage());
+                Log.e("Banco", "guardarBanco: " + e.getMessage());
+            }
+        }
+        return guardado;
+    }
+
+    public static boolean eliminarBanco(File directorio, Banco banco){
+        boolean guardado = false;
+        ArrayList<Banco> listaBanco = Banco.cargarBanco(directorio);
+        File f = new File(directorio, nomArchivo);
+        if(f.exists()){
+            try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f))){
+                listaBanco.remove(banco);
+                os.writeObject(listaBanco);
+                guardado = true;
+            }catch (Exception e){
+                Log.e("Banco", "eliminarBanco: " + e.getMessage());
             }
         }
         return guardado;

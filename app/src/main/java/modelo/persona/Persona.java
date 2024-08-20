@@ -1,6 +1,8 @@
 
 package modelo.persona;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -201,8 +203,7 @@ public class Persona implements Serializable {
                 os.writeObject(lista);
                 guardado = true;
             }catch (IOException e){
-                //TODO: Cambiar esto
-                new Exception(e.getMessage());
+                Log.e("Persona", "crear Datos Iniciales: " + e.getMessage());
             }
         } else guardado = true;
         return guardado;
@@ -215,8 +216,7 @@ public class Persona implements Serializable {
             try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(f))){
                 lista = (ArrayList<Persona>) is.readObject();
             }catch (Exception e){
-                //TODO : Cambiar esto
-                new Exception(e.getMessage());
+                Log.e("Persona", "cargarPersonas: " + e.getMessage());
             }
         }
         return lista;
@@ -232,8 +232,23 @@ public class Persona implements Serializable {
                 os.writeObject(listaPersona);
                 guardado = true;
             }catch (Exception e){
-                //TODO : Cambiar esto
-                new Exception(e.getMessage());
+                Log.e("Persona", "guardarPersona: " + e.getMessage());
+            }
+        }
+        return guardado;
+    }
+
+    public static boolean eliminarPersona(File directorio, Persona persona){
+        boolean guardado = false;
+        ArrayList<Persona> listaPersona = Persona.cargarPersonas(directorio);
+        File f = new File(directorio, nomArchivo);
+        if(f.exists()){
+            try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f))){
+                listaPersona.remove(persona);
+                os.writeObject(listaPersona);
+                guardado = true;
+            }catch (Exception e){
+                Log.e("Persona", "eliminarPersona: " + e.getMessage());
             }
         }
         return guardado;

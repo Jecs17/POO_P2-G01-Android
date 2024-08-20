@@ -1,15 +1,18 @@
 package com.example.poo_p2_g01_android;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,13 +24,19 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 import modelo.banco.Banco;
+import modelo.cuenta.CuentaFinanciera;
+import modelo.cuenta.CuentaxCobrar;
+import modelo.cuenta.CuentaxPagar;
 import modelo.persona.Persona;
 
 public class PersonaBancoActivity extends AppCompatActivity {
 
-    private Button btnPersona, btnBanco;
+    private Button btnPersona, btnBanco, btnEliminar, btnCancelar;
     private ImageButton btnRegresar;
     private ArrayList<Object> listaPersonasBancos;
+    private Dialog dialogEliminar;
+    private TableLayout tablaCuentaCobrar, tablaCuentaPagar;
+    private TextView textoEliminar, textoNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,9 +163,13 @@ public class PersonaBancoActivity extends AppCompatActivity {
                 btnEliminar.setAdjustViewBounds(true);
                 btnEliminar.setMaxWidth(100);
                 btnEliminar.setMaxHeight(100);
-                btnEliminar.setBackgroundResource(R.drawable.buttonstyle);
                 btnEliminar.setPadding(5, 10, 5, 10);
-                btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.x_mark));
+                btnEliminar.setBackgroundColor(getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color));
+                btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.trash_can));
+                btnEliminar.setOnClickListener(v -> {
+                    dialogoEliminar(tvNombre.getText().toString(), true);
+                    dialogEliminar.show();
+                });
 
                 //agregar al TableRow
                 tr.addView(tvCodigo);
@@ -210,9 +223,13 @@ public class PersonaBancoActivity extends AppCompatActivity {
                 btnEliminar.setAdjustViewBounds(true);
                 btnEliminar.setMaxWidth(100);
                 btnEliminar.setMaxHeight(100);
-                btnEliminar.setBackgroundResource(R.drawable.buttonstyle);
                 btnEliminar.setPadding(5, 10, 5, 10);
-                btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.x_mark));
+                btnEliminar.setBackgroundColor(getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color));
+                btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.trash_can));
+                btnEliminar.setOnClickListener(v -> {
+                    dialogoEliminar(tvNombre.getText().toString(),false);
+                    dialogEliminar.show();
+                });
 
                 //agregar al TableRow
                 tr.addView(tvCodigo);
@@ -261,4 +278,155 @@ public class PersonaBancoActivity extends AppCompatActivity {
         return null;
     }
 
+    private void dialogoEliminar(String nombre_eliminar, boolean esPersona){
+        dialogEliminar = new Dialog(PersonaBancoActivity.this);
+        dialogEliminar.setContentView(R.layout.dialog_eliminar_persona_banco);
+        dialogEliminar.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogEliminar.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_style));
+        dialogEliminar.setCancelable(false);
+
+        tablaCuentaCobrar = dialogEliminar.findViewById(R.id.tablaCuentaCobrarAsociado);
+        tablaCuentaPagar = dialogEliminar.findViewById(R.id.tablaCuentaPagarAsociado);
+        textoEliminar = dialogEliminar.findViewById(R.id.textoPreguntaEliminar);
+        textoNombre = dialogEliminar.findViewById(R.id.nombreObjetoEliminar);
+        btnEliminar = dialogEliminar.findViewById(R.id.btnEliminar);
+        btnCancelar = dialogEliminar.findViewById(R.id.btnCancelar);
+
+        ArrayList<CuentaxCobrar> listaCuentaCobrar = CuentaxCobrarActivity.buscarCuentasAsociada(nombre_eliminar,this);
+        ArrayList<CuentaxPagar> listaCuentaPagar = CuentaxPagarActivity.buscarCuentasAsociada(nombre_eliminar,this);
+
+        Log.d("Eliminar","Identificacion: " + nombre_eliminar);
+        Log.d("Eliminar", "Lista de cuentas: " + listaCuentaCobrar.toString() + listaCuentaPagar.toString());
+
+        llenarTablaCuentas(listaCuentaCobrar,listaCuentaPagar);
+
+        textoEliminar.setText(esPersona ? R.string.texto_eliminar_persona : R.string.texto_eliminar_banco);
+        textoNombre.setText(nombre_eliminar);
+
+        btnCancelar.setOnClickListener( v -> dialogEliminar.dismiss());
+        btnEliminar.setOnClickListener(v -> {
+            elimarRegistros(listaCuentaCobrar, listaCuentaPagar);
+            boolean objetoEliminado = false;
+            if(esPersona){
+                Persona personaEliminar = PersonaBancoActivity.buscarPersona(nombre_eliminar,this);
+                objetoEliminado = Persona.eliminarPersona(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),personaEliminar);
+            }else {
+                Banco bancoEliminar = PersonaBancoActivity.buscarBanco(nombre_eliminar, this);
+                objetoEliminado = Banco.eliminarBanco(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), bancoEliminar);
+            }
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            if(objetoEliminado){
+                Toast.makeText(this, esPersona ? "Persona Eliminada": "Banco Eliminado", Integer.valueOf(1000)).show();
+                llenarTabla();
+                dialogEliminar.dismiss();
+            }
+        });
+    }
+
+    private void llenarTablaCuentas(ArrayList<CuentaxCobrar> lstCC, ArrayList<CuentaxPagar> lstCP){
+        cleanTable(tablaCuentaCobrar);
+        for(CuentaxCobrar cuenta: lstCC){
+            TableRow tr = new TableRow(this);
+
+            TextView tvCodigo = new TextView(this);
+            tvCodigo.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            tvCodigo.setPadding(8, 10, 8, 10);
+            tvCodigo.setText(String.valueOf(cuenta.getCodigo()));
+
+            TextView deudor = new TextView(this);
+            deudor.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            deudor.setPadding(8, 10, 8, 10);
+            deudor.setText(cuenta.getDeudor().getNombre());
+
+            TextView valor = new TextView(this);
+            valor.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            valor.setPadding(8, 10, 8, 10);
+            valor.setText(String.valueOf(cuenta.getValor()));
+
+            TextView descripcion = new TextView(this);
+            descripcion.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            descripcion.setPadding(8, 10, 8, 10);
+            descripcion.setText(cuenta.getDescripcion());
+
+            TextView fechaPrestamo = new TextView(this);
+            fechaPrestamo.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            fechaPrestamo.setPadding(8, 10, 10, 10);
+            fechaPrestamo.setText(cuenta.getFechaPrestamo().toString());
+
+            TextView cuota = new TextView(this);
+            cuota.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            cuota.setPadding(8, 10, 8, 10);
+            cuota.setText(String.valueOf(cuenta.getCuota()));
+
+            //agregar al TableRow
+            tr.addView(tvCodigo);
+            tr.addView(deudor);
+            tr.addView(valor);
+            tr.addView(descripcion);
+            tr.addView(fechaPrestamo);
+            tr.addView(cuota);
+            tr.setPadding(0, 15, 0, 0);
+            //agregar al Tableview
+            tablaCuentaCobrar.addView(tr);
+        }
+        cleanTable(tablaCuentaPagar);
+        for(CuentaxPagar cuenta: lstCP){
+            TableRow tr = new TableRow(this);
+
+            TextView tvCodigo = new TextView(this);
+            tvCodigo.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            tvCodigo.setPadding(8, 10, 8, 10);
+            tvCodigo.setText(String.valueOf(cuenta.getCodigo()));
+
+            TextView acreedor = new TextView(this);
+            acreedor.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            acreedor.setPadding(8, 10, 8, 10);
+            acreedor.setText(CuentaxPagarActivity.nombreAcreedor(cuenta));
+
+            TextView valor = new TextView(this);
+            valor.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            valor.setPadding(8, 10, 8, 10);
+            valor.setText(String.valueOf(cuenta.getValor()));
+
+            TextView descripcion = new TextView(this);
+            descripcion.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            descripcion.setPadding(8, 10, 8, 10);
+            descripcion.setText(cuenta.getDescripcion());
+
+            TextView fechaPrestamo = new TextView(this);
+            fechaPrestamo.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            fechaPrestamo.setPadding(8, 10, 10, 10);
+            fechaPrestamo.setText(cuenta.getFechaPrestamo().toString());
+
+            TextView cuota = new TextView(this);
+            cuota.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            cuota.setPadding(8, 10, 8, 10);
+            cuota.setText(String.valueOf(cuenta.getCuota()));
+
+            //agregar al TableRow
+            tr.addView(tvCodigo);
+            tr.addView(acreedor);
+            tr.addView(valor);
+            tr.addView(descripcion);
+            tr.addView(fechaPrestamo);
+            tr.addView(cuota);
+            tr.setPadding(0, 15, 0, 0);
+            //agregar al Tableview
+            tablaCuentaPagar.addView(tr);
+        }
+    }
+
+    private void elimarRegistros(ArrayList<CuentaxCobrar> lstCC, ArrayList<CuentaxPagar> lstCP){
+        ArrayList<CuentaFinanciera> listaCF = new ArrayList<>();
+        listaCF.addAll(lstCC);
+        listaCF.addAll(lstCP);
+        boolean cuentasEliminadas = CuentaFinanciera.eliminarCuentas(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), listaCF);
+        if(cuentasEliminadas){
+            Toast.makeText(this,"Cuentas eliminadas", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

@@ -67,7 +67,7 @@ public class CuentaxCobrarActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<CuentaxCobrar> cargarListaCuenta(Context context){
+    private static ArrayList<CuentaxCobrar> cargarListaCuenta(Context context){
         ArrayList<CuentaxCobrar> listaCuenta = new ArrayList<>();
         try {
             listaCuenta = CuentaFinanciera.cargarCuentasxCobrar(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
@@ -141,5 +141,15 @@ public class CuentaxCobrarActivity extends AppCompatActivity {
         }
     }
 
+    public static ArrayList<CuentaxCobrar> buscarCuentasAsociada(String identificacion, Context context){
+        Persona persona = PersonaBancoActivity.buscarPersona(identificacion, context);
+        ArrayList<CuentaxCobrar> listaCuentaAsociadas= new ArrayList<>();
+        for(CuentaxCobrar cuenta: cargarListaCuenta(context)){
+            if(persona != null && persona.equals(cuenta.getDeudor())){
+                listaCuentaAsociadas.add(cuenta);
+            }
+        }
+        return listaCuentaAsociadas;
+    }
 
 }

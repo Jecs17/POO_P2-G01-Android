@@ -4,6 +4,8 @@ import modelo.persona.Persona;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
+
 /**
  * <h3>Clase CuentaxCobrar</h3>
  * <p>La clase CuentaxCobrar extiende de CuentaFinanciera y representa una cuenta por cobrar,
@@ -57,5 +59,18 @@ public class CuentaxCobrar extends CuentaFinanciera implements Serializable {
     @Override
     public String toString() {
         return String.format("%-9d %-20s %-15.2f %-25s %-19s %-15.2f", codigo, deudor.getNombre(), valor, descripcion, fechaPrestamo, cuota);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CuentaxCobrar that = (CuentaxCobrar) o;
+        return Objects.equals(deudor, that.deudor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(deudor);
     }
 }

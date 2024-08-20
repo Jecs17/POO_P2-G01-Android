@@ -55,6 +55,14 @@
     <string name="texto_telefono_oficial">Teléfono Oficial Crédito:</string>
     <string name="btnRegistro">Registrar</string>
 
+    <!--  String in the dialog eliminar_persona_banco  -->
+    <string name="tituloDialogoEliminar">Cuentas a Eliminar</string>
+    <string name="texto_eliminar_persona">¿Desea eliminar a esta persona?</string>
+    <string name="texto_eliminar_banco">¿Desea eliminar a este banco?</string>
+    <string name="texto_nombre_placeholder">NOMBRE</string>
+    <string name="btn_eliminar">Eliminar</string>
+    <string name="btn_cancelar">Cancelar</string>
+
     <!--  String in the activity cuentax_cobrar  -->
     <string name="tituloCuentaCobrar">Cuentas por Cobrar</string>
     <string name="btn_registrar_cuenta_financiera">Registrar Cuenta</string>

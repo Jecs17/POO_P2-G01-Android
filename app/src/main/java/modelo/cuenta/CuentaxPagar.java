@@ -5,6 +5,7 @@ import modelo.persona.Persona;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * <h3>Clase CuentaxPagar</h3>
@@ -118,5 +119,18 @@ public class CuentaxPagar extends CuentaFinanciera implements Serializable {
         } else{
             return String.format("%-9d %-23s %-15.2f %-33s %-19s %-15.2f", codigo, banco.getEntidadBancaria(), valor, descripcion, fechaPrestamo, cuota);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CuentaxPagar that = (CuentaxPagar) o;
+        return Objects.equals(acreedor, that.acreedor) && Objects.equals(banco, that.banco);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(acreedor, banco);
     }
 }

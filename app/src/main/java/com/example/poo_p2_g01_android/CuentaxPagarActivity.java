@@ -69,7 +69,7 @@ public class CuentaxPagarActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<CuentaxPagar> cargarListaCuenta(Context context){
+    private static ArrayList<CuentaxPagar> cargarListaCuenta(Context context){
         ArrayList<CuentaxPagar> listaCuenta = new ArrayList<>();
         try {
             listaCuenta = CuentaFinanciera.cargarCuentasxPagar(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
@@ -133,7 +133,7 @@ public class CuentaxPagarActivity extends AppCompatActivity {
         }
     }
 
-    private String nombreAcreedor(CuentaxPagar cuenta){
+    public static String nombreAcreedor(CuentaxPagar cuenta){
         Persona persona = cuenta.getAcreedor();
         Banco banco = cuenta.getBanco();
         String nombre = "";
@@ -153,5 +153,20 @@ public class CuentaxPagarActivity extends AppCompatActivity {
         if (childCount > 1) {
             table.removeViews(1, childCount - 1);
         }
+    }
+
+    public static ArrayList<CuentaxPagar> buscarCuentasAsociada(String identificacion, Context context){
+        Persona persona = PersonaBancoActivity.buscarPersona(identificacion, context);
+        Banco banco = PersonaBancoActivity.buscarBanco(identificacion, context);
+        ArrayList<CuentaxPagar> listaCuentaAsociadas= new ArrayList<>();
+        for(CuentaxPagar cuenta: cargarListaCuenta(context)){
+            if(persona!= null && persona.equals(cuenta.getAcreedor())){
+                listaCuentaAsociadas.add(cuenta);
+            }
+            if(banco != null && banco.equals(cuenta.getBanco())){
+                listaCuentaAsociadas.add(cuenta);
+            }
+        }
+        return listaCuentaAsociadas;
     }
 }

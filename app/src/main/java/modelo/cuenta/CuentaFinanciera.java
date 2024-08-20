@@ -286,5 +286,23 @@ public class CuentaFinanciera implements Serializable {
         }
         return guardado;
     }
+
+    public static boolean eliminarCuentas(File directorio, ArrayList<CuentaFinanciera> cuentas){
+        boolean guardado = false;
+        ArrayList<CuentaFinanciera> listaCF = CuentaFinanciera.cargarCuentasFinancieras(directorio);
+        File f = new File(directorio, nomArchivo);
+        if(f.exists()){
+            try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f))){
+                for(CuentaFinanciera cuenta: cuentas){
+                    listaCF.remove(cuenta);
+                }
+                os.writeObject(listaCF);
+                guardado = true;
+            }catch (Exception e){
+                Log.e("CuentaFinanciera", "eliminarCuentas: " + e.getMessage());
+            }
+        }
+        return guardado;
+    }
     
 }
