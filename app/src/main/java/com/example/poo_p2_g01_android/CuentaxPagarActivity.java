@@ -26,11 +26,32 @@ import modelo.cuenta.CuentaxCobrar;
 import modelo.cuenta.CuentaxPagar;
 import modelo.persona.Persona;
 
+/**
+ * Actividad para gestionar y visualizar las cuentas por pagar.
+ * Permite registrar nuevas cuentas, listar las existentes y buscar cuentas asociadas.
+ *
+ * @author Grupo1
+ */
 public class CuentaxPagarActivity extends AppCompatActivity {
 
+    /**
+     * Botón para regresar a la actividad anterior.
+     */
     private ImageButton btnRegresar;
+
+    /**
+     * Botón para iniciar la actividad de registro de una nueva cuenta por pagar.
+     */
     private Button btnRegistrarCuenta;
+
+    /**
+     * Layout de tabla donde se mostrarán las cuentas por pagar.
+     */
     private TableLayout tablaCuentaxPagar;
+
+    /**
+     * Contexto de la actividad actual.
+     */
     private Context context = this;
 
     @Override
@@ -53,14 +74,20 @@ public class CuentaxPagarActivity extends AppCompatActivity {
         llenarTabla();
     }
 
-    private void regresar(){
+    /**
+     * Configura el botón de regreso para cerrar la actividad actual y regresar a la anterior.
+     */
+    private void regresar() {
         btnRegresar = findViewById(R.id.btnRegresarCuentaPagar);
         btnRegresar.setOnClickListener(v -> {
             finish();
         });
     }
 
-    private void registrarCuenta(){
+    /**
+     * Configura el botón para registrar una nueva cuenta por pagar, iniciando la actividad correspondiente.
+     */
+    private void registrarCuenta() {
         btnRegistrarCuenta = findViewById(R.id.btnRegistrarCuentaPagar);
         btnRegistrarCuenta.setOnClickListener((v) -> {
             Intent intent = new Intent(CuentaxPagarActivity.this, RegistrarCuentasFinancieras.class);
@@ -69,24 +96,33 @@ public class CuentaxPagarActivity extends AppCompatActivity {
         });
     }
 
-    private static ArrayList<CuentaxPagar> cargarListaCuenta(Context context){
+    /**
+     * Carga la lista de cuentas por pagar desde los archivos almacenados en el dispositivo.
+     *
+     * @param context Contexto de la actividad.
+     * @return Una lista de cuentas por pagar.
+     */
+    private static ArrayList<CuentaxPagar> cargarListaCuenta(Context context) {
         ArrayList<CuentaxPagar> listaCuenta = new ArrayList<>();
         try {
             listaCuenta = CuentaFinanciera.cargarCuentasxPagar(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
-        } catch(Exception e){
-            Log.e("CuentaFinanciera", "Error al cargar los datos de cuentaxpagar "+ e.getMessage());
+        } catch (Exception e) {
+            Log.e("CuentaFinanciera", "Error al cargar los datos de cuentaxpagar " + e.getMessage());
         }
         return listaCuenta;
     }
 
-    private void llenarTabla(){
+    /**
+     * Llena la tabla con la lista de cuentas por pagar cargadas.
+     */
+    private void llenarTabla() {
         ArrayList<CuentaxPagar> listaCuentaPagar = cargarListaCuenta(context);
 
         tablaCuentaxPagar = findViewById(R.id.tablaCuentaPagar);
         Log.d("CuentaFinanciera", "Listado para la tabla: " + listaCuentaPagar.toString());
         cleanTable(tablaCuentaxPagar);
 
-        for (CuentaxPagar cuenta: listaCuentaPagar) {
+        for (CuentaxPagar cuenta : listaCuentaPagar) {
 
             TableRow tr = new TableRow(this);
 
@@ -120,7 +156,7 @@ public class CuentaxPagarActivity extends AppCompatActivity {
             cuota.setPadding(8, 10, 8, 10);
             cuota.setText(String.valueOf(cuenta.getCuota()));
 
-            //agregar al TableRow
+            // Agregar cada TextView al TableRow
             tr.addView(tvCodigo);
             tr.addView(acreedor);
             tr.addView(valor);
@@ -128,42 +164,60 @@ public class CuentaxPagarActivity extends AppCompatActivity {
             tr.addView(fechaPrestamo);
             tr.addView(cuota);
             tr.setPadding(0, 15, 0, 0);
-            //agregar al Tableview
+
+            // Agregar el TableRow al TableLayout
             tablaCuentaxPagar.addView(tr);
         }
     }
 
-    public static String nombreAcreedor(CuentaxPagar cuenta){
+    /**
+     * Obtiene el nombre del acreedor de la cuenta, ya sea una persona o un banco.
+     *
+     * @param cuenta Cuenta por pagar de la cual se obtendrá el acreedor.
+     * @return El nombre del acreedor.
+     */
+    public static String nombreAcreedor(CuentaxPagar cuenta) {
         Persona persona = cuenta.getAcreedor();
         Banco banco = cuenta.getBanco();
         String nombre = "";
-        if(persona != null){
+        if (persona != null) {
             nombre = persona.getNombre();
-        }else if( banco != null){
+        } else if (banco != null) {
             nombre = banco.getEntidadBancaria();
         }
         return nombre;
     }
 
+    /**
+     * Limpia todas las filas de la tabla, excepto la primera.
+     *
+     * @param table La tabla que será limpiada.
+     */
     private void cleanTable(TableLayout table) {
-
         int childCount = table.getChildCount();
 
-        // Remove all rows except the first one
+        // Elimina todas las filas excepto la primera
         if (childCount > 1) {
             table.removeViews(1, childCount - 1);
         }
     }
 
-    public static ArrayList<CuentaxPagar> buscarCuentasAsociada(String identificacion, Context context){
+    /**
+     * Busca las cuentas por pagar asociadas a una identificación de persona o banco.
+     *
+     * @param identificacion Identificación de la persona o banco.
+     * @param context Contexto de la actividad.
+     * @return Lista de cuentas por pagar asociadas.
+     */
+    public static ArrayList<CuentaxPagar> buscarCuentasAsociada(String identificacion, Context context) {
         Persona persona = PersonaBancoActivity.buscarPersona(identificacion, context);
         Banco banco = PersonaBancoActivity.buscarBanco(identificacion, context);
-        ArrayList<CuentaxPagar> listaCuentaAsociadas= new ArrayList<>();
-        for(CuentaxPagar cuenta: cargarListaCuenta(context)){
-            if(persona!= null && persona.equals(cuenta.getAcreedor())){
+        ArrayList<CuentaxPagar> listaCuentaAsociadas = new ArrayList<>();
+        for (CuentaxPagar cuenta : cargarListaCuenta(context)) {
+            if (persona != null && persona.equals(cuenta.getAcreedor())) {
                 listaCuentaAsociadas.add(cuenta);
             }
-            if(banco != null && banco.equals(cuenta.getBanco())){
+            if (banco != null && banco.equals(cuenta.getBanco())) {
                 listaCuentaAsociadas.add(cuenta);
             }
         }
