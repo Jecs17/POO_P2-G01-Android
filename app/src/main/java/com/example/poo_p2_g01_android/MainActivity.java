@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.poo_p2_g01_android.ControladorCategoria.CategoryActivity;
 
 import java.io.File;
+import java.util.List;
 
 import modelo.banco.Banco;
 import modelo.movimiento.Movimiento;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         inicializarCardViews();
         cargarDatos(this);
         cargarMovimientosIniciales(this);
+        codigoUnicoActualizado(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -131,4 +133,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private static void codigoUnicoActualizado(Context context) {
+        try {
+            List<Movimiento> lstMovimiento = Movimiento.cargarMovimientos(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            int codigoMayor = 0;
+            for(Movimiento movimiento: lstMovimiento) {
+                if(movimiento.getCodigoUnico() > codigoMayor) {
+                    codigoMayor = movimiento.getCodigoUnico();
+                }
+            }
+            Movimiento.actualizarCodigo(codigoMayor + 1);
+        } catch (Exception e) {
+            Log.e("Main Activity", "Error al cargar los movimientos en el main");
+        }
+
+    }
 }

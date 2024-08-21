@@ -21,6 +21,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.poo_p2_g01_android.IngresoActivity;
 import com.example.poo_p2_g01_android.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
@@ -111,13 +113,7 @@ public class CategoryActivity extends AppCompatActivity  {
         AlertDialog alertDialog = new MaterialAlertDialogBuilder(CategoryActivity.this)
                 .setTitle("Agregar Categoría")
                 .setView(dialogView)
-                .setPositiveButton("Agregar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        agregarCategoria(directorio, spinnerCategoria, etNombreCategoria, categoryGastoFrag, categoryIngresoFrag);
-                        dialogInterface.dismiss();
-                    }
-                })
+                .setPositiveButton("Agregar", null)
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -126,7 +122,30 @@ public class CategoryActivity extends AppCompatActivity  {
                 })
                 .create();
 
-        alertDialog.show();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button btnAgregar = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                btnAgregar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(!etNombreCategoria.getText().toString().isEmpty()) {
+                            boolean siExiste = agregarCategoria(directorio, spinnerCategoria, etNombreCategoria, categoryGastoFrag, categoryIngresoFrag);
+                            if(!siExiste) {
+                                Toast.makeText(CategoryActivity.this, "!Ingreso registrado!", Toast.LENGTH_SHORT).show();
+                                dialogInterface.dismiss();
+                            }
+                        }
+                        else {
+                            Toast.makeText(CategoryActivity.this, "Ingrese categoría", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
+      alertDialog.show();
+
         Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
         if (positiveButton != null) {
             positiveButton.setTextSize(18);
@@ -147,15 +166,16 @@ public class CategoryActivity extends AppCompatActivity  {
      * @param categoryGastoFrag Fragmento que maneja las categorías de gasto.
      * @param categoryIngresoFrag Fragmento que maneja las categorías de ingreso.
      */
-    private void agregarCategoria(File directorio, Spinner spinnerCategoria, TextInputEditText etNombreCategoria, CategoryGasto categoryGastoFrag, CategoryIngreso categoryIngresoFrag) {
+    private boolean agregarCategoria(File directorio, Spinner spinnerCategoria, TextInputEditText etNombreCategoria, CategoryGasto categoryGastoFrag, CategoryIngreso categoryIngresoFrag) {
         String nombreCategoria = String.valueOf(etNombreCategoria.getText()).trim();
         TipoCategoria tipoCategoria = (TipoCategoria) spinnerCategoria.getSelectedItem();
-
+        boolean siExiste = false;
         if (!nombreCategoria.isEmpty() && tipoCategoria != null) {
             Categoria nuevaCategoria = new Categoria(nombreCategoria, tipoCategoria);
-            guardarCategoria(directorio, nuevaCategoria, categoryGastoFrag, categoryIngresoFrag);
+            siExiste = guardarCategoria(directorio, nuevaCategoria, categoryGastoFrag, categoryIngresoFrag);
 
         }
+        return siExiste;
     }
 
     /**
@@ -166,19 +186,21 @@ public class CategoryActivity extends AppCompatActivity  {
      * @param categoryGastoFrag Fragmento que maneja las categorías de gasto.
      * @param categoryIngresoFrag Fragmento que maneja las categorías de ingreso.
      */
-    private void guardarCategoria(File directorio, Categoria nuevaCategoria, CategoryGasto categoryGastoFrag, CategoryIngreso categoryIngresoFrag) {
+    private boolean guardarCategoria(File directorio, Categoria nuevaCategoria, CategoryGasto categoryGastoFrag, CategoryIngreso categoryIngresoFrag) {
+        boolean siExiste;
         try {
-            boolean siExiste = validarCategoriaSiExiste(nuevaCategoria);
+            siExiste = validarCategoriaSiExiste(nuevaCategoria);
             if(!siExiste) {
                 Categoria.actualizarDatos(directorio, nuevaCategoria);
 
                 actualizarVista(categoryIngresoFrag, categoryGastoFrag, nuevaCategoria);
 
-
             }
         } catch (Exception e) {
+            siExiste = false;
             Log.d("Category Activity", "Error al escribir el archivo");
         }
+        return siExiste;
     }
 
     /**

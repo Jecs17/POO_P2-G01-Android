@@ -41,7 +41,7 @@ public abstract class Movimiento implements Serializable {
     /**
      * Nombre de archivo movimiento que guarda los ingresos y los gastos
      */
-    private final static String nombreArchivo = "MOVIMIENTO.ser";
+    private final static String nombreArchivo = "MOVIMIENTOs.ser";
 
 
     /**
@@ -114,7 +114,11 @@ public abstract class Movimiento implements Serializable {
      */
     public abstract int getCodigoUnico(); 
     
-    
+
+    public static void actualizarCodigo(int codigoActualizado) {
+        codigo = codigoActualizado;
+    }
+
     /**
      * Método abstracto que se va a sobreescribir en sus clases hijas para obtener la fecha de finalización del movimiento.
      * 

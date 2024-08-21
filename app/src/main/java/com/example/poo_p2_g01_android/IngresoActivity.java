@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import modelo.movimiento.Gasto;
 import modelo.movimiento.Ingreso;
 import modelo.movimiento.Movimiento;
 
@@ -182,15 +183,30 @@ public class IngresoActivity extends AppCompatActivity {
                 btnModificar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        boolean esFechaMayor = modificarIngreso(ingresoSeleccionado, linearLayout);
-                        if(esFechaMayor)
+                        boolean esFechaMayor = esFechaMayor(ingresoSeleccionado, linearLayout);
+                        if(esFechaMayor) {
+                            AlertDialog alertDialog = new MaterialAlertDialogBuilder(IngresoActivity.this)
+                                    .setTitle("ALERTA")
+                                    .setMessage("Si modifica el ingreso no se tomará en cuenta para fecha posteriores en el reporte")
+                                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            modificarIngreso(ingresoSeleccionado, linearLayout);
+                                            dialogInterface.dismiss();
+                                        }
+                                    }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    }).create();
+                            alertDialog.show();
                             dialogInterface.dismiss();
+                        }
                     }
                 });
             }
         });
-
         alertDialog1.show();
     }
 
@@ -245,40 +261,43 @@ public class IngresoActivity extends AppCompatActivity {
         return textView;
     }
 
-    private boolean modificarIngreso(Ingreso ingresoSeleccionado, LinearLayout linearLayout) {
+    private void modificarIngreso(Ingreso ingresoSeleccionado, LinearLayout linearLayout) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         TextView textFechaFin = linearLayout.findViewById(R.id.txtFechaFinLayout);
         LocalDate fechaFinSeleccionada = LocalDate.parse(textFechaFin.getText().toString(), formatter);
 
-        LocalDate fechaFinOriginal = LocalDate.parse(ingresoSeleccionado.getFechaFin(), formatter);
+        ingresoSeleccionado.setFechaFin(fechaFinSeleccionada);
+        boolean actualizado = Movimiento.actualizarMovimiento(IngresoActivity.this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), ingresoSeleccionado);
+        if (actualizado) {
+            llenarTabla();
+            Toast.makeText(IngresoActivity.this, "Ingreso modificado con éxito", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(IngresoActivity.this, "Error al modificar el ingreso", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean esFechaMayor(Ingreso ingresoSeleccionado, LinearLayout linearLayout) {
+        boolean esMayor;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        TextView textFechaFin = linearLayout.findViewById(R.id.txtFechaFinLayout);
+        LocalDate fechaFinSeleccionada = LocalDate.parse(textFechaFin.getText().toString(), formatter);
         LocalDate fechaInicio = ingresoSeleccionado.getFechaInicio();
-
-        boolean esFechaMayor;
-
-         if (!fechaFinSeleccionada.equals(fechaFinOriginal)) {
-             if (fechaFinSeleccionada.isAfter(fechaInicio)) {
-                ingresoSeleccionado.setFechaFin(fechaFinSeleccionada);
-                esFechaMayor = true;
-                boolean actualizado = Movimiento.actualizarMovimiento(IngresoActivity.this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), ingresoSeleccionado);
-                if (actualizado) {
-                    llenarTabla();
-                    Toast.makeText(IngresoActivity.this, "Ingreso modificado con éxito", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(IngresoActivity.this, "Error al modificar el ingreso", Toast.LENGTH_SHORT).show();
-                }
+        LocalDate fechaFinOriginal = LocalDate.parse(ingresoSeleccionado.getFechaFin(), formatter);
+        if (!fechaFinSeleccionada.equals(fechaFinOriginal)) {
+            if (fechaFinSeleccionada.isAfter(fechaInicio)) {
+                esMayor = true;
             } else {
-                esFechaMayor = false;
+                esMayor = false;
                 Toast.makeText(IngresoActivity.this, "Fecha fin debe ser mayor a la fecha inicio", Toast.LENGTH_SHORT).show();
             }
-
         } else {
-            esFechaMayor = false;
+            esMayor = false;
             Toast.makeText(IngresoActivity.this, "Ingrese la fecha fin nueva", Toast.LENGTH_SHORT).show();
         }
-
-        return esFechaMayor;
+        return esMayor;
     }
+
 
     private void ventanaFecha(TextView txtview){
         final Calendar c = Calendar.getInstance();
