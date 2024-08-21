@@ -56,7 +56,6 @@ public class CategoryActivity extends AppCompatActivity  {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_category);
         inicializarTabLayout();
-        cargarDatos();
         eventoBotonRetroceso();
         eventoBotonAgregarCategoria();
 
@@ -275,22 +274,6 @@ public class CategoryActivity extends AppCompatActivity  {
                 tabLayout.getTabAt(position).select();
             }
         });
-    }
-
-    /**
-     * Carga los datos iniciales de las categorías desde el archivo.
-     */
-    private void cargarDatos(){
-        boolean guardado = false;
-        File directorio = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-        try {
-            guardado = Categoria.crearDatosIniciales(directorio);
-        } catch(Exception e) {
-            Log.d("App", "Error al crear los datos iniciales" + e.getMessage());
-        }
-        if(guardado){
-            Log.d("App", "Datos escritos exitosamente, archivo categoria");
-        }
     }
 
     /**

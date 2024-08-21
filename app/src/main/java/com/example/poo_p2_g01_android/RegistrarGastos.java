@@ -91,9 +91,9 @@ public class RegistrarGastos extends AppCompatActivity {
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView textView = (TextView) view;
                 if (position == 0) {
-                    textView.setTextColor(Color.GRAY);
+                    textView.setTextColor(getColor(R.color.md_theme_onSurfaceVariant));
                 } else {
-                    textView.setTextColor(Color.BLACK);
+                    textView.setTextColor(getColor(R.color.md_theme_onBackground));
                 }
                 return view;
             }
@@ -135,9 +135,9 @@ public class RegistrarGastos extends AppCompatActivity {
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView textView = (TextView) view;
                 if (position == 0) {
-                    textView.setTextColor(Color.GRAY);
+                    textView.setTextColor(getColor(R.color.md_theme_onSurfaceVariant));
                 } else {
-                    textView.setTextColor(Color.BLACK);
+                    textView.setTextColor(getColor(R.color.md_theme_onBackground));
                 }
                 return view;
             }

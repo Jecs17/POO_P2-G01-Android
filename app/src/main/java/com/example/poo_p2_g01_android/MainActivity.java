@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.List;
 
 import modelo.banco.Banco;
+import modelo.movimiento.Categoria;
 import modelo.movimiento.Movimiento;
 import modelo.cuenta.CuentaFinanciera;
 import modelo.persona.Persona;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public static void cargarDatos(Context context) {
+        boolean guardadoCategoria = false;
         boolean guardadoPersona = false;
         boolean guardadoBanco = false;
         boolean guardadoCuentaFinanciera = false;
@@ -101,23 +103,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         File file = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
 
         try {
+            guardadoCategoria = Categoria.crearDatosIniciales(file);
             guardadoPersona = Persona.crearDatosIniciales(file);
             guardadoBanco = Banco.crearDatosIniciales(file);
             guardadoCuentaFinanciera = CuentaFinanciera.crearDatosIniciales(file, context);
 
         } catch (Exception e) {
+            guardadoCategoria = false;
             guardadoPersona = false;
             guardadoBanco = false;
             guardadoCuentaFinanciera = false;
             Log.d("Datos", "Error al cargar los datos iniciales"+ e.getMessage());;
         }
 
+        if(guardadoCategoria){
+            Log.d("Datos","Datos iniciales de Categoria - guardados");
+        }
         if(guardadoPersona && guardadoBanco){
             Log.d("Datos","Datos iniciales de Persona y Banco - guardados");
         }
         if(guardadoCuentaFinanciera){
             Log.d("Datos","Datos iniciales de Cuenta Financiera - guardados");
         }
+
     }
 
     private static void cargarMovimientosIniciales(Context context) {

@@ -399,8 +399,8 @@ public class IngresoActivity extends AppCompatActivity {
             btnEliminar.setMaxWidth(100);
             btnEliminar.setMaxHeight(100);
             btnEliminar.setPadding(5, 10, 5, 10);
-            btnEliminar.setBackgroundResource(R.drawable.buttonstyle);
-            btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.x_mark));
+            btnEliminar.setBackgroundColor(getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color));
+            btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.trash_can));
 
             btnEliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
