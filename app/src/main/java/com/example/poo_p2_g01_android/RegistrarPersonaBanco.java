@@ -146,7 +146,7 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         editNombreOficial.setBackgroundTintMode(PorterDuff.Mode.ADD);
         editTelefonoOficial.setBackgroundTintMode(PorterDuff.Mode.ADD);
 
-        //Añadiendo el evento onFocusChange
+        //Añadiendo el evento de TextWatcher
         editCodigo.addTextChangedListener(textWatcher);
         editNombre.addTextChangedListener(textWatcher);
         editEmail.addTextChangedListener(textWatcher);
@@ -154,6 +154,7 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         editNombreOficial.addTextChangedListener(textWatcher);
         editTelefonoOficial.addTextChangedListener(textWatcher);
 
+        //Añadiendo el evento de onFocusChange
         editCodigo.setOnFocusChangeListener(this::onFocusChange);
         editNombre.setOnFocusChangeListener(this::onFocusChange);
         editEmail.setOnFocusChangeListener(this::onFocusChange);
