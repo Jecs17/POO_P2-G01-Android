@@ -1,8 +1,10 @@
 package com.example.poo_p2_g01_android;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -31,12 +33,8 @@ import modelo.persona.Persona;
 
 public class PersonaBancoActivity extends AppCompatActivity {
 
-    private Button btnPersona, btnBanco, btnEliminar, btnCancelar;
-    private ImageButton btnRegresar;
-    private ArrayList<Object> listaPersonasBancos;
     private Dialog dialogEliminar;
     private TableLayout tablaCuentaCobrar, tablaCuentaPagar;
-    private TextView textoEliminar, textoNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,6 @@ public class PersonaBancoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        RegistrarPersonaBanco.clase = PersonaBancoActivity.class;
         registrarPersona();
         registrarBanco();
         regresar();
@@ -61,14 +58,12 @@ public class PersonaBancoActivity extends AppCompatActivity {
     }
 
     private void regresar(){
-        btnRegresar = findViewById(R.id.btnRegresarPersonaBanco);
-        btnRegresar.setOnClickListener(v -> {
-            finish();
-        });
+        ImageButton btnRegresar = findViewById(R.id.btnRegresarPersonaBanco);
+        btnRegresar.setOnClickListener(v -> finish());
     }
 
     public void registrarPersona(){
-        btnPersona = findViewById(R.id.btnRegistrarPersona);
+        Button btnPersona = findViewById(R.id.btnRegistrarPersona);
         btnPersona.setOnClickListener(v -> {
             Intent i = new Intent(PersonaBancoActivity.this, RegistrarPersonaBanco.class);
             RegistrarPersonaBanco.esPersona = true;
@@ -77,7 +72,7 @@ public class PersonaBancoActivity extends AppCompatActivity {
     }
 
     public void registrarBanco(){
-        btnBanco = findViewById(R.id.btnRegistrarBanco);
+        Button btnBanco = findViewById(R.id.btnRegistrarBanco);
         btnBanco.setOnClickListener(v -> {
             Intent i = new Intent(PersonaBancoActivity.this, RegistrarPersonaBanco.class);
             RegistrarPersonaBanco.esPersona = false;
@@ -115,7 +110,7 @@ public class PersonaBancoActivity extends AppCompatActivity {
     }
 
     private  void llenarTabla() {
-        listaPersonasBancos = agruparListas();
+        ArrayList<Object> listaPersonasBancos = agruparListas();
 
         TableLayout tabla = findViewById(R.id.tablaPersonaBanco);
         Log.d("ActivityPersonaBanco", listaPersonasBancos.toString());
@@ -164,7 +159,7 @@ public class PersonaBancoActivity extends AppCompatActivity {
                 btnEliminar.setMaxWidth(100);
                 btnEliminar.setMaxHeight(100);
                 btnEliminar.setPadding(5, 10, 5, 10);
-                btnEliminar.setBackgroundColor(getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color));
+                btnEliminar.setBackgroundColor(Color.TRANSPARENT);
                 btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.trash_can));
                 btnEliminar.setOnClickListener(v -> {
                     dialogoEliminar(tvNombre.getText().toString(), true);
@@ -224,7 +219,7 @@ public class PersonaBancoActivity extends AppCompatActivity {
                 btnEliminar.setMaxWidth(100);
                 btnEliminar.setMaxHeight(100);
                 btnEliminar.setPadding(5, 10, 5, 10);
-                btnEliminar.setBackgroundColor(getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color));
+                btnEliminar.setBackgroundColor(Color.TRANSPARENT);
                 btnEliminar.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.trash_can));
                 btnEliminar.setOnClickListener(v -> {
                     dialogoEliminar(tvNombre.getText().toString(),false);
@@ -278,6 +273,7 @@ public class PersonaBancoActivity extends AppCompatActivity {
         return null;
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void dialogoEliminar(String nombre_eliminar, boolean esPersona){
         dialogEliminar = new Dialog(PersonaBancoActivity.this);
         dialogEliminar.setContentView(R.layout.dialog_eliminar_persona_banco);
@@ -287,26 +283,26 @@ public class PersonaBancoActivity extends AppCompatActivity {
 
         tablaCuentaCobrar = dialogEliminar.findViewById(R.id.tablaCuentaCobrarAsociado);
         tablaCuentaPagar = dialogEliminar.findViewById(R.id.tablaCuentaPagarAsociado);
-        textoEliminar = dialogEliminar.findViewById(R.id.textoPreguntaEliminar);
-        textoNombre = dialogEliminar.findViewById(R.id.nombreObjetoEliminar);
-        btnEliminar = dialogEliminar.findViewById(R.id.btnEliminar);
-        btnCancelar = dialogEliminar.findViewById(R.id.btnCancelar);
+        TextView textoEliminar = dialogEliminar.findViewById(R.id.textoPreguntaEliminar);
+        TextView textoNombre = dialogEliminar.findViewById(R.id.nombreObjetoEliminar);
+        Button btnEliminar = dialogEliminar.findViewById(R.id.btnEliminar);
+        Button btnCancelar = dialogEliminar.findViewById(R.id.btnCancelar);
 
         ArrayList<CuentaxCobrar> listaCuentaCobrar = CuentaxCobrarActivity.buscarCuentasAsociada(nombre_eliminar,this);
         ArrayList<CuentaxPagar> listaCuentaPagar = CuentaxPagarActivity.buscarCuentasAsociada(nombre_eliminar,this);
 
         Log.d("Eliminar","Identificacion: " + nombre_eliminar);
-        Log.d("Eliminar", "Lista de cuentas: " + listaCuentaCobrar.toString() + listaCuentaPagar.toString());
+        Log.d("Eliminar", "Lista de cuentas: " + listaCuentaCobrar + listaCuentaPagar);
 
         llenarTablaCuentas(listaCuentaCobrar,listaCuentaPagar);
 
         textoEliminar.setText(esPersona ? R.string.texto_eliminar_persona : R.string.texto_eliminar_banco);
         textoNombre.setText(nombre_eliminar);
 
-        btnCancelar.setOnClickListener( v -> dialogEliminar.dismiss());
+        btnCancelar.setOnClickListener(v -> dialogEliminar.dismiss());
         btnEliminar.setOnClickListener(v -> {
             elimarRegistros(listaCuentaCobrar, listaCuentaPagar);
-            boolean objetoEliminado = false;
+            boolean objetoEliminado;
             if(esPersona){
                 Persona personaEliminar = PersonaBancoActivity.buscarPersona(nombre_eliminar,this);
                 objetoEliminado = Persona.eliminarPersona(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),personaEliminar);
@@ -320,7 +316,7 @@ public class PersonaBancoActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             if(objetoEliminado){
-                Toast.makeText(this, esPersona ? "Persona Eliminada": "Banco Eliminado", Integer.valueOf(1000)).show();
+                Toast.makeText(this, esPersona ? "Persona Eliminada": "Banco Eliminado", Toast.LENGTH_SHORT).show();
                 llenarTabla();
                 dialogEliminar.dismiss();
             }

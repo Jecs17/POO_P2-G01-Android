@@ -53,7 +53,6 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        RegistrarPersonaBanco.clase = RegistrarCuentasFinancieras.class;
         visualizarBotonPersonaBanco(false);
         cambiarCuenta();
         dialogFechaFin();
