@@ -13,6 +13,12 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".ControladorReporte.TablaReporteGasto"
+            android:exported="false" />
+        <activity
+            android:name=".ControladorReporte.TablaReporteIngreso"
+            android:exported="false" />
+        <activity
             android:name=".RegistrarGastos"
             android:exported="false" />
         <activity
@@ -38,7 +44,7 @@
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity" />
         <activity
-            android:name=".ReporteActivity"
+            android:name=".ControladorReporte.ReporteActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity" />

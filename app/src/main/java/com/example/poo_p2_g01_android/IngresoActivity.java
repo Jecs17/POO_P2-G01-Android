@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -41,7 +44,7 @@ import modelo.movimiento.Movimiento;
 public class IngresoActivity extends AppCompatActivity {
 
     private List<Ingreso> listaIngreso;
-
+    TextInputEditText txtCodigo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,8 +101,21 @@ public class IngresoActivity extends AppCompatActivity {
     private void mostrarDialogoFechaFinIngreso() {
         LayoutInflater layoutInflater = getLayoutInflater();
         View dialogCodigoView = layoutInflater.inflate(R.layout.dialog_ingresar_codigo, null);
+        txtCodigo = dialogCodigoView.findViewById(R.id.textCodigoUnico);
+        TextInputLayout textInputLayout = dialogCodigoView.findViewById(R.id.textInputLayout3);
 
-        TextInputEditText txtCodigo = dialogCodigoView.findViewById(R.id.textCodigoUnico);
+        txtCodigo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                textInputLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
 
         AlertDialog alertDialog = new MaterialAlertDialogBuilder(IngresoActivity.this)
                 .setTitle("Ingrese código")
@@ -130,10 +146,10 @@ public class IngresoActivity extends AppCompatActivity {
                                 procesarIngresoSeleccionado(codigoIngreso);
                                 dialogInterface.dismiss();
                             } else {
-                                Toast.makeText(IngresoActivity.this, "Código no encontrado", Toast.LENGTH_SHORT).show();
+                                validarEntradaSiExiste(textInputLayout);
                             }
                         } else {
-                            Toast.makeText(IngresoActivity.this, "Debe ingresar un código", Toast.LENGTH_SHORT).show();
+                            validarEntrada(textInputLayout);
                         }
                     }
                 });
@@ -141,6 +157,29 @@ public class IngresoActivity extends AppCompatActivity {
         });
 
         alertDialog.show();
+    }
+
+    /**
+     * Muestra mensaje llamativo al usuario
+     *
+     * @param textInputLayout recibe la referencia de la vista
+     */
+    private void validarEntrada(TextInputLayout textInputLayout) {
+        String input = txtCodigo.getText().toString();
+        if (input.isEmpty()) {
+            textInputLayout.setError("Ingrese código");
+        } else {
+            textInputLayout.setError(null);
+        }
+    }
+
+    /**
+     * Muestra mensaje llamativo al usuario
+     *
+     * @param textInputLayout recibe la referencia de la vista
+     */
+    private void validarEntradaSiExiste(TextInputLayout textInputLayout) {
+        textInputLayout.setError("¡Código no existe!");
     }
 
     private boolean verificarCodigoExiste(int codigoIngreso, List<Ingreso> ingresos) {
@@ -325,7 +364,7 @@ public class IngresoActivity extends AppCompatActivity {
         llenarTabla();
     }
 
-    private List<Ingreso> cargarListaIngresos() {
+    public List<Ingreso> cargarListaIngresos() {
         List<Ingreso> listaIngreso = new ArrayList<>();
         try {
             List<Movimiento> listaMovimiento = Movimiento.cargarMovimientos(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
@@ -342,7 +381,7 @@ public class IngresoActivity extends AppCompatActivity {
         return listaIngreso;
     }
 
-    private void cleanTable(TableLayout table) {
+    public static void cleanTable(TableLayout table) {
         int childCount = table.getChildCount();
         if (childCount > 1) {
             table.removeViews(1, childCount - 1);

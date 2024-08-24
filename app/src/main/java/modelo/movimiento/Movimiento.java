@@ -41,7 +41,7 @@ public abstract class Movimiento implements Serializable {
     /**
      * Nombre de archivo movimiento que guarda los ingresos y los gastos
      */
-    private final static String nombreArchivo = "MOVIMIENTOs.ser";
+    private final static String nombreArchivo = "movimientosIngresoGastos.ser";
 
 
     /**
@@ -247,10 +247,10 @@ public abstract class Movimiento implements Serializable {
      */
     public static List<Movimiento> obtenerMovimientos(Context context) {
         List<Movimiento> listaMovimiento = new ArrayList<>();
-        listaMovimiento.add(new Ingreso(CategoryActivity.buscarCategoriaPorNombre("Salario", context), 45.00, "Salario mensual", LocalDate.of(2024, Month.JULY, 10), LocalDate.of(2025, Month.MARCH, 10), TipoRepeticion.SIN_REPETICION ));
-        listaMovimiento.add(new Ingreso(CategoryActivity.buscarCategoriaPorNombre("Alquiler", context), 100.00, "Alquiler hogar", LocalDate.of(2023, Month.APRIL, 10), LocalDate.of(2025, Month.APRIL, 10), TipoRepeticion.MES));
-        listaMovimiento.add(new Gasto(CategoryActivity.buscarCategoriaPorNombre("Comida", context), 10.00, "Comida diaria", LocalDate.of(2024, Month.JULY, 11), null, TipoRepeticion.SIN_REPETICION ));
-        listaMovimiento.add(new Gasto(CategoryActivity.buscarCategoriaPorNombre("Transporte", context), 2.00, "Transporte diario", LocalDate.of(2024, Month.JUNE, 13), null, TipoRepeticion.MES));
+        listaMovimiento.add(new Ingreso(CategoryActivity.buscarCategoriaPorNombre("Salario", context), 45.00, "Salario mensual", LocalDate.of(2024, Month.JULY, 10), LocalDate.of(2025, Month.MARCH, 10), TipoRepeticion.MES ));
+        listaMovimiento.add(new Ingreso(CategoryActivity.buscarCategoriaPorNombre("Alquiler", context), 100.00, "Alquiler hogar", LocalDate.of(2024, Month.APRIL, 10), LocalDate.of(2025, Month.APRIL, 10), TipoRepeticion.MES));
+        listaMovimiento.add(new Gasto(CategoryActivity.buscarCategoriaPorNombre("Comida", context), 10.00, "Comida diaria", LocalDate.of(2024, Month.JULY, 11), LocalDate.of(2024, Month.DECEMBER,12), TipoRepeticion.MES ));
+        listaMovimiento.add(new Gasto(CategoryActivity.buscarCategoriaPorNombre("Transporte", context), 2.00, "Transporte diario", LocalDate.of(2024, Month.JUNE, 13), LocalDate.of(2024, Month.NOVEMBER, 20), TipoRepeticion.MES));
         return listaMovimiento;
     }
 

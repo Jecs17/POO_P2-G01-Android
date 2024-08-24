@@ -43,7 +43,6 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

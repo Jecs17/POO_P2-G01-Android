@@ -23,7 +23,7 @@
     <string name="txtTituloCategorias">LISTADO DE CATEGORIAS</string>
     <string name="txtIngresos">INGRESOS</string>
     <string name="txtGastos">GASTOS</string>
-    
+
     <!-- String in the activity ingreso-->
     <string name="txtTituloIngresos">LISTADO DE INGRESOS</string>
 
@@ -35,8 +35,8 @@
 
     <!-- String in the activity gasto-->
     <string name="txtTituloGastos">LISTADO DE GASTOS</string>
-    
-    
+
+
     <!--  String in the activity persona_banco  -->
     <string name="tituloPersonaBanco">Personas y Bancos</string>
     <string name="btn_RegistrarPersona">Registrar Persona</string>

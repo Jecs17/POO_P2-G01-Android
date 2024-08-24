@@ -6,9 +6,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:orientation="vertical"
-    >
+    tools:context=".MainActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutFinanzaPersonal"
         android:layout_width="match_parent"
@@ -32,702 +32,701 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <ScrollView
-            android:id="@+id/ScrollView"
+    <ScrollView
+        android:id="@+id/ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            >
+            android:columnCount="2"
+            android:useDefaultMargins="true">
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCategoria"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#91cb5d"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
 
-                <GridLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:columnCount="2"
-                    android:useDefaultMargins="true"
-                    >
+                    android:layout_height="match_parent">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvCategoria"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginTop="23dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#91cb5d"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp"
-                        >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="5"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/category_img"
+                        app:tint="#FFF" />
 
-                        <FrameLayout
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/imageCategory"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/tag_img"
+                            app:layout_constraintBottom_toTopOf="@+id/textView3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="5"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/category_img"
-                                app:tint="#FFF" />
-
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:id="@+id/imageCategory"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/tag_img"
-                                    app:layout_constraintBottom_toTopOf="@+id/textView3"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-                                    android:id="@+id/textView3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtCategory"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageCategory" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </FrameLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvIngresos"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginTop="23dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#02b4ea"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp">
-
-
-                        <FrameLayout
+                        <TextView
+                            android:id="@+id/textView3"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtCategory"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageCategory" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvIngresos"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#02b4ea"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
 
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/ingreso_img"
-                                app:tint="#FFF" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/imageIngreso"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ingreso_img"
-                                    app:layout_constraintBottom_toTopOf="@+id/textIngreso"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-                                    android:id="@+id/textIngreso"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtIngreso"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageIngreso" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </FrameLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/ingreso_img"
+                        app:tint="#FFF" />
 
 
-                    </androidx.cardview.widget.CardView>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvGastos"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#ff6884"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp">
-
-
-                        <FrameLayout
+                        <ImageView
+                            android:id="@+id/imageIngreso"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ingreso_img"
+                            app:layout_constraintBottom_toTopOf="@+id/textIngreso"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/gastos_img"
-                                app:tint="#FFF" />
-
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/ImageGasto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/gastos_img"
-                                    app:layout_constraintBottom_toTopOf="@+id/textGasto"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-                                    android:id="@+id/textGasto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtGasto"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/ImageGasto" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </FrameLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvCuentaxCobrar"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#76b0c3"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp">
-
-
-                        <FrameLayout
+                        <TextView
+                            android:id="@+id/textIngreso"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtIngreso"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageIngreso" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/cuentaxcobrar"
-                                app:tint="#FFF" />
-
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <ImageView
-                                    android:id="@+id/imageCuentaxCobrar"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:padding="0dp"
-                                    android:src="@drawable/cuentaxcobrar"
-                                    app:layout_constraintBottom_toTopOf="@+id/textCuentaxCobrar"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-                                    android:id="@+id/textCuentaxCobrar"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtCuentaxCobrar"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageCuentaxCobrar" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </FrameLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvCuentaxPagar"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#ff8d3c"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </FrameLayout>
 
 
-                        <FrameLayout
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvGastos"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#ff6884"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/gastos_img"
+                        app:tint="#FFF" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ImageGasto"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gastos_img"
+                            app:layout_constraintBottom_toTopOf="@+id/textGasto"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/cuentaxpagar"
-                                app:tint="#FFF" />
-
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <ImageView
-                                    android:id="@+id/imageCuentaxPagar"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/cuentaxpagar"
-                                    app:layout_constraintBottom_toTopOf="@+id/textCuentaxPagar"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-                                    android:id="@+id/textCuentaxPagar"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtCuentaxPagar"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageCuentaxPagar" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </FrameLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvCuentaBancaria"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#47abba"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp">
-
-
-                        <FrameLayout
+                        <TextView
+                            android:id="@+id/textGasto"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtGasto"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ImageGasto" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/cuenta_bancaria"
-                                app:tint="#FFF" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
+                </FrameLayout>
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+            </androidx.cardview.widget.CardView>
 
-                                <ImageView
-                                    android:id="@+id/imageCuentaBancaria"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/cuenta_bancaria"
-                                    app:layout_constraintBottom_toTopOf="@+id/textCuentaBancaria"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-
-                                    android:id="@+id/textCuentaBancaria"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtCuentaBancaria"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageCuentaBancaria" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </FrameLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvInversiones"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#be68bf"
-                        app:cardCornerRadius="25dp"
-                        app:cardElevation="8dp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCuentaxCobrar"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#76b0c3"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
 
 
-                        <FrameLayout
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/cuentaxcobrar"
+                        app:tint="#FFF" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageCuentaxCobrar"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            android:src="@drawable/cuentaxcobrar"
+                            app:layout_constraintBottom_toTopOf="@+id/textCuentaxCobrar"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/inversiones"
-                                app:tint="#FFF" />
-
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <ImageView
-                                    android:id="@+id/imageInversiones"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/inversiones"
-                                    app:layout_constraintBottom_toTopOf="@+id/textInversiones"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-                                    android:id="@+id/textInversiones"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtInversiones"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageInversiones" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </FrameLayout>
-
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvPersonaBanco"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#fcba58"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp">
-
-
-                        <FrameLayout
+                        <TextView
+                            android:id="@+id/textCuentaxCobrar"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtCuentaxCobrar"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageCuentaxCobrar" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/banco"
-                                app:tint="#FFF" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
+                </FrameLayout>
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+            </androidx.cardview.widget.CardView>
 
-                                <ImageView
-                                    android:id="@+id/imageBancoPersona"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/banco"
-                                    app:layout_constraintBottom_toTopOf="@+id/textBancoPersona"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-                                    android:id="@+id/textBancoPersona"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtBancoPersona"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageBancoPersona" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </FrameLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvReportes"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#cbc062"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCuentaxPagar"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#ff8d3c"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
 
 
-                        <FrameLayout
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/cuentaxpagar"
+                        app:tint="#FFF" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageCuentaxPagar"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/cuentaxpagar"
+                            app:layout_constraintBottom_toTopOf="@+id/textCuentaxPagar"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/reporte"
-                                app:tint="#FFF" />
-
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <ImageView
-                                    android:id="@+id/imageReporte"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/reporte"
-                                    app:layout_constraintBottom_toTopOf="@+id/textReporte"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
-
-                                <TextView
-
-                                    android:id="@+id/textReporte"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:gravity="center"
-                                    android:text="@string/txtReporte"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageReporte" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </FrameLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cvProyeccionGastos"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_columnWeight="1"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        app:cardBackgroundColor="#397985"
-                        app:cardCornerRadius="@dimen/cardCornerRadius"
-                        app:cardElevation="8dp">
-
-
-                        <FrameLayout
+                        <TextView
+                            android:id="@+id/textCuentaxPagar"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingBottom="10dp">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtCuentaxPagar"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageCuentaxPagar" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:alpha="0.15"
-                                android:rotation="0"
-                                android:scaleType="fitEnd"
-                                android:src="@drawable/proyeccion_gasto"
-                                app:tint="#FFF" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCuentaBancaria"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#47abba"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
 
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                                <ImageView
-                                    android:id="@+id/imageProyeccionGasto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/proyeccion_gasto"
-                                    app:layout_constraintBottom_toTopOf="@+id/textProyeccionGasto"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:tint="#FFF" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/cuenta_bancaria"
+                        app:tint="#FFF" />
 
-                                <TextView
 
-                                    android:id="@+id/textProyeccionGasto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/oswald_regular"
-                                    android:text="@string/txtProyeccionGasto"
-                                    android:textAlignment="center"
-                                    android:textColor="#FFF"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/imageProyeccionGasto" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:id="@+id/imageCuentaBancaria"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/cuenta_bancaria"
+                            app:layout_constraintBottom_toTopOf="@+id/textCuentaBancaria"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
 
-                        </FrameLayout>
+                        <TextView
 
-                    </androidx.cardview.widget.CardView>
+                            android:id="@+id/textCuentaBancaria"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtCuentaBancaria"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageCuentaBancaria" />
 
-                </GridLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </ScrollView>
+                </FrameLayout>
 
-    </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvInversiones"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#be68bf"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="8dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/inversiones"
+                        app:tint="#FFF" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageInversiones"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/inversiones"
+                            app:layout_constraintBottom_toTopOf="@+id/textInversiones"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+                            android:id="@+id/textInversiones"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtInversiones"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageInversiones" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvPersonaBanco"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#fcba58"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/banco"
+                        app:tint="#FFF" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageBancoPersona"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/banco"
+                            app:layout_constraintBottom_toTopOf="@+id/textBancoPersona"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+                            android:id="@+id/textBancoPersona"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtBancoPersona"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageBancoPersona" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvReportes"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#cbc062"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/reporte"
+                        app:tint="#FFF" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageReporte"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/reporte"
+                            app:layout_constraintBottom_toTopOf="@+id/textReporte"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+
+                            android:id="@+id/textReporte"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:gravity="center"
+                            android:text="@string/txtReporte"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageReporte" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvProyeccionGastos"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#397985"
+                app:cardCornerRadius="@dimen/cardCornerRadius"
+                app:cardElevation="8dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.15"
+                        android:rotation="0"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/proyeccion_gasto"
+                        app:tint="#FFF" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageProyeccionGasto"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/proyeccion_gasto"
+                            app:layout_constraintBottom_toTopOf="@+id/textProyeccionGasto"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#FFF" />
+
+                        <TextView
+
+                            android:id="@+id/textProyeccionGasto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oswald_regular"
+                            android:text="@string/txtProyeccionGasto"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/imageProyeccionGasto" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+
+    </ScrollView>
+
+</LinearLayout>
 
 
 

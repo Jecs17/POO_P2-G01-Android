@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +24,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.poo_p2_g01_android.IngresoActivity;
 import com.example.poo_p2_g01_android.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class CategoryActivity extends AppCompatActivity  {
      */
     CategoryAdapter categoryAdapter;
 
+    private TextInputEditText etNombreCategoria;
     /**
      * Se llama cuando la actividad es creada. Inicializa los componentes de la interfaz de usuario y
      * configura los eventos de los botones.
@@ -103,11 +106,25 @@ public class CategoryActivity extends AppCompatActivity  {
      */
     private void mostrarDialogoAgregarCategoria(File directorio, CategoryGasto categoryGastoFrag, CategoryIngreso categoryIngresoFrag) {
         View dialogView = LayoutInflater.from(CategoryActivity.this).inflate(R.layout.dialog_seleccion_categorias, null);
+        TextInputLayout textInputLayout = dialogView.findViewById(R.id.textInputLayout2);
         Spinner spinnerCategoria = dialogView.findViewById(R.id.spinner_categorias);
-        TextInputEditText etNombreCategoria = dialogView.findViewById(R.id.textNombreCategoria);
+        etNombreCategoria = dialogView.findViewById(R.id.textNombreCategoria);
         ViewPager2 viewPager2 = findViewById(R.id.viewPager);
         int posicionActual =  viewPager2.getCurrentItem();
         inicializarSpinner(spinnerCategoria, posicionActual);
+
+        etNombreCategoria.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                textInputLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
 
         AlertDialog alertDialog = new MaterialAlertDialogBuilder(CategoryActivity.this)
                 .setTitle("Agregar Categoría")
@@ -128,22 +145,23 @@ public class CategoryActivity extends AppCompatActivity  {
                 btnAgregar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!etNombreCategoria.getText().toString().isEmpty()) {
+                        if (!etNombreCategoria.getText().toString().isEmpty()) {
                             boolean siExiste = agregarCategoria(directorio, spinnerCategoria, etNombreCategoria, categoryGastoFrag, categoryIngresoFrag);
-                            if(!siExiste) {
-                                Toast.makeText(CategoryActivity.this, "!Ingreso registrado!", Toast.LENGTH_SHORT).show();
+                            if (!siExiste) {
+                                Toast.makeText(CategoryActivity.this, "!Categoría registrada!", Toast.LENGTH_SHORT).show();
                                 dialogInterface.dismiss();
+                            } else {
+                                validarEntradaSiExiste(textInputLayout);
                             }
-                        }
-                        else {
-                            Toast.makeText(CategoryActivity.this, "Ingrese categoría", Toast.LENGTH_SHORT).show();
+                        } else {
+                            validarEntrada(textInputLayout);
                         }
                     }
                 });
             }
         });
 
-      alertDialog.show();
+        alertDialog.show();
 
         Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
         if (positiveButton != null) {
@@ -154,6 +172,29 @@ public class CategoryActivity extends AppCompatActivity  {
         if (negativeButton != null) {
             negativeButton.setTextSize(18);
         }
+    }
+
+    /**
+     * Muestra mensaje llamativo al usuario
+     *
+     * @param textInputLayout recibe la referencia de la vista
+     */
+    private void validarEntrada(TextInputLayout textInputLayout) {
+        String input = etNombreCategoria.getText().toString();
+        if (input.isEmpty()) {
+            textInputLayout.setError("Ingrese categoría");
+        } else {
+            textInputLayout.setError(null);
+        }
+    }
+
+    /**
+     * Muestra mensaje llamativo al usuario
+     *
+     * @param textInputLayout recibe la referencia de la vista
+     */
+    private void validarEntradaSiExiste(TextInputLayout textInputLayout) {
+        textInputLayout.setError("¡Categoría ya existe!");
     }
 
     /**
@@ -232,7 +273,6 @@ public class CategoryActivity extends AppCompatActivity  {
             List<Categoria> lstCategoria = Categoria.cargarCategorias(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
             for(Categoria categoria: lstCategoria) {
                 if (categoria.equals(nuevaCategoria)) {
-                    Toast.makeText(this, "¡¡CATEGORIA YA EXISTE!!", Toast.LENGTH_SHORT).show();
                     siExiste = true;
                 }
             }

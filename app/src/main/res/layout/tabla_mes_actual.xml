@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/LayoutTablaMesActual"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+        <TableLayout
+            android:layout_marginTop="30dp"
+            android:id="@+id/tablaMesActual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            tools:ignore="VisualLintBounds">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/md_theme_inverseOnSurface"
+                >
+
+                <TextView
+                    android:id="@+id/textViewCategoria"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:text="Categoría"
+                    android:gravity="center_horizontal"/>
+
+
+                <TextView
+                    android:id="@+id/textViewValor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:text="Valor"
+                    android:gravity="center_horizontal"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>

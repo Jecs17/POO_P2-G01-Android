@@ -73,8 +73,8 @@
                 android:id="@+id/btnRegresarIngreso"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:contentDescription="@string/btn_regresar_content"
                 android:background="@drawable/round_2_corner_shape"
+                android:contentDescription="@string/btn_regresar_content"
                 app:layout_constraintBottom_toBottomOf="@id/guia10horizontal"
                 app:layout_constraintEnd_toEndOf="@id/guia15vertical"
                 app:layout_constraintHorizontal_bias="0"
@@ -111,10 +111,10 @@
                 android:id="@+id/btnFinalizarIngreso"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Finalizar Ingreso"
                 app:layout_constraintEnd_toEndOf="@id/guia85vertical"
                 app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="@id/guia15vertical"
                 app:layout_constraintTop_toBottomOf="@id/btnRegistrarIngreso"
                 app:layout_constraintVertical_chainStyle="packed" />
@@ -155,8 +155,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
-                            android:paddingEnd="15dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="Fecha Inicio" />
 
                         <TextView
@@ -164,8 +164,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
-                            android:paddingEnd="15dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="Categoría" />
 
                         <TextView
@@ -173,8 +173,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
-                            android:paddingEnd="15dp"
                             android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
                             android:text="Valor Neto" />
 
                         <TextView
@@ -182,8 +182,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
-                            android:paddingEnd="90dp"
                             android:paddingStart="35dp"
+                            android:paddingEnd="90dp"
                             android:text="Descripción" />
 
                         <TextView
@@ -191,8 +191,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
-                            android:paddingEnd="25dp"
                             android:paddingStart="10dp"
+                            android:paddingEnd="25dp"
                             android:text="Fecha Fin" />
 
                         <TextView
@@ -200,8 +200,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
-                            android:paddingEnd="45dp"
                             android:paddingStart="45dp"
+                            android:paddingEnd="45dp"
                             android:text="Repetición" />
 
                         <TextView

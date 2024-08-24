@@ -1,49 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/vistaCategory"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vistaCategory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginTop="15dp"
     android:layout_marginEnd="5dp"
+    android:orientation="vertical"
     tools:context=".ControladorCategoria.CategoryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal"
         android:layout_marginBottom="15dp"
-        >
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/btnAtras"
-            android:contentDescription="@string/btn_regresar_content"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/round_2_corner_shape"
-            android:src="@drawable/turn_back_arrow"/>
+            android:contentDescription="@string/btn_regresar_content"
+            android:src="@drawable/turn_back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="@string/txtTituloCategorias"
             android:layout_gravity="center"
             android:gravity="center"
-            >
+            android:text="@string/txtTituloCategorias"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -90,35 +88,34 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
-        app:layout_constraintTop_toBottomOf="@id/tabLCategoria"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewAgregarCategoria"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-    </androidx.viewpager2.widget.ViewPager2>
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewAgregarCategoria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLCategoria"></androidx.viewpager2.widget.ViewPager2>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewAgregarCategoria"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:clickable="true"
         android:background="@color/theme_fondo_secundario"
+        android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="10dp"
+            android:text=" + Añadir nueva categoría"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text=" + Añadir nueva categoría" />
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

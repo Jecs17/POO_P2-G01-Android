@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.poo_p2_g01_android.ControladorCategoria.CategoryActivity;
+import com.example.poo_p2_g01_android.ControladorReporte.ReporteActivity;
 
 import java.io.File;
 import java.util.List;

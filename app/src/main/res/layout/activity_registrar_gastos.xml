@@ -68,8 +68,8 @@
         android:id="@+id/btnActivityRegistrarGastos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/btnRegistro"
         android:paddingVertical="15dp"
+        android:text="@string/btnRegistro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
@@ -79,9 +79,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Categoría"
         app:layout_constraintBottom_toBottomOf="@id/guiaTop"
-        app:layout_constraintStart_toStartOf="@id/guiaStart"
-        android:text="Categoría"/>
+        app:layout_constraintStart_toStartOf="@id/guiaStart" />
 
     <Spinner
         android:id="@+id/spinner_gastos"
@@ -89,18 +89,18 @@
         android:layout_height="55dp"
         android:layout_marginTop="5dp"
         android:padding="10dp"
-        app:layout_constraintTop_toTopOf="@id/guiaTop"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
-        app:layout_constraintEnd_toEndOf="@id/guiaEnd"/>
+        app:layout_constraintTop_toTopOf="@id/guiaTop" />
 
     <TextView
         android:id="@+id/txtValorGasto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valor"
         android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_gastos"
-        app:layout_constraintStart_toStartOf="@id/guiaStart"/>
+        android:text="Valor"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/spinner_gastos" />
 
     <EditText
         android:id="@+id/edValorGastos"
@@ -109,44 +109,45 @@
         android:layout_marginTop="10dp"
         android:hint="Ingrese un número"
         android:imeOptions="actionDone"
-        android:maxLines="1"
         android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/txtValorGasto"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
-        app:layout_constraintEnd_toEndOf="@id/guiaEnd"/>
+        app:layout_constraintTop_toBottomOf="@id/txtValorGasto" />
 
     <TextView
         android:id="@+id/txtDescripcionGasto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descripción"
         android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/edValorGastos"
-        app:layout_constraintStart_toStartOf="@id/guiaStart"/>
+        android:text="Descripción"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/edValorGastos" />
 
     <EditText
         android:id="@+id/edDescripcionGastos"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="10dp"
-        android:imeOptions="actionDone"
-        android:maxLines="1"
+        android:ems="10"
         android:hint="Ingrese una descripción"
+        android:imeOptions="actionDone"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/txtDescripcionGasto"
-        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="@id/guiaEnd"
-        />
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/txtDescripcionGasto" />
 
 
     <TextView
         android:id="@+id/txtRepeticiónGasto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Repetición"
         android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/edDescripcionGastos"
-        app:layout_constraintStart_toStartOf="@id/guiaStart"/>
+        android:text="Repetición"
+        app:layout_constraintStart_toStartOf="@id/guiaStart"
+        app:layout_constraintTop_toBottomOf="@id/edDescripcionGastos" />
 
 
     <Spinner
@@ -155,9 +156,9 @@
         android:layout_height="55dp"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        app:layout_constraintTop_toBottomOf="@id/txtRepeticiónGasto"
+        app:layout_constraintEnd_toEndOf="@id/guiaEnd"
         app:layout_constraintStart_toStartOf="@id/guiaStart"
-        app:layout_constraintEnd_toEndOf="@id/guiaEnd"/>
+        app:layout_constraintTop_toBottomOf="@id/txtRepeticiónGasto" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -230,7 +231,6 @@
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
