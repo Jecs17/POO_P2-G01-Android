@@ -48,6 +48,19 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.85" />
 
+            <ImageButton
+                android:id="@+id/btnRegresarRegistroCF"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/round_2_corner_shape"
+                android:contentDescription="@string/btn_regresar_content"
+                android:src="@drawable/turn_back_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/guia15horizontalCF"
+                app:layout_constraintEnd_toEndOf="@id/guia15verticalCF"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"

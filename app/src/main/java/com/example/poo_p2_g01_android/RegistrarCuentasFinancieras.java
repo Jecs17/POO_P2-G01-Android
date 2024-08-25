@@ -1,17 +1,26 @@
 package com.example.poo_p2_g01_android;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +40,7 @@ import modelo.cuenta.CuentaxCobrar;
 import modelo.cuenta.CuentaxPagar;
 import modelo.persona.Persona;
 
-public class RegistrarCuentasFinancieras extends AppCompatActivity implements View.OnClickListener {
+public class RegistrarCuentasFinancieras extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener {
 
     private TextView txtFechaPrestamo, txtFechaInicioPago, txtFechaFinPago, txtviewInteres, txtviewIdentificacion;
     private Button btnFechaPrestamo, btnFechaInicioPago, btnFechaFinPago, btnNingunaFecha, btnAbrirCalendario, btnDPersona, btnDBanco;
@@ -43,6 +52,9 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
     public static boolean esAcreedor = false;
     private Context context = this;
     private String nombreObjetoRecuperado = "";
+    private ColorStateList color_mal;
+    private ColorStateList color_bien;
+    private final boolean[] comprobacion = {false, false, false, false, false, false, false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +66,8 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        color_mal = ColorStateList.valueOf(this.getColor(R.color.md_theme_errorContainer_mediumContrast));
+        color_bien = ColorStateList.valueOf(this.getColor(R.color.md_theme_secondaryFixed_highContrast));
         visualizarBotonPersonaBanco(false);
         cambiarCuenta();
         dialogFechaFin();
@@ -64,13 +78,21 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
     @Override
     protected void onResume() {
         super.onResume();
-        //TODO: REGRESO DEL VALOR DEL NOMBRE DEL OBJETO
+        obtenerNombreObjeto();
+        registrarDatos();
+        regresar();
+        verificarDatos();
+        estadoBoton(comprobacion);
+    }
+
+    private void obtenerNombreObjeto(){
         Intent intent = getIntent();
         nombreObjetoRecuperado = intent.getStringExtra("nombre");
         editIdentificacion.setText(nombreObjetoRecuperado);
-        //
-        comprobarIdentificacion();
-        registrarDatos();
+        if(nombreObjetoRecuperado != null){
+            comprobacion[0] = true;
+            editIdentificacion.setBackgroundTintList(color_bien);
+        }
     }
 
     private void cambiarCuenta(){
@@ -92,6 +114,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
             editIntereses.setVisibility(View.VISIBLE);
             btnRegistrarPersonaBanco.setText(R.string.btn_acreedor);
         }
+    }
+
+    private void regresar(){
+        ImageButton btnRegresar = findViewById(R.id.btnRegresarRegistroCF);
+        btnRegresar.setOnClickListener(v -> finish());
     }
 
     private void dialogFechaFin(){
@@ -126,7 +153,7 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         txtFechaFinPago = findViewById(R.id.txtFechaFinPago);
         txtFechaPrestamo.setText(LocalDate.now().toString());
         txtFechaInicioPago.setText(LocalDate.now().toString());
-        txtFechaFinPago.setText(LocalDate.now().toString());
+        txtFechaFinPago.setText(LocalDate.now().plusDays(7).toString());
 
         btnFechaPrestamo = findViewById(R.id.btnFechaPrestamo);
         btnFechaInicioPago = findViewById(R.id.btnFechaInicioPago);
@@ -136,6 +163,7 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         btnFechaFinPago.setOnClickListener(this);
     }
 
+    @SuppressLint("UseCompatTextViewDrawableApis")
     private void ventanaFecha(TextView txtview){
         DatePickerDialog datePD = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -166,33 +194,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
     }
 
     //Registro
-    private void comprobarIdentificacion(){
-        editIdentificacion = findViewById(R.id.txtIdentificacionObjeto);
-        editIdentificacion.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
-                    String identificacion = editIdentificacion.getText().toString();
-                    Persona persona = PersonaBancoActivity.buscarPersona(identificacion, context);
-                    Log.i("Identificacion", "Valor de persona: " + persona);
-                    Banco banco = PersonaBancoActivity.buscarBanco(identificacion, context);
-                    Log.i("Identificacion", "Valor de Banco: " + banco);
-                    if (persona == null && banco == null) {
-                        visualizarBotonPersonaBanco(true);
-                    } else if(persona != null || banco != null){
-                        visualizarBotonPersonaBanco(false);
-                    }
-                }
-            }
-        });
-    }
-
     private void dialogRegistro(){
         dialogRegistrarPB = new Dialog(RegistrarCuentasFinancieras.this);
         dialogRegistrarPB.setContentView(R.layout.dialog_registrar_persona_banco);
         dialogRegistrarPB.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialogRegistrarPB.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_style));
-        dialogRegistrarPB.setCancelable(false);
 
         btnDPersona = dialogRegistrarPB.findViewById(R.id.btnPersonaDialogo);
         btnDBanco = dialogRegistrarPB.findViewById(R.id.btnBancoDialogo);
@@ -255,9 +261,9 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         btnRegistrarCF = findViewById(R.id.btnRegistrarCF);
 
         btnRegistrarCF.setOnClickListener(v -> {
-            double valor = Double.valueOf(editCantidad.getText().toString());
+            double valor = Double.parseDouble(editCantidad.getText().toString());
             String descripcion = editDescripcion.getText().toString();
-            double cuota = Double.valueOf(editCuota.getText().toString());
+            double cuota = Double.parseDouble(editCuota.getText().toString());
             LocalDate fechaPrestamo = LocalDate.parse(editFechaPrestamo.getText().toString());
             LocalDate fechaInicio = LocalDate.parse(editFechaInicio.getText().toString());
             String stringFechaFin = editFechaFin.getText().toString();
@@ -292,5 +298,162 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
                 finish();
             }
         });
+    }
+
+    private void verificarDatos(){
+        editIdentificacion.setBackgroundTintMode(PorterDuff.Mode.ADD);
+        editCantidad.setBackgroundTintMode(PorterDuff.Mode.ADD);
+        editDescripcion.setBackgroundTintMode(PorterDuff.Mode.ADD);
+        editCuota.setBackgroundTintMode(PorterDuff.Mode.ADD);
+        editIntereses.setBackgroundTintMode(PorterDuff.Mode.ADD);
+
+        editIdentificacion.setOnFocusChangeListener(this::onFocusChange);
+        editCantidad.setOnFocusChangeListener(this::onFocusChange);
+        editDescripcion.setOnFocusChangeListener(this::onFocusChange);
+        editCuota.setOnFocusChangeListener(this::onFocusChange);
+        editIntereses.setOnFocusChangeListener(this::onFocusChange);
+
+        editCantidad.addTextChangedListener(textWatcher);
+        editDescripcion.addTextChangedListener(textWatcher);
+        editCuota.addTextChangedListener(textWatcher);
+        editIntereses.addTextChangedListener(textWatcher);
+
+        editFechaPrestamo.addTextChangedListener(textWatcher);
+        editFechaInicio.addTextChangedListener(textWatcher);
+        editFechaFin.addTextChangedListener(textWatcher);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus){
+        if(!hasFocus){
+            if(v.equals(editIdentificacion)){
+                String identificacion = editIdentificacion.getText().toString();
+                Persona persona = PersonaBancoActivity.buscarPersona(identificacion, context);
+                Log.i("Identificacion", "Valor de persona: " + persona);
+                Banco banco = PersonaBancoActivity.buscarBanco(identificacion, context);
+                Log.i("Identificacion", "Valor de Banco: " + banco);
+                if (persona == null && banco == null) {
+                    comprobacion[0] = false;
+                    mensajeValidacion(esAcreedor? "Persona o Banco no Registrado": "Persona no Registrada");
+                    editIdentificacion.setBackgroundTintList(color_mal);
+                    visualizarBotonPersonaBanco(true);
+                } else if(persona != null || banco != null){
+                    editIdentificacion.setBackgroundTintList(color_bien);
+                    visualizarBotonPersonaBanco(false);
+                    comprobacion[0] = true;
+                }
+            }
+            if (!comprobacion[1] && v.equals(editCantidad)) {
+                mensajeValidacion("Cantidad Vacia");
+                editCantidad.setBackgroundTintList(color_mal);
+            } else if (!comprobacion[2] && v.equals(editDescripcion)) {
+                mensajeValidacion("Descripción Vacia");
+                editDescripcion.setBackgroundTintList(color_mal);
+            } else if (!comprobacion[3] && v.equals(editCuota)) {
+                mensajeValidacion("Cuota Vacia");
+                editCuota.setBackgroundTintList(color_mal);
+            } else if (!comprobacion[4] && v.equals(editIntereses)) {
+                mensajeValidacion("Interes Vacio");
+                editIntereses.setBackgroundTintList(color_mal);
+            }
+        }
+    }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            if(editCantidad.hasFocus()){
+                boolean nombreVacio = editCantidad.getText().toString().isEmpty();
+                if(nombreVacio){
+                    editCantidad.setBackgroundTintList(color_mal);
+                    comprobacion[1] = false;
+                }else {
+                    editCantidad.setBackgroundTintList(color_bien);
+                    comprobacion[1] = true;
+                }
+            }
+
+            if(editDescripcion.hasFocus()){
+                boolean nombreVacio = editDescripcion.getText().toString().isEmpty();
+                if(nombreVacio){
+                    editDescripcion.setBackgroundTintList(color_mal);
+                    comprobacion[2] = false;
+                }else {
+                    editDescripcion.setBackgroundTintList(color_bien);
+                    comprobacion[2] = true;
+                }
+            }
+
+            if(editCuota.hasFocus()){
+                boolean nombreVacio = editCuota.getText().toString().isEmpty();
+                if(nombreVacio){
+                    editCuota.setBackgroundTintList(color_mal);
+                    comprobacion[3] = false;
+                }else {
+                    editCuota.setBackgroundTintList(color_bien);
+                    comprobacion[3] = true;
+                }
+            }
+
+            if(editIntereses.hasFocus()){
+                boolean nombreVacio = editIntereses.getText().toString().isEmpty();
+                if(nombreVacio){
+                    editIntereses.setBackgroundTintList(color_mal);
+                    comprobacion[4] = false;
+                }else {
+                    editIntereses.setBackgroundTintList(color_bien);
+                    comprobacion[4] = true;
+                }
+            }
+
+            estadoBoton(comprobacion);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            ColorStateList color_normal = ColorStateList.valueOf(getColor(R.color.md_theme_onPrimary));
+            LocalDate fechaPrestamo = LocalDate.parse(editFechaPrestamo.getText().toString());
+            LocalDate fechaInicio = LocalDate.parse(editFechaInicio.getText().toString());
+            LocalDate fechaFin = null;
+            if(fechaPrestamo.isBefore(fechaInicio) || fechaPrestamo.isEqual(fechaInicio)){
+                comprobacion[5] = true;
+                btnFechaPrestamo.setCompoundDrawableTintList(color_normal);
+            }else{
+                comprobacion[5] = false;
+                btnFechaPrestamo.setCompoundDrawableTintList(color_mal);
+                mensajeValidacion("Fecha de Préstamo o Inicio de Pago Invalido");
+            }
+            if(!editFechaFin.getText().toString().equals("Sin Fecha")){
+                fechaFin = LocalDate.parse(editFechaFin.getText().toString());
+                if(fechaFin.isAfter(fechaInicio)){
+                    comprobacion[6] = true;
+                    btnFechaFinPago.setCompoundDrawableTintList(color_normal);
+                }
+                else {
+                    comprobacion[6] = false;
+                    btnFechaFinPago.setCompoundDrawableTintList(color_mal);
+                    mensajeValidacion("Fecha de Fin de Pago Invalida");
+                }
+            }
+            estadoBoton(comprobacion);
+        }
+    };
+
+    private void estadoBoton(boolean[] valores){
+        if(esAcreedor && valores[0] && valores[1] && valores[2] && valores[3] && valores[5] && valores[6]){
+            btnRegistrarCF.setEnabled(true);
+        }else if(!esAcreedor && valores[0] && valores[1] && valores[2] && valores[3] && valores[4] && valores[5] && valores[6]){
+            btnRegistrarCF.setEnabled(true);
+        } else{
+            btnRegistrarCF.setEnabled(false);
+        }
+    }
+
+    private void mensajeValidacion(String mensaje){
+        Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show();
     }
 }
