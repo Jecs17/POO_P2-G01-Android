@@ -186,6 +186,11 @@ public class Persona implements Serializable {
         return String.format("%-18s %-20s %-24s %-23s Telf: %-30s", fechaRegistro, cedula, nombre, email, telefono);
     }
 
+    /**
+     * Obtiene una lista inicial de personas.
+     *
+     * @return Una lista con personas predefinidas.
+     */
     public static ArrayList<Persona> obtenerPersonasIniciales(){
         ArrayList<Persona> lista = new ArrayList<>();
         lista.add(new Persona("094232152", "Pedro Lopéz", "0994354621", "pedrol12@gmail.com"));
@@ -193,6 +198,14 @@ public class Persona implements Serializable {
         return lista;
     }
 
+    /**
+     * Crea datos iniciales y los guarda en un archivo.
+     *
+     * Si el archivo no existe, se crea y se escriben los datos iniciales en él.
+     *
+     * @param directorio El directorio donde se guardará el archivo.
+     * @return true si los datos se guardaron exitosamente, false en caso contrario.
+     */
     public static boolean crearDatosIniciales(File directorio){
         ArrayList<Persona> lista = Persona.obtenerPersonasIniciales();
         boolean guardado = false;
@@ -209,6 +222,14 @@ public class Persona implements Serializable {
         return guardado;
     }
 
+    /**
+     * Carga la lista de personas desde un archivo.
+     *
+     * Si el archivo existe, se lee y se deserializa la lista de personas.
+     *
+     * @param directorio El directorio donde se encuentra el archivo.
+     * @return Una lista de personas cargada desde el archivo.
+     */
     public static ArrayList<Persona> cargarPersonas(File directorio){
         ArrayList<Persona> lista = new ArrayList<>();
         File f = new File(directorio, nomArchivo);
@@ -222,6 +243,16 @@ public class Persona implements Serializable {
         return lista;
     }
 
+    /**
+     * Guarda una persona en el archivo.
+     *
+     * Si el archivo existe, se carga la lista de personas, se agrega la nueva persona,
+     * y se guarda la lista actualizada en el archivo.
+     *
+     * @param directorio El directorio donde se encuentra el archivo.
+     * @param persona La persona a agregar a la lista.
+     * @return true si la persona se guardó exitosamente, false en caso contrario.
+     */
     public static boolean guardarPersona(File directorio, Persona persona){
         boolean guardado = false;
         ArrayList<Persona> listaPersona = Persona.cargarPersonas(directorio);
@@ -238,6 +269,16 @@ public class Persona implements Serializable {
         return guardado;
     }
 
+    /**
+     * Elimina una persona del archivo.
+     *
+     * Si el archivo existe, se carga la lista de personas, se elimina la persona especificada,
+     * y se guarda la lista actualizada en el archivo.
+     *
+     * @param directorio El directorio donde se encuentra el archivo.
+     * @param persona La persona a eliminar de la lista.
+     * @return true si la persona se eliminó exitosamente, false en caso contrario.
+     */
     public static boolean eliminarPersona(File directorio, Persona persona){
         boolean guardado = false;
         ArrayList<Persona> listaPersona = Persona.cargarPersonas(directorio);

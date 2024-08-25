@@ -1,11 +1,15 @@
 package com.example.poo_p2_g01_android;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.widget.ImageButton;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,8 +26,19 @@ import java.util.List;
 import modelo.movimiento.Categoria;
 import modelo.movimiento.Gasto;
 
+/**
+ * Esta actividad se encarga de proyectar los gastos basados en los gastos de los
+ * últimos tres meses y mostrar los resultados en una tabla.
+ *
+ * @author Grupo1
+ */
 public class ProyeccionGastoActivity extends AppCompatActivity {
 
+    /**
+     * Método llamado cuando la actividad es creada.
+     *
+     * @param savedInstanceState Contiene los datos más recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,16 +50,21 @@ public class ProyeccionGastoActivity extends AppCompatActivity {
             return insets;
         });
         regresar();
-        //TODO: ReporteActivity -> obtener nombre mes, reporte crear gastosPorMesYMismaCategoria()
-        //TODO: Parte final reemplazar formato String por Lista de ROWs
     }
 
+    /**
+     * Método llamado cuando la actividad entra en primer plano.
+     * Se encarga de llenar la tabla con los datos proyectados.
+     */
     @Override
     protected void onResume() {
         super.onResume();
-        prueba();
+        llenarTabla();
     }
 
+    /**
+     * Configura el botón de regreso para finalizar la actividad cuando es presionado.
+     */
     private void regresar(){
         ImageButton btnRegresar = findViewById(R.id.btnRegresarProyeccion);
         btnRegresar.setOnClickListener(v -> finish());
@@ -86,7 +106,12 @@ public class ProyeccionGastoActivity extends AppCompatActivity {
         return meses;
     }
 
-    public String gastosDeTresMeses(){
+    /**
+     * Obtiene las filas de la tabla con los gastos de los últimos tres meses por categoría.
+     *
+     * @return Lista de filas de tabla con los datos de gastos.
+     */
+    private ArrayList<TableRow> gastosDeTresMeses(){
         List<Month> tresMeses = obtenerMeses();
         List<Categoria> listaCategoriaGasto = CategoryActivity.leerDatosGasto(this);
         List<Gasto> gastosMes1 = new ArrayList<>();
@@ -104,7 +129,7 @@ public class ProyeccionGastoActivity extends AppCompatActivity {
             }
         }
 
-        String formatoValores="";
+        ArrayList<TableRow> lstFilas = new ArrayList<>();
 
         for(Categoria categoria: listaCategoriaGasto){
             List<Double> valoresNetosPorCategoria = new ArrayList<>();
@@ -144,12 +169,91 @@ public class ProyeccionGastoActivity extends AppCompatActivity {
             }
 
             double promedioValores = sumaValores/valoresNetosPorCategoria.size();
-            formatoValores += String.format("%-25s %-8.2f %-8.2f %-8.2f %-8.2f%n", categoria.getNombre(), valoresNetosPorCategoria.get(0), valoresNetosPorCategoria.get(1), valoresNetosPorCategoria.get(2), promedioValores);
+
+            TableRow tr = new TableRow(this);
+
+            TextView tvCategoria = new TextView(this);
+            tvCategoria.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            tvCategoria.setPadding(20, 10, 20, 10);
+            tvCategoria.setText(categoria.getNombre());
+
+            TextView tvValorMes1 = new TextView(this);
+            tvValorMes1.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            tvValorMes1.setPadding(20, 10, 20, 10);
+            tvValorMes1.setText(String.valueOf(valoresNetosPorCategoria.get(0)));
+            tvValorMes1.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            TextView tvValorMes2 = new TextView(this);
+            tvValorMes2.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            tvValorMes2.setPadding(20, 10, 20, 10);
+            tvValorMes2.setText(String.valueOf(valoresNetosPorCategoria.get(1)));
+            tvValorMes2.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            TextView tvValorMes3 = new TextView(this);
+            tvValorMes3.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            tvValorMes3.setPadding(20, 10, 20, 10);
+            tvValorMes3.setText(String.valueOf(valoresNetosPorCategoria.get(2)));
+            tvValorMes3.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            TextView tvValorMesProyectado = new TextView(this);
+            tvValorMesProyectado.setTextColor(ContextCompat.getColor(this, R.color.md_theme_background));
+            tvValorMesProyectado.setPadding(20, 10, 22, 10);
+            tvValorMesProyectado.setText(String.valueOf(promedioValores));
+            tvValorMesProyectado.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            tr.addView(tvCategoria);
+            tr.addView(tvValorMes1);
+            tr.addView(tvValorMes2);
+            tr.addView(tvValorMes3);
+            tr.addView(tvValorMesProyectado);
+            tr.setPadding(0, 15, 0, 0);
+
+            lstFilas.add(tr);
         }
-        return formatoValores;
+        return lstFilas;
     }
 
-    private void prueba(){
-        Log.i("Proyeccion", gastosDeTresMeses());
+    /**
+     * Llena la tabla con los datos de los gastos proyectados y sus respectivos meses.
+     */
+    private void llenarTabla(){
+        ArrayList<TableRow> lstFilas = gastosDeTresMeses();
+        String[] meses = nombreMeses();
+
+        TextView contenidoProyectado = findViewById(R.id.txtviewContextoProyectado);
+
+        String textoProyectado = getString(R.string.contenidoProyectado) + " " + meses[0];
+        contenidoProyectado.setText(textoProyectado);
+
+        TextView mes1 = findViewById(R.id.txtviewMes1);
+        TextView mes2 = findViewById(R.id.txtviewMes2);
+        TextView mes3 = findViewById(R.id.txtviewMes3);
+        TextView mesProyectado = findViewById(R.id.txtviewMesProyectado);
+
+        mes1.setText(meses[3]);
+        mes2.setText(meses[2]);
+        mes3.setText(meses[1]);
+        mesProyectado.setText(meses[0]);
+
+        TableLayout tablaProyeccion = findViewById(R.id.tablaProyeccionGastos);
+        cleanTable(tablaProyeccion);
+        for(TableRow fila: lstFilas){
+            tablaProyeccion.addView(fila);
+        }
+    }
+
+    /**
+     * Limpia la tabla eliminando todas las filas excepto la primera.
+     *
+     * @param table Tabla a limpiar.
+     */
+    private void cleanTable(TableLayout table) {
+
+        int childCount = table.getChildCount();
+
+        // Elimina todas las filas excepto la primera
+        if (childCount > 1) {
+            table.removeViews(1, childCount - 1);
+        }
     }
 }

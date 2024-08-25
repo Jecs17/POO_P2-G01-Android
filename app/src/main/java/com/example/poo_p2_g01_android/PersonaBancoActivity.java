@@ -31,11 +31,24 @@ import modelo.cuenta.CuentaxCobrar;
 import modelo.cuenta.CuentaxPagar;
 import modelo.persona.Persona;
 
+/**
+ * Actividad para gestionar personas y bancos.
+ *
+ * Permite registrar nuevas personas y bancos, mostrar una tabla con sus datos y eliminar
+ * personas o bancos, incluyendo la visualización de cuentas asociadas.
+ *
+ * @author Grupo1
+ */
 public class PersonaBancoActivity extends AppCompatActivity {
 
     private Dialog dialogEliminar;
     private TableLayout tablaCuentaCobrar, tablaCuentaPagar;
 
+    /**
+     * Se llama cuando la actividad se está creando. Configura la vista y registra los listeners de los botones.
+     *
+     * @param savedInstanceState Si la actividad se ha reiniciado anteriormente, este Bundle contiene los datos más recientes suministrados en onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,17 +64,26 @@ public class PersonaBancoActivity extends AppCompatActivity {
         regresar();
     }
 
+    /**
+     * Se llama cuando la actividad está a punto de volverse visible de nuevo. Rellena la tabla con datos actualizados.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         llenarTabla();
     }
 
+    /**
+     * Configura el botón de regreso para cerrar la actividad cuando se presiona.
+     */
     private void regresar(){
         ImageButton btnRegresar = findViewById(R.id.btnRegresarPersonaBanco);
         btnRegresar.setOnClickListener(v -> finish());
     }
 
+    /**
+     * Registra un listener para el botón de registro de personas. Abre la actividad de registro con la configuración para persona.
+     */
     public void registrarPersona(){
         Button btnPersona = findViewById(R.id.btnRegistrarPersona);
         btnPersona.setOnClickListener(v -> {
@@ -71,6 +93,9 @@ public class PersonaBancoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Registra un listener para el botón de registro de bancos. Abre la actividad de registro con la configuración para banco.
+     */
     public void registrarBanco(){
         Button btnBanco = findViewById(R.id.btnRegistrarBanco);
         btnBanco.setOnClickListener(v -> {
@@ -80,6 +105,12 @@ public class PersonaBancoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Carga la lista de personas desde los archivos externos del dispositivo.
+     *
+     * @param context El contexto de la aplicación.
+     * @return Una lista de objetos Persona cargados.
+     */
     private ArrayList<Persona> cargarListaPersona(Context context){
         ArrayList<Persona> listaPersona = new ArrayList<>();
         try {
@@ -90,6 +121,12 @@ public class PersonaBancoActivity extends AppCompatActivity {
         return listaPersona;
     }
 
+    /**
+     * Carga la lista de bancos desde los archivos externos del dispositivo.
+     *
+     * @param context El contexto de la aplicación.
+     * @return Una lista de objetos Banco cargados.
+     */
     private ArrayList<Banco> cargarListaBanco(Context context){
         ArrayList<Banco> listaBanco = new ArrayList<>();
         try {
@@ -100,6 +137,11 @@ public class PersonaBancoActivity extends AppCompatActivity {
         return listaBanco;
     }
 
+    /**
+     * Agrupa las listas de personas y bancos en una sola lista.
+     *
+     * @return Una lista que contiene objetos Persona y Banco.
+     */
     private ArrayList<Object> agruparListas(){
         ArrayList<Persona> listaPersona = cargarListaPersona(this);
         ArrayList<Banco> listaBanco = cargarListaBanco(this);
@@ -109,6 +151,9 @@ public class PersonaBancoActivity extends AppCompatActivity {
         return listaGeneral;
     }
 
+    /**
+     * Llena la tabla de la interfaz con los datos de personas y bancos.
+     */
     private  void llenarTabla() {
         ArrayList<Object> listaPersonasBancos = agruparListas();
 
@@ -241,6 +286,11 @@ public class PersonaBancoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Limpia las filas de una tabla, dejando intacta la primera fila.
+     *
+     * @param table La tabla que se va a limpiar.
+     */
     private void cleanTable(TableLayout table) {
 
         int childCount = table.getChildCount();
@@ -251,6 +301,13 @@ public class PersonaBancoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Busca y retorna una persona por identificación o nombre.
+     *
+     * @param identificacion La cédula o nombre de la persona a buscar.
+     * @param context El contexto de la aplicación.
+     * @return La persona encontrada, o null si no se encuentra.
+     */
     public static Persona buscarPersona(String identificacion, Context context) {
         ArrayList<Persona> listaPersona = new PersonaBancoActivity().cargarListaPersona(context);
         for (Persona persona : listaPersona) {
@@ -263,6 +320,13 @@ public class PersonaBancoActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Busca y retorna un banco por identificación o nombre de la entidad bancaria.
+     *
+     * @param identificacion El RUC o nombre de la entidad bancaria a buscar.
+     * @param context El contexto de la aplicación.
+     * @return El banco encontrado, o null si no se encuentra.
+     */
     public static Banco buscarBanco(String identificacion, Context context) {
         ArrayList<Banco> listaBanco = new PersonaBancoActivity().cargarListaBanco(context);
         for (Banco banco : listaBanco) {
@@ -273,6 +337,12 @@ public class PersonaBancoActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Configura y muestra un diálogo para confirmar la eliminación de una persona o banco.
+     *
+     * @param nombre_eliminar El nombre de la persona o banco que se va a eliminar.
+     * @param esPersona Indica si se está eliminando una persona (true) o un banco (false).
+     */
     @SuppressLint("UseCompatLoadingForDrawables")
     private void dialogoEliminar(String nombre_eliminar, boolean esPersona){
         dialogEliminar = new Dialog(PersonaBancoActivity.this);
@@ -323,6 +393,12 @@ public class PersonaBancoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Llena las tablas de cuentas por cobrar y cuentas por pagar asociadas a una persona o banco.
+     *
+     * @param lstCC La lista de cuentas por cobrar asociadas.
+     * @param lstCP La lista de cuentas por pagar asociadas.
+     */
     private void llenarTablaCuentas(ArrayList<CuentaxCobrar> lstCC, ArrayList<CuentaxPagar> lstCP){
         cleanTable(tablaCuentaCobrar);
         for(CuentaxCobrar cuenta: lstCC){
@@ -416,6 +492,12 @@ public class PersonaBancoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Elimina las cuentas financieras asociadas a una persona o banco y muestra un mensaje de confirmación.
+     *
+     * @param lstCC La lista de cuentas por cobrar a eliminar.
+     * @param lstCP La lista de cuentas por pagar a eliminar.
+     */
     private void elimarRegistros(ArrayList<CuentaxCobrar> lstCC, ArrayList<CuentaxPagar> lstCP){
         ArrayList<CuentaFinanciera> listaCF = new ArrayList<>();
         listaCF.addAll(lstCC);

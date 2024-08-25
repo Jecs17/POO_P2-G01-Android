@@ -87,6 +87,7 @@
 
     <!--  String in the tablelayout  -->
     <string name="tituloProyeccionGasto">Proyección de Gastos</string>
+    <string name="contenidoProyectado">Mes a Proyectar: </string>
 
 
     <!--  String in the tablelayout  -->

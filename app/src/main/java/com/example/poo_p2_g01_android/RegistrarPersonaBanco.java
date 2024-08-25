@@ -2,7 +2,6 @@ package com.example.poo_p2_g01_android;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -25,19 +24,28 @@ import androidx.core.view.WindowInsetsCompat;
 import modelo.banco.Banco;
 import modelo.persona.Persona;
 
+/**
+ * Esta actividad maneja el registro de una persona o un banco.
+ * Dependiendo del contexto, la interfaz se ajusta para registrar los datos correspondientes.
+ *
+ * @author Grupo1
+ */
 public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnFocusChangeListener {
 
-    private TextView viewTitulo, viewCodigo, viewNombre, viewNombreOficial, viewTelefonoOficial, viewTelefono;
     private EditText editNombreOficial, editTelefonoOficial;
     public static boolean esPersona = false;
     private EditText editNombre, editCodigo, editEmail, editTelefono;
     private Button btnRegistrar;
-    private ImageButton btnRegreso;
     final boolean[] comprobacion = new boolean[]{false, false, false, false, false, false};
     private ColorStateList color_mal;
     private ColorStateList color_bien;
     boolean desdeCuenta = false;
 
+    /**
+     * Método llamado cuando la actividad es creada.
+     *
+     * @param savedInstanceState Contiene los datos más recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +64,10 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         desdeCuenta = intent.getBooleanExtra("desdeCuenta", false);
     }
 
+    /**
+     * Método llamado cuando la actividad entra en primer plano.
+     * Se encarga de registrar los datos y verificar la validez de la entrada del usuario.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -64,13 +76,16 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         estadoBoton(comprobacion);
     }
 
+    /**
+     * Ajusta la vista dependiendo de si se está registrando una persona o un banco.
+     */
     private void cambiarVista(){
-        viewTitulo = findViewById(R.id.tituloRegistrar);
-        viewCodigo = findViewById(R.id.txtviewCodigo);
-        viewNombre = findViewById(R.id.txtviewNombreObjeto);
-        viewTelefono = findViewById(R.id.textviewTelefono);
-        viewNombreOficial = findViewById(R.id.txtviewNombreOficial);
-        viewTelefonoOficial = findViewById(R.id.txtviewTelefonoOficial);
+        TextView viewTitulo = findViewById(R.id.tituloRegistrar);
+        TextView viewCodigo = findViewById(R.id.txtviewCodigo);
+        TextView viewNombre = findViewById(R.id.txtviewNombreObjeto);
+        TextView viewTelefono = findViewById(R.id.textviewTelefono);
+        TextView viewNombreOficial = findViewById(R.id.txtviewNombreOficial);
+        TextView viewTelefonoOficial = findViewById(R.id.txtviewTelefonoOficial);
         editNombreOficial = findViewById(R.id.txtNombreOficial);
         editTelefonoOficial = findViewById(R.id.txtTelefonoOficial);
         editTelefono = findViewById(R.id.txtTelefono);
@@ -98,8 +113,11 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         }
     }
 
+    /**
+     * Configura el botón de regreso para finalizar la actividad o abrir la actividad de registrar cuentas financieras.
+     */
     private void regresar(){
-        btnRegreso = findViewById(R.id.btnRegresarRegistroPB);
+        ImageButton btnRegreso = findViewById(R.id.btnRegresarRegistroPB);
         btnRegreso.setOnClickListener(v -> {
             if(desdeCuenta){
                 Intent intentCuenta = new Intent(this, RegistrarCuentasFinancieras.class);
@@ -109,6 +127,10 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         });
     }
 
+    /**
+     * Registra los datos de la persona o banco ingresados por el usuario.
+     * Si los datos se guardan correctamente, muestra un mensaje de confirmación.
+     */
     private void RegistrarDatos(){
         Context context = this;
         editCodigo = findViewById(R.id.txtCodigo);
@@ -118,39 +140,40 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         editNombreOficial = findViewById(R.id.txtNombreOficial);
         editTelefonoOficial = findViewById(R.id.txtTelefonoOficial);
         btnRegistrar = findViewById(R.id.btnActivityRegistrarPB);
-        btnRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String codigo = editCodigo.getText().toString();
-                String nombre = editNombre.getText().toString();
-                String email = editEmail.getText().toString();
-                String telefono = editTelefono.getText().toString();
-                boolean guardado = false;
-                if(esPersona){
-                    Persona persona = new Persona(codigo,nombre,telefono,email);
-                    guardado = Persona.guardarPersona(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),persona);
+        btnRegistrar.setOnClickListener(v -> {
+            String codigo = editCodigo.getText().toString();
+            String nombre = editNombre.getText().toString();
+            String email = editEmail.getText().toString();
+            String telefono = editTelefono.getText().toString();
+            boolean guardado = false;
+            if(esPersona){
+                Persona persona = new Persona(codigo,nombre,telefono,email);
+                guardado = Persona.guardarPersona(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),persona);
 
-                }else {
-                    String nombreOficial = editNombreOficial.getText().toString();
-                    String telefonoOficial = editTelefonoOficial.getText().toString();
-                    Persona oficial = new Persona(nombreOficial,telefonoOficial);
-                    Banco banco = new Banco(nombre, codigo, email, oficial);
-                    guardado = Banco.guardarBanco(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), banco);
-                }
+            }else {
+                String nombreOficial = editNombreOficial.getText().toString();
+                String telefonoOficial = editTelefonoOficial.getText().toString();
+                Persona oficial = new Persona(nombreOficial,telefonoOficial);
+                Banco banco = new Banco(nombre, codigo, email, oficial);
+                guardado = Banco.guardarBanco(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), banco);
+            }
 
-                if(guardado){
-                    Toast.makeText(getApplicationContext(),"Datos guardados", Toast.LENGTH_SHORT).show();
-                    if(desdeCuenta){
-                        Intent intentCuenta = new Intent(context, RegistrarCuentasFinancieras.class);
-                        intentCuenta.putExtra("nombre",nombre);
-                        startActivity(intentCuenta);
-                    }
-                    finish();
+            if(guardado){
+                Toast.makeText(getApplicationContext(),"Datos guardados", Toast.LENGTH_SHORT).show();
+                if(desdeCuenta){
+                    Intent intentCuenta = new Intent(context, RegistrarCuentasFinancieras.class);
+                    intentCuenta.putExtra("nombre",nombre);
+                    startActivity(intentCuenta);
                 }
+                finish();
             }
         });
     }
 
+    /**
+     * Verifica la validez de los datos ingresados en los campos de texto.
+     * Asigna colores indicativos a los campos según su validez y establece los listeners.
+     */
     private void verificarDatos(){
         // Colocando el modo del color
         editCodigo.setBackgroundTintMode(PorterDuff.Mode.ADD);
@@ -160,7 +183,7 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         editNombreOficial.setBackgroundTintMode(PorterDuff.Mode.ADD);
         editTelefonoOficial.setBackgroundTintMode(PorterDuff.Mode.ADD);
 
-        //Añadiendo el evento de TextWatcher
+        // Añadiendo el evento de TextWatcher
         editCodigo.addTextChangedListener(textWatcher);
         editNombre.addTextChangedListener(textWatcher);
         editEmail.addTextChangedListener(textWatcher);
@@ -168,15 +191,22 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         editNombreOficial.addTextChangedListener(textWatcher);
         editTelefonoOficial.addTextChangedListener(textWatcher);
 
-        //Añadiendo el evento de onFocusChange
-        editCodigo.setOnFocusChangeListener(this::onFocusChange);
-        editNombre.setOnFocusChangeListener(this::onFocusChange);
-        editEmail.setOnFocusChangeListener(this::onFocusChange);
-        editTelefono.setOnFocusChangeListener(this::onFocusChange);
-        editNombreOficial.setOnFocusChangeListener(this::onFocusChange);
-        editTelefonoOficial.setOnFocusChangeListener(this::onFocusChange);
+        // Añadiendo el evento de onFocusChange
+        editCodigo.setOnFocusChangeListener(this);
+        editNombre.setOnFocusChangeListener(this);
+        editEmail.setOnFocusChangeListener(this);
+        editTelefono.setOnFocusChangeListener(this);
+        editNombreOficial.setOnFocusChangeListener(this);
+        editTelefonoOficial.setOnFocusChangeListener(this);
     }
 
+    /**
+     * Maneja el evento de cambio de enfoque en los campos de texto.
+     * Muestra mensajes de validación y cambia el color de los campos según su validez.
+     *
+     * @param v        La vista que cambió de enfoque.
+     * @param hasFocus Indica si la vista tiene enfoque o no.
+     */
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if(!hasFocus){
@@ -203,8 +233,10 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         }
     }
 
-
-    private TextWatcher textWatcher = new TextWatcher() {
+    /**
+     * Listener que monitorea los cambios en los campos de texto para validar los datos ingresados.
+     */
+    private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
@@ -292,6 +324,11 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         public void afterTextChanged(Editable s) {}
     };
 
+    /**
+     * Activa o desactiva el botón de registro en función de la validez de los datos ingresados.
+     *
+     * @param valores Array que indica la validez de los datos ingresados en cada campo.
+     */
     private void estadoBoton(boolean[] valores){
         if(esPersona && valores[0] && valores[1] && valores[2] && valores[3]){
             btnRegistrar.setEnabled(true);
@@ -302,6 +339,11 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         }
     }
 
+    /**
+     * Muestra un mensaje Toast con la validación especificada.
+     *
+     * @param mensaje El mensaje que se mostrará.
+     */
     private void mensajeValidacion(String mensaje){
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show();
     }

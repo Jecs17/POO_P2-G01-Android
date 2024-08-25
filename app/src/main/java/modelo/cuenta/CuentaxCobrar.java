@@ -61,6 +61,12 @@ public class CuentaxCobrar extends CuentaFinanciera implements Serializable {
         return String.format("%-9d %-20s %-15.2f %-25s %-19s %-15.2f", codigo, deudor.getNombre(), valor, descripcion, fechaPrestamo, cuota);
     }
 
+    /**
+     * Compara esta cuenta por cobrar con otro objeto para determinar igualdad.
+     *
+     * @param o el objeto con el que comparar.
+     * @return true si los objetos son iguales, false en caso contrario.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,6 +75,11 @@ public class CuentaxCobrar extends CuentaFinanciera implements Serializable {
         return Objects.equals(deudor, that.deudor);
     }
 
+    /**
+     * Devuelve el código hash de esta cuenta por cobrar.
+     *
+     * @return el código hash de la cuenta por cobrar.
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(deudor);

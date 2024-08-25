@@ -26,10 +26,18 @@ import modelo.movimiento.Movimiento;
 import modelo.cuenta.CuentaFinanciera;
 import modelo.persona.Persona;
 
-
+/**
+ * <h3>Activity Principal de la Aplicación</h3>
+ * <p>Esta actividad es la pantalla principal de la aplicación y gestiona la navegación entre diferentes secciones.</p>
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @Override
+    /**
+     * Método llamado cuando la actividad es creada.
+     *
+     * @param savedInstanceState el estado guardado de la instancia, si está disponible.
+     */
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -45,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * Inicializa los CardViews y asigna el listener de clic a cada uno.
+     */
     private void inicializarCardViews() {
         CardView[] cardViews = {
                 findViewById(R.id.cvCategoria),
@@ -64,6 +75,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Maneja los clics en los CardViews de la actividad.
+     *
+     * @param view la vista que fue clickeada.
+     *
+     * <p>Este método determina qué CardView fue clickeado y abre la actividad correspondiente basada en el ID de la vista.</p>
+     */
     @Override
     public void onClick(View view) {
         Intent intent = null;
@@ -95,6 +113,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Carga los datos iniciales de las categorías, personas, bancos y cuentas financieras.
+     *
+     * @param context el contexto de la aplicación {@link Context}.
+     */
     public static void cargarDatos(Context context) {
         boolean guardadoCategoria = false;
         boolean guardadoPersona = false;
@@ -114,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             guardadoPersona = false;
             guardadoBanco = false;
             guardadoCuentaFinanciera = false;
-            Log.d("Datos", "Error al cargar los datos iniciales"+ e.getMessage());;
+            Log.d("Datos", "Error al cargar los datos iniciales" + e.getMessage());
         }
 
         if(guardadoCategoria){
@@ -129,6 +152,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Carga los movimientos iniciales desde el archivo de datos.
+     *
+     * @param context el contexto de la aplicación {@link Context}.
+     */
     private static void cargarMovimientosIniciales(Context context) {
         boolean guardado;
         try {
@@ -138,10 +166,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("Main Activity", "Error al cargar los datos iniciales de movimiento" + e.getMessage());
         }
         if(guardado){
-            Log.d("Main Activity", "Datos iniciales de movimentos agregados exitosamente");
+            Log.d("Main Activity", "Datos iniciales de movimientos agregados exitosamente");
         }
     }
 
+    /**
+     * Actualiza el código único para los movimientos cargados.
+     *
+     * @param context el contexto de la aplicación {@link Context}.
+     */
     private static void codigoUnicoActualizado(Context context) {
         try {
             List<Movimiento> lstMovimiento = Movimiento.cargarMovimientos(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
@@ -155,6 +188,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             Log.e("Main Activity", "Error al cargar los movimientos en el main");
         }
-
     }
 }

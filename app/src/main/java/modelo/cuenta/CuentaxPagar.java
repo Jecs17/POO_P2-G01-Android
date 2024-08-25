@@ -121,6 +121,12 @@ public class CuentaxPagar extends CuentaFinanciera implements Serializable {
         }
     }
 
+    /**
+     * Compara esta cuenta por pagar con otro objeto para determinar igualdad.
+     *
+     * @param o el objeto con el que comparar.
+     * @return true si los objetos son iguales, false en caso contrario.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -129,6 +135,11 @@ public class CuentaxPagar extends CuentaFinanciera implements Serializable {
         return Objects.equals(acreedor, that.acreedor) && Objects.equals(banco, that.banco);
     }
 
+    /**
+     * Devuelve el código hash de esta cuenta por pagar.
+     *
+     * @return el código hash de la cuenta por pagar.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(acreedor, banco);

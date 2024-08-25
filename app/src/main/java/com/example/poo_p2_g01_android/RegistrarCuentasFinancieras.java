@@ -12,9 +12,6 @@ import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,22 +37,37 @@ import modelo.cuenta.CuentaxCobrar;
 import modelo.cuenta.CuentaxPagar;
 import modelo.persona.Persona;
 
+/**
+ * Esta clase gestiona el registro de cuentas financieras, tanto cuentas por cobrar como cuentas por pagar.
+ * Dependiendo del tipo de cuenta, los campos disponibles para el usuario cambiarán.
+ *
+ * @author Grupo1
+ */
 public class RegistrarCuentasFinancieras extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener {
 
-    private TextView txtFechaPrestamo, txtFechaInicioPago, txtFechaFinPago, txtviewInteres, txtviewIdentificacion;
-    private Button btnFechaPrestamo, btnFechaInicioPago, btnFechaFinPago, btnNingunaFecha, btnAbrirCalendario, btnDPersona, btnDBanco;
+    private TextView txtFechaPrestamo;
+    private TextView txtFechaInicioPago;
+    private TextView txtFechaFinPago;
+    private Button btnFechaPrestamo;
+    private Button btnFechaInicioPago;
+    private Button btnFechaFinPago;
     private int dia, mes, anio;
     private Dialog dialogFecha, dialogRegistrarPB;
     private TextView editFechaPrestamo, editFechaInicio, editFechaFin;
     private EditText editIntereses, editIdentificacion, editCantidad, editDescripcion, editCuota;
     private Button btnRegistrarPersonaBanco, btnRegistrarCF;
     public static boolean esAcreedor = false;
-    private Context context = this;
-    private String nombreObjetoRecuperado = "";
+    private final Context context = this;
     private ColorStateList color_mal;
     private ColorStateList color_bien;
     private final boolean[] comprobacion = {false, false, false, false, false, false, false};
 
+    /**
+     * Método que se ejecuta al crear la actividad.
+     * Configura la interfaz de usuario y los valores iniciales.
+     *
+     * @param savedInstanceState Estado guardado de la instancia anterior de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +87,10 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         colocarFecha();
     }
 
+    /**
+     * Método que se ejecuta al reanudar la actividad.
+     * Configura y verifica los datos necesarios.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -85,9 +101,12 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         estadoBoton(comprobacion);
     }
 
+    /**
+     * Obtiene el nombre del objeto desde el intent y lo establece en el campo de identificación.
+     */
     private void obtenerNombreObjeto(){
         Intent intent = getIntent();
-        nombreObjetoRecuperado = intent.getStringExtra("nombre");
+        String nombreObjetoRecuperado = intent.getStringExtra("nombre");
         editIdentificacion.setText(nombreObjetoRecuperado);
         if(nombreObjetoRecuperado != null){
             comprobacion[0] = true;
@@ -95,10 +114,13 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         }
     }
 
+    /**
+     * Configura la vista y los elementos de la interfaz según el tipo de cuenta (acreedor o deudor).
+     */
     private void cambiarCuenta(){
-        txtviewIdentificacion = findViewById(R.id.txtviewIdentificacionCF);
+        TextView txtviewIdentificacion = findViewById(R.id.txtviewIdentificacionCF);
         editIdentificacion = findViewById(R.id.txtIdentificacionObjeto);
-        txtviewInteres = findViewById(R.id.txtviewInteres);
+        TextView txtviewInteres = findViewById(R.id.txtviewInteres);
         editIntereses = findViewById(R.id.txtInteres);
         btnRegistrarPersonaBanco = findViewById(R.id.btnRegistrarPersonaBanco);
         if(!esAcreedor){
@@ -116,11 +138,18 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         }
     }
 
+    /**
+     * Configura el botón de regreso para cerrar la actividad cuando se presiona.
+     */
     private void regresar(){
         ImageButton btnRegresar = findViewById(R.id.btnRegresarRegistroCF);
         btnRegresar.setOnClickListener(v -> finish());
     }
 
+    /**
+     * Configura el diálogo para seleccionar la fecha de fin de pago.
+     */
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void dialogFechaFin(){
         dialogFecha = new Dialog(RegistrarCuentasFinancieras.this);
         dialogFecha.setContentView(R.layout.dialog_seleccion_fecha);
@@ -128,25 +157,22 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         dialogFecha.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_style));
         dialogFecha.setCancelable(false);
 
-        btnNingunaFecha = dialogFecha.findViewById(R.id.btnNinguno);
-        btnAbrirCalendario = dialogFecha.findViewById(R.id.btnCalendario);
+        Button btnNingunaFecha = dialogFecha.findViewById(R.id.btnNinguno);
+        Button btnAbrirCalendario = dialogFecha.findViewById(R.id.btnCalendario);
 
-        btnNingunaFecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtFechaFinPago.setText("Sin Fecha");
-                dialogFecha.dismiss();
-            }
+        btnNingunaFecha.setOnClickListener(v -> {
+            txtFechaFinPago.setText("Sin Fecha");
+            dialogFecha.dismiss();
         });
-        btnAbrirCalendario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ventanaFecha(txtFechaFinPago);
-                dialogFecha.dismiss();
-            }
+        btnAbrirCalendario.setOnClickListener(v -> {
+            ventanaFecha(txtFechaFinPago);
+            dialogFecha.dismiss();
         });
     }
 
+    /**
+     * Establece las fechas predeterminadas para el préstamo, inicio de pago, y fin de pago.
+     */
     private void colocarFecha(){
         txtFechaPrestamo = findViewById(R.id.txtFechaPrestamo);
         txtFechaInicioPago = findViewById(R.id.txtFechaInicioPago);
@@ -163,6 +189,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         btnFechaFinPago.setOnClickListener(this);
     }
 
+    /**
+     * Abre un diálogo de selección de fecha y establece la fecha seleccionada en el TextView correspondiente.
+     *
+     * @param txtview El TextView en el que se establecerá la fecha seleccionada.
+     */
     @SuppressLint("UseCompatTextViewDrawableApis")
     private void ventanaFecha(TextView txtview){
         DatePickerDialog datePD = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -178,6 +209,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         datePD.show();
     }
 
+    /**
+     * Maneja los eventos de clic en los botones de selección de fecha.
+     *
+     * @param v La vista que se ha clicado.
+     */
     @Override
     public void onClick(View v){
         final Calendar c = Calendar.getInstance();
@@ -193,15 +229,18 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         }
     }
 
-    //Registro
+    /**
+     * Configura el diálogo para registrar una persona o un banco, según la opción seleccionada.
+     */
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void dialogRegistro(){
         dialogRegistrarPB = new Dialog(RegistrarCuentasFinancieras.this);
         dialogRegistrarPB.setContentView(R.layout.dialog_registrar_persona_banco);
         dialogRegistrarPB.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialogRegistrarPB.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_style));
 
-        btnDPersona = dialogRegistrarPB.findViewById(R.id.btnPersonaDialogo);
-        btnDBanco = dialogRegistrarPB.findViewById(R.id.btnBancoDialogo);
+        Button btnDPersona = dialogRegistrarPB.findViewById(R.id.btnPersonaDialogo);
+        Button btnDBanco = dialogRegistrarPB.findViewById(R.id.btnBancoDialogo);
 
         btnDPersona.setOnClickListener((v) -> {
             Intent intent = new Intent( RegistrarCuentasFinancieras.this, RegistrarPersonaBanco.class);
@@ -225,6 +264,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
 
     }
 
+    /**
+     * Muestra u oculta el botón de registrar persona/banco dependiendo del valor del parámetro.
+     *
+     * @param ver Indica si se debe mostrar o no el botón.
+     */
     private void visualizarBotonPersonaBanco(boolean ver){
         btnRegistrarPersonaBanco = findViewById(R.id.btnRegistrarPersonaBanco);
         if(!ver){
@@ -241,14 +285,15 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
                     finish();
                 });
             } else {
-                btnRegistrarPersonaBanco.setOnClickListener(v -> {
-                    dialogRegistrarPB.show();
-                });
+                btnRegistrarPersonaBanco.setOnClickListener(v -> dialogRegistrarPB.show());
             }
 
         }
     }
 
+    /**
+     * Configura los datos ingresados y guarda la cuenta financiera cuando el usuario presiona el botón de registro.
+     */
     private void registrarDatos(){
         editIdentificacion = findViewById(R.id.txtIdentificacionObjeto);
         editCantidad = findViewById(R.id.txtCantidad);
@@ -300,6 +345,9 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         });
     }
 
+    /**
+     * Verifica la validez de los datos ingresados en los campos de texto y establece los colores de fondo correspondientes.
+     */
     private void verificarDatos(){
         editIdentificacion.setBackgroundTintMode(PorterDuff.Mode.ADD);
         editCantidad.setBackgroundTintMode(PorterDuff.Mode.ADD);
@@ -307,11 +355,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         editCuota.setBackgroundTintMode(PorterDuff.Mode.ADD);
         editIntereses.setBackgroundTintMode(PorterDuff.Mode.ADD);
 
-        editIdentificacion.setOnFocusChangeListener(this::onFocusChange);
-        editCantidad.setOnFocusChangeListener(this::onFocusChange);
-        editDescripcion.setOnFocusChangeListener(this::onFocusChange);
-        editCuota.setOnFocusChangeListener(this::onFocusChange);
-        editIntereses.setOnFocusChangeListener(this::onFocusChange);
+        editIdentificacion.setOnFocusChangeListener(this);
+        editCantidad.setOnFocusChangeListener(this);
+        editDescripcion.setOnFocusChangeListener(this);
+        editCuota.setOnFocusChangeListener(this);
+        editIntereses.setOnFocusChangeListener(this);
 
         editCantidad.addTextChangedListener(textWatcher);
         editDescripcion.addTextChangedListener(textWatcher);
@@ -323,6 +371,12 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         editFechaFin.addTextChangedListener(textWatcher);
     }
 
+    /**
+     * Se activa cuando el foco de un campo de texto cambia, y valida el campo que ha perdido el foco.
+     *
+     * @param v La vista que ha perdido el foco.
+     * @param hasFocus Indica si la vista tiene el foco.
+     */
     @Override
     public void onFocusChange(View v, boolean hasFocus){
         if(!hasFocus){
@@ -359,7 +413,10 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         }
     }
 
-    private TextWatcher textWatcher = new TextWatcher() {
+    /**
+     * Verifica y actualiza el estado de los campos de texto en función de los cambios de texto.
+     */
+    private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
@@ -413,6 +470,7 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
             estadoBoton(comprobacion);
         }
 
+        @SuppressLint("UseCompatTextViewDrawableApis")
         @Override
         public void afterTextChanged(Editable s) {
             ColorStateList color_normal = ColorStateList.valueOf(getColor(R.color.md_theme_onPrimary));
@@ -443,6 +501,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         }
     };
 
+    /**
+     * Habilita o deshabilita el botón de registro de cuentas financieras en función del estado de validación de los campos.
+     *
+     * @param valores Un array booleano que indica el estado de validación de los campos.
+     */
     private void estadoBoton(boolean[] valores){
         if(esAcreedor && valores[0] && valores[1] && valores[2] && valores[3] && valores[5] && valores[6]){
             btnRegistrarCF.setEnabled(true);
@@ -453,6 +516,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         }
     }
 
+    /**
+     * Muestra un mensaje de validación como un Toast en la pantalla.
+     *
+     * @param mensaje El mensaje de validación a mostrar.
+     */
     private void mensajeValidacion(String mensaje){
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show();
     }

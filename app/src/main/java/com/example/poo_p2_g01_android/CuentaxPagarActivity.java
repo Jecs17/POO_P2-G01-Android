@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 import modelo.banco.Banco;
 import modelo.cuenta.CuentaFinanciera;
-import modelo.cuenta.CuentaxCobrar;
 import modelo.cuenta.CuentaxPagar;
 import modelo.persona.Persona;
 
@@ -34,25 +33,7 @@ import modelo.persona.Persona;
  */
 public class CuentaxPagarActivity extends AppCompatActivity {
 
-    /**
-     * Botón para regresar a la actividad anterior.
-     */
-    private ImageButton btnRegresar;
-
-    /**
-     * Botón para iniciar la actividad de registro de una nueva cuenta por pagar.
-     */
-    private Button btnRegistrarCuenta;
-
-    /**
-     * Layout de tabla donde se mostrarán las cuentas por pagar.
-     */
-    private TableLayout tablaCuentaxPagar;
-
-    /**
-     * Contexto de la actividad actual.
-     */
-    private Context context = this;
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,17 +59,15 @@ public class CuentaxPagarActivity extends AppCompatActivity {
      * Configura el botón de regreso para cerrar la actividad actual y regresar a la anterior.
      */
     private void regresar() {
-        btnRegresar = findViewById(R.id.btnRegresarCuentaPagar);
-        btnRegresar.setOnClickListener(v -> {
-            finish();
-        });
+        ImageButton btnRegresar = findViewById(R.id.btnRegresarCuentaPagar);
+        btnRegresar.setOnClickListener(v -> finish());
     }
 
     /**
      * Configura el botón para registrar una nueva cuenta por pagar, iniciando la actividad correspondiente.
      */
     private void registrarCuenta() {
-        btnRegistrarCuenta = findViewById(R.id.btnRegistrarCuentaPagar);
+        Button btnRegistrarCuenta = findViewById(R.id.btnRegistrarCuentaPagar);
         btnRegistrarCuenta.setOnClickListener((v) -> {
             Intent intent = new Intent(CuentaxPagarActivity.this, RegistrarCuentasFinancieras.class);
             RegistrarCuentasFinancieras.esAcreedor = true;
@@ -118,7 +97,7 @@ public class CuentaxPagarActivity extends AppCompatActivity {
     private void llenarTabla() {
         ArrayList<CuentaxPagar> listaCuentaPagar = cargarListaCuenta(context);
 
-        tablaCuentaxPagar = findViewById(R.id.tablaCuentaPagar);
+        TableLayout tablaCuentaxPagar = findViewById(R.id.tablaCuentaPagar);
         Log.d("CuentaFinanciera", "Listado para la tabla: " + listaCuentaPagar.toString());
         cleanTable(tablaCuentaxPagar);
 

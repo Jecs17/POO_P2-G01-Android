@@ -209,6 +209,12 @@ public class CuentaFinanciera implements Serializable {
         this.fechaFin = fechaFin;
     }
 
+    /**
+     * Obtiene una lista inicial de cuentas financieras.
+     *
+     * @param context el contexto de la aplicación {@link Context}.
+     * @return una lista de cuentas financieras iniciales {@link ArrayList<CuentaFinanciera>}.
+     */
     public static ArrayList<CuentaFinanciera> obtenerCuentasIniciales(Context context){
         ArrayList<CuentaFinanciera> lista = new ArrayList<>();
         Persona deudor = PersonaBancoActivity.buscarPersona("094232152",context);
@@ -220,6 +226,13 @@ public class CuentaFinanciera implements Serializable {
         return lista;
     }
 
+    /**
+     * Crea y guarda datos iniciales en un archivo si no existen.
+     *
+     * @param directorio el directorio donde se guardará el archivo {@link File}.
+     * @param context el contexto de la aplicación {@link Context}.
+     * @return true si los datos fueron guardados exitosamente, false en caso contrario.
+     */
     public static boolean crearDatosIniciales(File directorio, Context context){
         ArrayList<CuentaFinanciera> lista = CuentaFinanciera.obtenerCuentasIniciales(context);
         boolean guardado = false;
@@ -236,6 +249,12 @@ public class CuentaFinanciera implements Serializable {
         return guardado;
     }
 
+    /**
+     * Carga la lista de cuentas financieras desde un archivo.
+     *
+     * @param directorio el directorio donde se encuentra el archivo {@link File}.
+     * @return una lista de cuentas financieras {@link ArrayList<CuentaFinanciera>}.
+     */
     public static ArrayList<CuentaFinanciera> cargarCuentasFinancieras(File directorio){
         ArrayList<CuentaFinanciera> lista = new ArrayList<>();
         File f = new File(directorio, nomArchivo);
@@ -249,6 +268,12 @@ public class CuentaFinanciera implements Serializable {
         return lista;
     }
 
+    /**
+     * Carga la lista de cuentas por cobrar desde un archivo.
+     *
+     * @param directorio el directorio donde se encuentra el archivo {@link File}.
+     * @return una lista de cuentas por cobrar {@link ArrayList<CuentaxCobrar>}.
+     */
     public static ArrayList<CuentaxCobrar> cargarCuentasxCobrar(File directorio){
         ArrayList<CuentaFinanciera> listaCF = cargarCuentasFinancieras(directorio);
         ArrayList<CuentaxCobrar> listaCuentaxCobrar = new ArrayList<>();
@@ -260,6 +285,12 @@ public class CuentaFinanciera implements Serializable {
         return listaCuentaxCobrar;
     }
 
+    /**
+     * Carga la lista de cuentas por pagar desde un archivo.
+     *
+     * @param directorio el directorio donde se encuentra el archivo {@link File}.
+     * @return una lista de cuentas por pagar {@link ArrayList<CuentaxPagar>}.
+     */
     public static ArrayList<CuentaxPagar> cargarCuentasxPagar(File directorio){
         ArrayList<CuentaFinanciera> listaCF = cargarCuentasFinancieras(directorio);
         ArrayList<CuentaxPagar> listaCuentaxPagar= new ArrayList<>();
@@ -271,6 +302,13 @@ public class CuentaFinanciera implements Serializable {
         return listaCuentaxPagar;
     }
 
+    /**
+     * Guarda una cuenta financiera en un archivo.
+     *
+     * @param directorio el directorio donde se guardará el archivo {@link File}.
+     * @param cuenta la cuenta financiera a guardar {@link CuentaFinanciera}.
+     * @return true si la cuenta fue guardada exitosamente, false en caso contrario.
+     */
     public static boolean guardarCuenta(File directorio, CuentaFinanciera cuenta){
         boolean guardado = false;
         ArrayList<CuentaFinanciera> listaCF = CuentaFinanciera.cargarCuentasFinancieras(directorio);
@@ -287,6 +325,13 @@ public class CuentaFinanciera implements Serializable {
         return guardado;
     }
 
+    /**
+     * Elimina una lista de cuentas financieras de un archivo.
+     *
+     * @param directorio el directorio donde se encuentra el archivo {@link File}.
+     * @param cuentas la lista de cuentas financieras a eliminar {@link ArrayList<CuentaFinanciera>}.
+     * @return true si las cuentas fueron eliminadas exitosamente, false en caso contrario.
+     */
     public static boolean eliminarCuentas(File directorio, ArrayList<CuentaFinanciera> cuentas){
         boolean guardado = false;
         ArrayList<CuentaFinanciera> listaCF = CuentaFinanciera.cargarCuentasFinancieras(directorio);

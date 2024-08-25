@@ -24,13 +24,27 @@ import modelo.cuenta.CuentaFinanciera;
 import modelo.cuenta.CuentaxCobrar;
 import modelo.persona.Persona;
 
+/**
+ * Actividad para gestionar las cuentas por cobrar.
+ *
+ * Permite registrar nuevas cuentas por cobrar, mostrar una tabla con las cuentas existentes
+ * y regresar a la actividad anterior. También incluye métodos para cargar y buscar cuentas
+ * asociadas a una persona.
+ *
+ * @author Grupo1
+ */
 public class CuentaxCobrarActivity extends AppCompatActivity {
 
-    private Button btnRegistrarCuenta;
-    private ImageButton btnRegresar;
-    private TableLayout tablaCuentaxCobrar;
-    private Context context = this;
+    private final Context context = this;
 
+    /**
+     * Método llamado al crear la actividad.
+     *
+     * Inicializa la vista de la actividad, configura los márgenes de la vista para que no se superponga
+     * con las barras del sistema y establece los oyentes de eventos para los botones de registro y regreso.
+     *
+     * @param savedInstanceState El estado guardado de la actividad, si existe.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,21 +59,30 @@ public class CuentaxCobrarActivity extends AppCompatActivity {
         regresar();
     }
 
+    /**
+     * Método llamado cuando la actividad se reanuda.
+     *
+     * Actualiza la tabla con la lista más reciente de cuentas por cobrar.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         llenarTabla();
     }
 
+    /**
+     * Configura el botón para regresar a la actividad anterior.
+     */
     private void regresar(){
-        btnRegresar = findViewById(R.id.btnRegresarCuentaCobrar);
-        btnRegresar.setOnClickListener(v -> {
-            finish();
-        });
+        ImageButton btnRegresar = findViewById(R.id.btnRegresarCuentaCobrar);
+        btnRegresar.setOnClickListener(v -> finish());
     }
 
+    /**
+     * Configura el botón para registrar una nueva cuenta por cobrar.
+     */
     private void registrarCuenta(){
-        btnRegistrarCuenta = findViewById(R.id.btnRegistrarCuentaCobrar);
+        Button btnRegistrarCuenta = findViewById(R.id.btnRegistrarCuentaCobrar);
         btnRegistrarCuenta.setOnClickListener((v) -> {
             Intent intent = new Intent(CuentaxCobrarActivity.this, RegistrarCuentasFinancieras.class);
             RegistrarCuentasFinancieras.esAcreedor = false;
@@ -67,6 +90,12 @@ public class CuentaxCobrarActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Carga la lista de cuentas por cobrar desde el almacenamiento externo.
+     *
+     * @param context El contexto de la aplicación.
+     * @return Lista de cuentas por cobrar.
+     */
     private static ArrayList<CuentaxCobrar> cargarListaCuenta(Context context){
         ArrayList<CuentaxCobrar> listaCuenta = new ArrayList<>();
         try {
@@ -77,10 +106,13 @@ public class CuentaxCobrarActivity extends AppCompatActivity {
         return listaCuenta;
     }
 
+    /**
+     * Llena la tabla con la lista de cuentas por cobrar.
+     */
     private void llenarTabla(){
-        ArrayList<CuentaxCobrar> listaCuentaCobrar= cargarListaCuenta(context);
+        ArrayList<CuentaxCobrar> listaCuentaCobrar = cargarListaCuenta(context);
 
-        tablaCuentaxCobrar = findViewById(R.id.tablaCuentaCobrar);
+        TableLayout tablaCuentaxCobrar = findViewById(R.id.tablaCuentaCobrar);
         Log.d("CuentaFinanciera", "Listado para la tabla: " + listaCuentaCobrar.toString());
         cleanTable(tablaCuentaxCobrar);
 
@@ -131,8 +163,12 @@ public class CuentaxCobrarActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Limpia todas las filas de una tabla, excepto la primera.
+     *
+     * @param table La tabla a limpiar.
+     */
     private void cleanTable(TableLayout table) {
-
         int childCount = table.getChildCount();
 
         // Remove all rows except the first one
@@ -141,6 +177,13 @@ public class CuentaxCobrarActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Busca cuentas por cobrar asociadas a una persona específica.
+     *
+     * @param identificacion La identificación de la persona.
+     * @param context El contexto de la aplicación.
+     * @return Lista de cuentas por cobrar asociadas a la persona.
+     */
     public static ArrayList<CuentaxCobrar> buscarCuentasAsociada(String identificacion, Context context){
         Persona persona = PersonaBancoActivity.buscarPersona(identificacion, context);
         ArrayList<CuentaxCobrar> listaCuentaAsociadas= new ArrayList<>();

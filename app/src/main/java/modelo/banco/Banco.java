@@ -163,6 +163,11 @@ public class Banco implements Serializable {
         return String.format("Oficial: %s\n%s",oficialCredito.getNombre(), oficialCredito.getTelefono());
     }
 
+    /**
+     * Obtiene una lista inicial de bancos.
+     *
+     * @return Una lista con bancos predefinidos.
+     */
     public static ArrayList<Banco> obtenerBancosInciales(){
         ArrayList<Banco> lista = new ArrayList<>();
         Persona oficial = new Persona("Mario Duarte", "0994312563");
@@ -170,6 +175,14 @@ public class Banco implements Serializable {
         return lista;
     }
 
+    /**
+     * Crea datos iniciales y los guarda en un archivo.
+     *
+     * Si el archivo no existe, se crea y se escriben los datos iniciales en él.
+     *
+     * @param directorio El directorio donde se guardará el archivo.
+     * @return true si los datos se guardaron exitosamente, false en caso contrario.
+     */
     public static boolean crearDatosIniciales(File directorio){
         ArrayList<Banco> lista = Banco.obtenerBancosInciales();
         boolean guardado = false;
@@ -186,6 +199,14 @@ public class Banco implements Serializable {
         return guardado;
     }
 
+    /**
+     * Carga la lista de bancos desde un archivo.
+     *
+     * Si el archivo existe, se lee y se deserializa la lista de bancos.
+     *
+     * @param directorio El directorio donde se encuentra el archivo.
+     * @return Una lista de bancos cargada desde el archivo.
+     */
     public static ArrayList<Banco> cargarBanco(File directorio){
         ArrayList<Banco> lista = new ArrayList<>();
         File f = new File(directorio, nomArchivo);
@@ -199,6 +220,16 @@ public class Banco implements Serializable {
         return lista;
     }
 
+    /**
+     * Guarda un banco en el archivo.
+     *
+     * Si el archivo existe, se carga la lista de bancos, se agrega el nuevo banco,
+     * y se guarda la lista actualizada en el archivo.
+     *
+     * @param directorio El directorio donde se encuentra el archivo.
+     * @param banco El banco a agregar a la lista.
+     * @return true si el banco se guardó exitosamente, false en caso contrario.
+     */
     public static boolean guardarBanco(File directorio, Banco banco){
         boolean guardado = false;
         ArrayList<Banco> listaBanco = Banco.cargarBanco(directorio);
@@ -215,6 +246,16 @@ public class Banco implements Serializable {
         return guardado;
     }
 
+    /**
+     * Elimina un banco del archivo.
+     *
+     * Si el archivo existe, se carga la lista de bancos, se elimina el banco especificado,
+     * y se guarda la lista actualizada en el archivo.
+     *
+     * @param directorio El directorio donde se encuentra el archivo.
+     * @param banco El banco a eliminar de la lista.
+     * @return true si el banco se eliminó exitosamente, false en caso contrario.
+     */
     public static boolean eliminarBanco(File directorio, Banco banco){
         boolean guardado = false;
         ArrayList<Banco> listaBanco = Banco.cargarBanco(directorio);
