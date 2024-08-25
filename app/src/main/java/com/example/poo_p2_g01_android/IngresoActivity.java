@@ -33,6 +33,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -412,22 +413,36 @@ public class IngresoActivity extends AppCompatActivity {
      * @return {@code true} si la fecha de fin es mayor que la fecha de inicio; {@code false} en caso contrario.
      */
     private boolean esFechaMayor(Ingreso ingresoSeleccionado, LinearLayout linearLayout) {
-        boolean esMayor;
+        boolean esMayor = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         TextView textFechaFin = linearLayout.findViewById(R.id.txtFechaFinLayout);
-        LocalDate fechaFinSeleccionada = LocalDate.parse(textFechaFin.getText().toString(), formatter);
-        LocalDate fechaInicio = ingresoSeleccionado.getFechaInicio();
-        LocalDate fechaFinOriginal = LocalDate.parse(ingresoSeleccionado.getFechaFin(), formatter);
-        if (!fechaFinSeleccionada.equals(fechaFinOriginal)) {
-            if (fechaFinSeleccionada.isAfter(fechaInicio)) {
-                esMayor = true;
+
+        try {
+            LocalDate fechaFinSeleccionada = LocalDate.parse(textFechaFin.getText().toString(), formatter);
+            LocalDate fechaInicio = ingresoSeleccionado.getFechaInicio();
+            String fechaFinOriginalStr = ingresoSeleccionado.getFechaFin();
+
+            if (fechaFinOriginalStr.equals("No definida")) {
+                if (fechaFinSeleccionada.isAfter(fechaInicio)) {
+                    esMayor = true;
+                } else {
+                    Toast.makeText(IngresoActivity.this, "Fecha fin debe ser mayor a la fecha inicio", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                esMayor = false;
-                Toast.makeText(IngresoActivity.this, "Fecha fin debe ser mayor a la fecha inicio", Toast.LENGTH_SHORT).show();
+                LocalDate fechaFinOriginal = LocalDate.parse(fechaFinOriginalStr, formatter);
+
+                if (!fechaFinSeleccionada.equals(fechaFinOriginal)) {
+                    if (fechaFinSeleccionada.isAfter(fechaInicio)) {
+                        esMayor = true;
+                    } else {
+                        Toast.makeText(IngresoActivity.this, "Fecha fin debe ser mayor a la fecha inicio", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(IngresoActivity.this, "Ingrese la fecha fin nueva", Toast.LENGTH_SHORT).show();
+                }
             }
-        } else {
-            esMayor = false;
-            Toast.makeText(IngresoActivity.this, "Ingrese la fecha fin nueva", Toast.LENGTH_SHORT).show();
+        } catch (DateTimeParseException e) {
+            Toast.makeText(IngresoActivity.this, "Formato de fecha inválido. Por favor, ingrese una fecha válida.", Toast.LENGTH_SHORT).show();
         }
         return esMayor;
     }
