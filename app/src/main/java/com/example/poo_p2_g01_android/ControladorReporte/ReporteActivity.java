@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,14 +19,29 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ReporteActivity es una actividad que se encarga de mostrar el reporte financiero
+ * utilizando una vista expandible para los datos.
+ * Esta actividad está configurada para utilizar la funcionalidad Edge-to-Edge para
+ * una experiencia de usuario más inmersiva.
+ */
 public class ReporteActivity extends AppCompatActivity {
 
+    /**
+     * Método que se llama cuando se crea la actividad.
+     * Aquí se configuran los elementos de la interfaz, se habilita el modo Edge-to-Edge,
+     * se inicializa la vista expandible, y se ajusta el padding de la vista según las
+     * barras del sistema (status bar, navigation bar, etc.).
+     *
+     * @param savedInstanceState Estado de la actividad guardado previamente, si existe.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_reporte);
         inicializarExpandable();
+        retroceso();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.vistaReporte), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -34,6 +50,29 @@ public class ReporteActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Configura el evento del botón de retroceso para finalizar la actividad.
+     */
+    private void retroceso() {
+        ImageButton backButton = findViewById(R.id.btnAtrasReporte);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    /**
+     * Inicializa y configura la vista expandible en la actividad, incluyendo la asignación de datos
+     * a los grupos y elementos hijos, y establece un listener para manejar los clics en los elementos hijos.
+     *
+     * Este método se encarga de:
+     * 1. Crear y configurar la vista expandible.
+     * 2. Inicializar los datos de los grupos ("Ingresos" y "Gastos") y sus respectivos elementos hijos.
+     * 3. Establecer un adaptador personalizado para manejar la vista expandible.
+     * 4. Configurar un listener para manejar los eventos de clic en los elementos hijos.
+     */
     public void inicializarExpandable() {
         ExpandableListView expandableListView;
         ExpandableListAdapter adapter;
@@ -62,8 +101,6 @@ public class ReporteActivity extends AppCompatActivity {
         adapter = new ExpandableListAdapter(this, groupList, childItemLists);
         expandableListView.setAdapter(adapter);
 
-
-
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -75,6 +112,14 @@ public class ReporteActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Maneja el evento de clic en un elemento hijo de la vista expandible.
+     * Dependiendo del grupo y el hijo seleccionados, crea un Intent para iniciar
+     * una actividad específica y pasa información adicional mediante extras.
+     *
+     * @param group El nombre del grupo al que pertenece el elemento hijo seleccionado.
+     * @param child El nombre del elemento hijo seleccionado.
+     */
     private void EventoClickExpandable(String group, String child) {
         Intent intent = null;
 
@@ -143,6 +188,13 @@ public class ReporteActivity extends AppCompatActivity {
         return fechaActual.getMonth().getValue();
     }
 
+    /**
+     * Obtiene el número del mes a partir de una fecha proporcionada.
+     *
+     * @param fecha La fecha de la cual se extraerá el número del mes. No debe ser {@code null}.
+     * @return El número del mes correspondiente a la fecha proporcionada (1 para enero, 2 para febrero, etc.).
+     * @throws NullPointerException Si {@code fecha} es {@code null}.
+     */
     public static int getMesxFecha(LocalDate fecha) {
         return fecha.getMonth().getValue();
     }

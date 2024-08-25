@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -37,26 +38,58 @@ import modelo.movimiento.Gasto;
 import modelo.movimiento.Ingreso;
 import modelo.movimiento.Movimiento;
 
+/**
+ * Actividad que muestra un reporte de gastos.
+ * Esta actividad está configurada para utilizar la funcionalidad Edge-to-Edge para
+ * una experiencia de usuario más inmersiva.
+ */
 public class TablaReporteGasto extends AppCompatActivity {
 
-
+    /**
+     * Lista de objetos {@link Gasto} que contiene los gastos a mostrar en el reporte.
+     */
     private List<Gasto> lstGasto;
 
+    /**
+     * Método que se llama cuando se crea la actividad.
+     * Aquí se configura la interfaz, se habilita el modo Edge-to-Edge,
+     * se obtienen los datos adicionales del Intent y se ajusta el padding de la vista
+     * según las barras del sistema (status bar, navigation bar, etc.).
+     *
+     * @param savedInstanceState Estado de la actividad guardado previamente, si existe.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tabla_reporte_gasto);
         obtenerIntentExtra();
+        retroceso();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.VistaReporteGasto), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
     }
 
+    /**
+     * Configura el evento del botón de retroceso para finalizar la actividad.
+     */
+    private void retroceso() {
+        ImageButton backButton = findViewById(R.id.btnAtrasReporteGasto);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    /**
+     * Obtiene el tipo de tabla del Intent y muestra la tabla correspondiente.
+     * Carga la lista de gastos y llama a {@link #mostrarTablaMesActual()} o
+     * {@link #mostrarTablaAnioActual()} según el tipo de tabla.
+     */
     private void obtenerIntentExtra() {
         lstGasto = cargarListaGastos();
         String tipoTabla = getIntent().getStringExtra("tipoTabla");
@@ -75,6 +108,19 @@ public class TablaReporteGasto extends AppCompatActivity {
         }
     }
 
+    /**
+     * Muestra la tabla de gastos del mes actual en la interfaz de usuario.
+     *
+     * Este método realiza las siguientes acciones:
+     * <ul>
+     *   <li>Carga la lista de gastos del mes actual mediante {@link #obtenerGastoMesActual()}.</li>
+     *   <li>Infla el diseño de la tabla desde el recurso XML {@code R.layout.tabla_mes_actual}.</li>
+     *   <li>Configura el layout del contenedor principal para mostrar la tabla de gastos.</li>
+     *   <li>Agrega una fila de encabezado con el nombre del mes actual.</li>
+     *   <li>Itera sobre la lista de gastos y añade filas a la tabla con la categoría y el valor de cada gasto.</li>
+     *   <li>Agrega una fila con el total de cuotas y una fila con el total general de los gastos del mes.</li>
+     * </ul>
+     */
     private void mostrarTablaMesActual() {
         List<Gasto> lstGastoMesActual = obtenerGastoMesActual();
         Log.e("TablaReporteIngreso", lstGastoMesActual.toString());
@@ -271,6 +317,10 @@ public class TablaReporteGasto extends AppCompatActivity {
         return cuotasGastos;
     }
 
+    /**
+     * Muestra la tabla con los gastos del año actual en la vista correspondiente.
+     * Crea una tabla que lista los gastos por mes y añade un resumen de cuotas y total.
+     */
     private void mostrarTablaAnioActual() {
         List<Gasto> lstGastoAnioActual = ordenarGastos(procesarIngresosPorMeses(obtenerGastoAnioActual()));
         Log.e("TablaReporteIngreso", lstGastoAnioActual.toString());
@@ -408,6 +458,13 @@ public class TablaReporteGasto extends AppCompatActivity {
         }
     }
 
+    /**
+     * Procesa una lista de gastos y expande aquellos con tipo de repetición mensual
+     * para cubrir todos los meses desde la fecha de inicio hasta la fecha de fin.
+     *
+     * @param gastos Lista de gastos a procesar.
+     * @return Lista de gastos con todas las instancias mensuales expandidas.
+     */
     public List<Gasto> procesarIngresosPorMeses(List<Gasto> gastos) {
         List<Gasto> lstGastosExtendidos = new ArrayList<>();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -428,7 +485,6 @@ public class TablaReporteGasto extends AppCompatActivity {
                             gasto.getTipoRepeticion()
                     ));
                 } else {
-
                     fechaFin = LocalDate.parse(gasto.getFechaFin(), formato);
 
                     if (fechaInicio.getYear() < fechaActual.getYear()) {
@@ -458,9 +514,9 @@ public class TablaReporteGasto extends AppCompatActivity {
                 lstGastosExtendidos.add(gasto);
             }
         }
-
         return lstGastosExtendidos;
     }
+
     /**
      * Calcula el total de gastos del año actual.
      *
@@ -530,6 +586,11 @@ public class TablaReporteGasto extends AppCompatActivity {
         return cuotas;
     }
 
+    /**
+     * Carga una lista de objetos `Gasto` desde los movimientos almacenados en un archivo.
+     *
+     * @return Lista de objetos `Gasto` cargados desde los movimientos.
+     */
     private List<Gasto> cargarListaGastos() {
         List<Gasto> listaGasto = new ArrayList<>();
         try {
@@ -547,6 +608,11 @@ public class TablaReporteGasto extends AppCompatActivity {
         return listaGasto;
     }
 
+    /**
+     * Carga una lista de objetos `CuentaxPagar` desde un archivo de cuentas por pagar.
+     *
+     * @return Lista de objetos `CuentaxPagar` cargados.
+     */
     private List<CuentaxPagar> cargarCuentasxPagar(){
         ArrayList<CuentaxPagar> listaCuenta = new ArrayList<>();
         try {

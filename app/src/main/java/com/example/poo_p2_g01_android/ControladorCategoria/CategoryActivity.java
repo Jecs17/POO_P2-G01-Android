@@ -45,7 +45,6 @@ public class CategoryActivity extends AppCompatActivity  {
      * Adaptador utilizado para gestionar y mostrar las categorías en el ViewPager2.
      */
     CategoryAdapter categoryAdapter;
-
     private TextInputEditText etNombreCategoria;
     /**
      * Se llama cuando la actividad es creada. Inicializa los componentes de la interfaz de usuario y

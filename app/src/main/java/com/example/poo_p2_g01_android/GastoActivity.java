@@ -41,11 +41,20 @@ import modelo.movimiento.Gasto;
 import modelo.movimiento.Ingreso;
 import modelo.movimiento.Movimiento;
 
+/**
+ * Actividad que gestiona la visualización y manipulación de los gastos.
+ * Proporciona funcionalidades para registrar nuevos gastos, finalizar gastos y manejar retrocesos.
+ */
 public class GastoActivity extends AppCompatActivity {
 
     private List<Gasto> listaGasto;
     TextInputEditText txtCodigo;
 
+    /**
+     * Inicializa la actividad, configura las vistas y eventos, y ajusta el padding para las barras del sistema.
+     *
+     * @param savedInstanceState El estado guardado de la instancia anterior, si existe.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +84,10 @@ public class GastoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Configura el botón para registrar un nuevo gasto.
+     * Al hacer clic en el botón, se inicia la actividad {@link RegistrarGastos}.
+     */
     private void vistaRegistrarGasto() {
         Button btnRegistroGasto = findViewById(R.id.btnRegistrarGasto);
 
@@ -88,6 +101,10 @@ public class GastoActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Configura el botón para finalizar un gasto.
+     * Al hacer clic en el botón, se muestra un diálogo para seleccionar la fecha de finalización del gasto.
+     */
     private void vistaFinalizarGasto() {
         Button btnFinalizarGasto = findViewById(R.id.btnFinalizarGasto);
 
@@ -99,6 +116,10 @@ public class GastoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Muestra un diálogo para ingresar el código de un gasto.
+     * Valida la entrada del código y procesa el gasto seleccionado si el código existe.
+     */
     private void mostrarDialogoFechaFinGasto() {
         LayoutInflater layoutInflater = getLayoutInflater();
         View dialogCodigoView = layoutInflater.inflate(R.layout.dialog_ingresar_codigo, null);
@@ -183,6 +204,13 @@ public class GastoActivity extends AppCompatActivity {
         textInputLayout.setError("¡Código no existe!");
     }
 
+    /**
+     * Verifica si un código de gasto existe en la lista de gastos.
+     *
+     * @param codigoGasto El código del gasto a buscar.
+     * @param gastos La lista de gastos en la que buscar.
+     * @return `true` si el código existe, `false` en caso contrario.
+     */
     private boolean verificarCodigoExiste(int codigoGasto, List<Gasto> gastos) {
         for (Gasto gasto : gastos) {
             if (gasto.getCodigoUnico() == codigoGasto) {
@@ -192,6 +220,11 @@ public class GastoActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Procesa el gasto seleccionado por código, mostrando los detalles en un diálogo.
+     *
+     * @param codigoSeleccionado El código del gasto a procesar.
+     */
     private void procesarGastoSeleccionado(int codigoSeleccionado) {
         Gasto gastoSeleccionado = buscarGastoPorCodigo(codigoSeleccionado);
         if (gastoSeleccionado != null) {
@@ -201,6 +234,11 @@ public class GastoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Muestra un diálogo con los detalles del gasto seleccionado y permite modificarlo.
+     *
+     * @param gastoSeleccionado El gasto cuyo detalle se mostrará.
+     */
     private void mostrarDialogoDatosGasto(Gasto gastoSeleccionado) {
         LinearLayout linearLayout = crearLayoutDatosGasto(gastoSeleccionado);
 
@@ -250,6 +288,13 @@ public class GastoActivity extends AppCompatActivity {
         alertDialog1.show();
     }
 
+    /**
+     * Verifica si la fecha de fin seleccionada es mayor que la fecha de inicio del gasto.
+     *
+     * @param gastoSeleccionado El gasto cuyo periodo se está evaluando.
+     * @param linearLayout El layout donde se encuentra el campo de fecha de fin.
+     * @return `true` si la fecha de fin seleccionada es válida; `false` en caso contrario.
+     */
     private boolean esFechaMayor(Gasto gastoSeleccionado, LinearLayout linearLayout) {
         boolean esMayor;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -271,7 +316,12 @@ public class GastoActivity extends AppCompatActivity {
         return esMayor;
     }
 
-
+    /**
+     * Crea un `LinearLayout` con los detalles del gasto seleccionado.
+     *
+     * @param gastoSeleccionado El gasto cuyos detalles se van a mostrar.
+     * @return Un `LinearLayout` con la información del gasto.
+     */
     private LinearLayout crearLayoutDatosGasto(Gasto gastoSeleccionado) {
         LinearLayout linearLayout = new LinearLayout(GastoActivity.this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -316,6 +366,12 @@ public class GastoActivity extends AppCompatActivity {
         return linearLayout;
     }
 
+    /**
+     * Crea un {@link TextView} con el texto especificado y un padding vertical.
+     *
+     * @param texto El texto que se mostrará en el {@link TextView}.
+     * @return El {@link TextView} creado con el texto y padding.
+     */
     private TextView crearTextView(String texto) {
         TextView textView = new TextView(GastoActivity.this);
         textView.setText(texto);
@@ -323,6 +379,12 @@ public class GastoActivity extends AppCompatActivity {
         return textView;
     }
 
+    /**
+     * Modifica un {@link Gasto} seleccionado con la nueva fecha de fin y actualiza el archivo de movimientos.
+     *
+     * @param gastoSeleccionado El {@link Gasto} que se va a modificar.
+     * @param linearLayout El {@link LinearLayout} que contiene los datos a actualizar.
+     */
     private void modificarGasto(Gasto gastoSeleccionado, LinearLayout linearLayout) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -339,6 +401,11 @@ public class GastoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Muestra un {@link DatePickerDialog} para seleccionar una fecha y la establece en el {@link TextView} proporcionado.
+     *
+     * @param txtview El {@link TextView} donde se mostrará la fecha seleccionada.
+     */
     private void ventanaFecha(TextView txtview){
         final Calendar c = Calendar.getInstance();
         int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -358,13 +425,20 @@ public class GastoActivity extends AppCompatActivity {
         datePD.show();
     }
 
-
+    /**
+     * Se llama cuando la actividad se reanuda. Actualiza la tabla de gastos llamando al método {@link #llenarTabla()}.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         llenarTabla();
     }
 
+    /**
+     * Carga la lista de gastos desde el archivo de movimientos y la retorna.
+     *
+     * @return Lista de objetos {@link Gasto} cargados desde el archivo.
+     */
     private List<Gasto> cargarListaGastos() {
         List<Gasto> listaGasto = new ArrayList<>();
         try {
@@ -382,6 +456,11 @@ public class GastoActivity extends AppCompatActivity {
         return listaGasto;
     }
 
+    /**
+     * Limpia las filas de una {@link TableLayout}, manteniendo solo la primera fila.
+     *
+     * @param table El {@link TableLayout} a limpiar.
+     */
     private void cleanTable(TableLayout table) {
         int childCount = table.getChildCount();
         if (childCount > 1) {
@@ -389,6 +468,10 @@ public class GastoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Llena la tabla de gastos en la interfaz de usuario con los datos de {@link Gasto}.
+     * Carga la lista de gastos, limpia la tabla existente y agrega una fila por cada gasto.
+     */
     private void llenarTabla() {
         listaGasto = cargarListaGastos();
         Log.d("Gasto Activity", "Número de gastos cargados: " + listaGasto.size());
@@ -479,6 +562,11 @@ public class GastoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Elimina un gasto de la lista y del almacenamiento.
+     *
+     * @param gasto El gasto a eliminar.
+     */
     private void eliminarGasto(Gasto gasto) {
         boolean eliminado = Movimiento.eliminarMovimiento(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), gasto);
         if (eliminado) {
@@ -489,6 +577,12 @@ public class GastoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Busca un gasto por su código único.
+     *
+     * @param codigo El código del gasto a buscar.
+     * @return El gasto encontrado o null si no existe.
+     */
     public Gasto buscarGastoPorCodigo(int codigo) {
         for (Gasto gasto : listaGasto) {
             if (gasto.getCodigoUnico() == codigo) {

@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -36,25 +37,59 @@ import modelo.cuenta.CuentaxCobrar;
 import modelo.movimiento.Ingreso;
 import modelo.movimiento.Movimiento;
 
+/**
+ * Actividad para mostrar un reporte de ingresos en una tabla.
+ *
+ * Esta clase maneja la visualización de ingresos en un formato tabular
+ * y configura la vista de acuerdo con el tipo de reporte seleccionado.
+ */
 public class TablaReporteIngreso extends AppCompatActivity {
 
+    /**
+     * Lista de ingresos que se mostrarán en la tabla.
+     */
     private List<Ingreso> lstIngreso;
 
     @Override
+    /**
+     * Método llamado al crear la actividad. Configura la vista y ajusta los márgenes
+     * para tener en cuenta las barras del sistema.
+     *
+     * @param savedInstanceState Estado guardado de la actividad, si existe.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tabla_reporte_ingreso);
         obtenerIntentExtra();
+        retroceso();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.VistaReporteIngreso), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
     }
 
+    /**
+     * Configura el evento del botón de retroceso para finalizar la actividad.
+     */
+    private void retroceso() {
+        ImageButton backButton = findViewById(R.id.btnAtrasReporteIngreso);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    /**
+     * Obtiene el tipo de tabla desde el intent y muestra la tabla correspondiente.
+     *
+     * Tipos de tabla:
+     * - "Mes actual": Muestra la tabla del mes actual.
+     * - "Año": Muestra la tabla del año actual.
+     */
     private void obtenerIntentExtra() {
         lstIngreso = cargarListaIngresos();
         String tipoTabla = getIntent().getStringExtra("tipoTabla");
@@ -73,6 +108,10 @@ public class TablaReporteIngreso extends AppCompatActivity {
         }
     }
 
+    /**
+     * Muestra la tabla de ingresos del mes actual en la vista.
+     * Carga los ingresos del mes actual, los organiza en una tabla y los muestra en la interfaz.
+     */
     private void mostrarTablaMesActual() {
         List<Ingreso> lstIngresoMesActual = obtenerIngresoMesActual();
         Log.e("TablaReporteIngreso", lstIngresoMesActual.toString());
@@ -270,6 +309,10 @@ public class TablaReporteIngreso extends AppCompatActivity {
         return cuotasIngresos;
     }
 
+    /**
+     * Muestra la tabla de ingresos del año actual en la vista.
+     * Organiza los ingresos por mes, los muestra en una tabla, y agrega los totales al final.
+     */
     private void mostrarTablaAnioActual() {
         List<Ingreso> lstIngresoAnioActual = ordenarIngresos(procesarIngresosPorMeses(obtenerIngresoAnioActual()));
         Log.e("TablaReporteIngreso", lstIngresoAnioActual.toString());
@@ -459,6 +502,7 @@ public class TablaReporteIngreso extends AppCompatActivity {
 
         return lstIngresosExtendidos;
     }
+
     /**
      * Calcula el total de ingresos del año actual.
      *
@@ -521,7 +565,6 @@ public class TablaReporteIngreso extends AppCompatActivity {
                 fechaFin = cuenta.getFechaFin();
             }
 
-            // Verifica si la cuenta está en el rango de fechas relevante
             if ((fechaInicio.getYear() == añoActual || fechaFin.getYear() == añoActual) &&
                     (fechaInicio.getMonthValue() <= mesActual.getValue() || fechaFin.getMonthValue() >= mesActual.getValue())) {
                 cuotas += cuenta.getCuota();
@@ -530,6 +573,11 @@ public class TablaReporteIngreso extends AppCompatActivity {
         return cuotas;
     }
 
+    /**
+     * Carga una lista de objetos {@link Ingreso} desde un archivo de movimientos almacenado en el directorio de descargas externo.
+     *
+     * @return Una lista de objetos {@link Ingreso} cargados desde el archivo.
+     */
     private List<Ingreso> cargarListaIngresos() {
         List<Ingreso> listaIngreso = new ArrayList<>();
         try {
@@ -547,6 +595,11 @@ public class TablaReporteIngreso extends AppCompatActivity {
         return listaIngreso;
     }
 
+    /**
+     * Carga una lista de objetos {@link CuentaxCobrar} desde un archivo almacenado en el directorio de descargas externo.
+     *
+     * @return Una lista de objetos {@link CuentaxCobrar} cargados desde el archivo.
+     */
     private List<CuentaxCobrar> cargarCuentasxCobrar(){
         ArrayList<CuentaxCobrar> listaCuenta = new ArrayList<>();
         try {

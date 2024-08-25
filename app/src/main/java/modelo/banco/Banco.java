@@ -63,7 +63,7 @@ public class Banco implements Serializable {
     /**
      * Nombre del Archivo serializado de los Bancos.
      */
-    public static final String nomArchivo = "bancos.ser";
+    public static final String nomArchivo = "Bancoss.ser";
     
     /**
      * Constructor de la clase Banco.

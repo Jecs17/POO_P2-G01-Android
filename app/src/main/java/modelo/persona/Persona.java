@@ -60,7 +60,7 @@ public class Persona implements Serializable {
     /**
      * Nombre del Archivo serializado de las Personas
      */
-    public static final String nomArchivo = "personas.ser";
+    public static final String nomArchivo = "Personass.ser";
     
     /**
      * <h3>Constructor clase Persona(Oficial Crédito)</h3>

@@ -38,11 +38,52 @@ import modelo.movimiento.Gasto;
 import modelo.movimiento.Ingreso;
 import modelo.movimiento.Movimiento;
 
+/**
+ * Actividad para registrar nuevos gastos, permitiendo seleccionar fechas, categorías y configurar la repetición.
+ */
 public class RegistrarGastos extends AppCompatActivity {
-    private int dia, mes, anio;
-    TextView txtInicioFechaGasto, txtFechaFinGasto;
-    Button btnFechaInicio, btnFechaFin, btnRegistrar;
+    /**
+     * Día del mes.
+     */
+    private int dia;
+    /**
+     * Mes del año.
+     */
+    private int mes;
+    /**
+     * Año.
+     */
+    private int anio;
+    /**
+     * Vista de texto para mostrar la fecha de inicio del gasto.
+     */
+    TextView txtInicioFechaGasto;
+    /**
+     * Vista de texto para mostrar la fecha de fin del gasto.
+     */
+    TextView txtFechaFinGasto;
+    /**
+     * Botón para seleccionar la fecha de inicio.
+     */
+    Button btnFechaInicio;
+    /**
+     * Botón para seleccionar la fecha de fin.
+     */
+    Button btnFechaFin;
+    /**
+     * Botón para registrar el gasto.
+     */
+    Button btnRegistrar;
+    /**
+     * Diálogo para seleccionar una fecha.
+     */
     private Dialog dialog;
+
+    /**
+     * Inicializa la actividad y configura la interfaz de usuario.
+     *
+     * @param savedInstanceState Estado de la instancia guardada.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +116,9 @@ public class RegistrarGastos extends AppCompatActivity {
         });
     }
 
+    /**
+     * Inicializa el spinner de categorías de gasto.
+     */
     private void inicializarSpinnerCategoria() {
         Spinner spinnerGasto = findViewById(R.id.spinner_gastos);
         List<Categoria> categorias = new ArrayList<>();
@@ -103,7 +147,9 @@ public class RegistrarGastos extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Carga una lista de categorías de gastos desde un archivo.
+     */
     private List<Categoria> cargarListaCategorias(){
         List<Categoria> listaCategoriaGastos = new ArrayList<>();
         try {
@@ -121,6 +167,9 @@ public class RegistrarGastos extends AppCompatActivity {
         return listaCategoriaGastos;
     }
 
+    /**
+     * Inicializa un spinner para seleccionar la repetición de un gasto.
+     */
     private void inicializarSpinnerRepeticion() {
         Spinner spinnerRepeticion = findViewById(R.id.spinner_gastos_repeticion);
         String[] repeticiones = {"Seleccione una opción", "Sin Repetición", "Mes"};
@@ -146,6 +195,11 @@ public class RegistrarGastos extends AppCompatActivity {
         spinnerRepeticion.setAdapter(adapter);
     }
 
+    /**
+     * Busca y asigna referencias a los elementos de la interfaz.
+     *
+     * Este método vincula las variables de la clase con los elementos de la interfaz de usuario identificados por sus IDs.
+     */
     private void inicializarReferencias() {
         txtFechaFinGasto = findViewById(R.id.txtFechaFinGasto);
         txtInicioFechaGasto = findViewById(R.id.txtFechaInicioGasto);
@@ -169,6 +223,11 @@ public class RegistrarGastos extends AppCompatActivity {
 
     }
 
+    /**
+     * Muestra un diálogo emergente para seleccionar la fecha final del gasto.
+     *
+     * El diálogo permite elegir una fecha usando un calendario o establecer "Sin Fecha".
+     */
     private void dialogFechaFin(){
         dialog = new Dialog(RegistrarGastos.this);
         dialog.setContentView(R.layout.dialog_seleccion_fecha);
@@ -195,6 +254,11 @@ public class RegistrarGastos extends AppCompatActivity {
         });
     }
 
+    /**
+     * Muestra un selector de fecha (DatePickerDialog) y actualiza el TextView con la fecha seleccionada.
+     *
+     * @param txtview TextView donde se mostrará la fecha seleccionada (formato DD-MM-YYYY).
+     */
     private void ventanaFecha(TextView txtview){
         final Calendar c = Calendar.getInstance();
         dia = c.get(Calendar.DAY_OF_MONTH);
@@ -261,7 +325,13 @@ public class RegistrarGastos extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Registra un nuevo gasto en la aplicación.
+     *
+     * Este método recupera los datos ingresados por el usuario (categoría, valor, descripción, repetición, fechas) y los valida.
+     * Si la validación es exitosa, crea un objeto Gasto y lo guarda en el almacenamiento externo.
+     *
+     */
     private void RegistrarDatosGastos() {
         Context context = this;
         Spinner spinnerCategoria = findViewById(R.id.spinner_gastos);
@@ -299,6 +369,9 @@ public class RegistrarGastos extends AppCompatActivity {
         });
     }
 
+    /**
+     * Inicia el proceso de registro de gastos al reanudarse la actividad.
+     */
     @Override
     protected void onResume() {
         super.onResume();

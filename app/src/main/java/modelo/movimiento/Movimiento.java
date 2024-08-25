@@ -41,7 +41,7 @@ public abstract class Movimiento implements Serializable {
     /**
      * Nombre de archivo movimiento que guarda los ingresos y los gastos
      */
-    private final static String nombreArchivo = "movimientosIngresoGastos.ser";
+    private final static String nombreArchivo = "movimientosIngresoGasto.ser";
 
 
     /**

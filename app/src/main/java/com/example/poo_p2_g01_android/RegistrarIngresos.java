@@ -37,11 +37,44 @@ import modelo.movimiento.Categoria;
 import modelo.movimiento.Ingreso;
 import modelo.movimiento.Movimiento;
 
+/**
+ * Actividad para registrar ingresos en la aplicación.
+ */
 public class RegistrarIngresos extends AppCompatActivity {
-    private int dia, mes, anio;
-    TextView txtInicioFechaIngreso, txtFechaFinIngreso;
-    Button btnFechaInicio, btnFechaFin, btnRegistrar;
+    /** Día de la fecha seleccionada. */
+    private int dia;
+
+    /** Mes de la fecha seleccionada. */
+    private int mes;
+
+    /** Año de la fecha seleccionada. */
+    private int anio;
+
+    /** Campo de texto para la fecha de inicio del ingreso. */
+    TextView txtInicioFechaIngreso;
+
+    /** Campo de texto para la fecha de fin del ingreso. */
+    TextView txtFechaFinIngreso;
+
+    /** Botón para seleccionar la fecha de inicio. */
+    Button btnFechaInicio;
+
+    /** Botón para seleccionar la fecha de fin. */
+    Button btnFechaFin;
+
+    /** Botón para registrar el ingreso. */
+    Button btnRegistrar;
+
+    /** Diálogo para mostrar la selección de fecha. */
     private Dialog dialog;
+
+    /**
+     * Inicializa la actividad de registrar ingresos.
+     * Configura la interfaz de usuario, incluyendo la selección de fechas y los elementos del formulario.
+     * También maneja el ajuste de márgenes de ventana para la vista de la actividad.
+     *
+     * @param savedInstanceState Estado guardado de la instancia, si está disponible.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +94,7 @@ public class RegistrarIngresos extends AppCompatActivity {
         });
     }
 
+
     /**
      * Configura el evento del botón de retroceso para finalizar la actividad.
      */
@@ -74,6 +108,11 @@ public class RegistrarIngresos extends AppCompatActivity {
         });
     }
 
+    /**
+     * Inicializa el spinner de categorías de ingreso.
+     * Carga las categorías desde una lista y configura el adaptador del spinner.
+     * Establece un color diferente para el ítem de selección por defecto.
+     */
     private void inicializarSpinnerCategoria() {
         Spinner spinnerIngreso = findViewById(R.id.spinner_ingresos);
         List<Categoria> categorias = new ArrayList<>();
@@ -99,10 +138,14 @@ public class RegistrarIngresos extends AppCompatActivity {
         };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerIngreso.setAdapter(adapter);
-
     }
 
-
+    /**
+     * Carga una lista de categorías de tipo ingreso desde un archivo.
+     * Lee las categorías desde un archivo y filtra solo las de tipo ingreso.
+     *
+     * @return Lista de categorías de tipo ingreso.
+     */
     private List<Categoria> cargarListaCategorias(){
         List<Categoria> listaCategoriaIngresos = new ArrayList<>();
         try {
@@ -120,6 +163,10 @@ public class RegistrarIngresos extends AppCompatActivity {
         return listaCategoriaIngresos;
     }
 
+    /**
+     * Inicializa el Spinner para seleccionar la repetición de ingresos.
+     * Configura el adaptador con opciones predefinidas y ajusta el color del texto en función de la selección.
+     */
     private void inicializarSpinnerRepeticion() {
         Spinner spinnerRepeticion = findViewById(R.id.spinner_ingresos_repeticion);
         String[] repeticiones = {"Seleccione una opción", "Sin Repetición", "Mes"};
@@ -145,6 +192,9 @@ public class RegistrarIngresos extends AppCompatActivity {
         spinnerRepeticion.setAdapter(adapter);
     }
 
+    /**
+     * Inicializa referencias a elementos de la UI para gestionar fechas de ingreso.
+     */
     private void inicializarReferencias() {
         txtFechaFinIngreso = findViewById(R.id.txtFechaFinIngreso);
         txtInicioFechaIngreso = findViewById(R.id.txtFechaInicioIngreso);
@@ -165,9 +215,11 @@ public class RegistrarIngresos extends AppCompatActivity {
                 ventanaFecha(txtInicioFechaIngreso);
             }
         });
-
     }
 
+    /**
+     * Muestra diálogo para seleccionar fecha final.
+     */
     private void dialogFechaFin(){
         dialog = new Dialog(RegistrarIngresos.this);
         dialog.setContentView(R.layout.dialog_seleccion_fecha);
@@ -194,6 +246,9 @@ public class RegistrarIngresos extends AppCompatActivity {
         });
     }
 
+    /**
+     * Muestra un diálogo de selección de fecha y actualiza el TextView proporcionado con la fecha elegida en formato AAAA-MM-DD.
+     */
     private void ventanaFecha(TextView txtview){
         final Calendar c = Calendar.getInstance();
         dia = c.get(Calendar.DAY_OF_MONTH);
@@ -260,7 +315,12 @@ public class RegistrarIngresos extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Registra un nuevo ingreso.
+     *
+     * Obtiene datos de la UI, valida y crea un objeto Ingreso.
+     * Guarda el ingreso y muestra un mensaje de confirmación o error.
+     */
     private void RegistrarDatosIngresos() {
         Context context = this;
         Spinner spinnerCategoria = findViewById(R.id.spinner_ingresos);
@@ -298,6 +358,9 @@ public class RegistrarIngresos extends AppCompatActivity {
         });
     }
 
+    /**
+     * Inicia el registro de ingresos al reanudarse la actividad.
+     */
     @Override
     protected void onResume() {
         super.onResume();

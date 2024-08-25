@@ -44,7 +44,7 @@ public class Categoria implements Serializable {
     /**
      * El nombre del archivo, donde se almacenará información
      */
-    private static final String nomArchivo = "category.ser";
+    private static final String nomArchivo = "CATEGORIAs.ser";
 
     /**
      * <h3>Constructor de la clase Categoria</h3>

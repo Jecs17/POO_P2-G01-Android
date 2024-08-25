@@ -41,10 +41,34 @@ import modelo.movimiento.Gasto;
 import modelo.movimiento.Ingreso;
 import modelo.movimiento.Movimiento;
 
+/**
+ * Actividad para el registro de ingresos.
+ * <p>
+ * Maneja la interfaz de usuario para registrar ingresos, incluyendo la visualización de datos y la interacción con el usuario.
+ * </p>
+ */
 public class IngresoActivity extends AppCompatActivity {
 
+    /**
+     * Lista de ingresos que se mostrarán y manejarán en esta actividad.
+     */
     private List<Ingreso> listaIngreso;
+
+    /**
+     * Campo de entrada de texto para el código de ingreso.
+     */
     TextInputEditText txtCodigo;
+
+
+    /**
+     * Inicializa la actividad de registro de ingresos.
+     * <p>
+     * Configura la vista, los elementos de la interfaz de usuario, y los listeners necesarios para registrar ingresos.
+     * También ajusta el padding para tener en cuenta las barras del sistema.
+     * </p>
+     *
+     * @param savedInstanceState Estado guardado de la actividad, si está disponible.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +98,13 @@ public class IngresoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Configura el botón para registrar un nuevo ingreso.
+     * <p>
+     * Asocia un `OnClickListener` al botón de registro de ingresos (`btnRegistrarIngreso`).
+     * Cuando el botón es presionado, se inicia una nueva actividad (`RegistrarIngresos`) para registrar un ingreso.
+     * </p>
+     */
     private void vistaRegistrarIngreso() {
         Button btnRegistroIngreso = findViewById(R.id.btnRegistrarIngreso);
 
@@ -86,7 +117,13 @@ public class IngresoActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Configura el botón para finalizar un ingreso.
+     * <p>
+     * Asocia un `OnClickListener` al botón de finalizar ingreso (`btnFinalizarIngreso`).
+     * Cuando el botón es presionado, se muestra un diálogo para ingresar la fecha de finalización del ingreso.
+     * </p>
+     */
     private void vistaFinalizarIngreso() {
         Button btnFinalizarIngreso = findViewById(R.id.btnFinalizarIngreso);
 
@@ -98,6 +135,16 @@ public class IngresoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Muestra un diálogo para ingresar un código único asociado a un ingreso.
+     * <p>
+     * Este método infla una vista personalizada para el diálogo, que incluye un campo de texto para ingresar un código.
+     * Se agrega un `TextWatcher` al campo de texto para eliminar los errores cuando el usuario comienza a escribir.
+     * El diálogo tiene dos botones: "Aceptar" y "Cancelar".
+     * Al presionar "Aceptar", se valida el código ingresado y, si es válido, se procesa el ingreso seleccionado.
+     * Si el código es inválido o no se ingresa un código, se muestra un mensaje de error adecuado.
+     * </p>
+     */
     private void mostrarDialogoFechaFinIngreso() {
         LayoutInflater layoutInflater = getLayoutInflater();
         View dialogCodigoView = layoutInflater.inflate(R.layout.dialog_ingresar_codigo, null);
@@ -182,6 +229,13 @@ public class IngresoActivity extends AppCompatActivity {
         textInputLayout.setError("¡Código no existe!");
     }
 
+    /**
+     * Verifica si un código de ingreso está presente en la lista de ingresos.
+     *
+     * @param codigoIngreso El código único del ingreso.
+     * @param ingresos La lista de ingresos a verificar.
+     * @return {@code true} si el código existe, {@code false} en caso contrario.
+     */
     private boolean verificarCodigoExiste(int codigoIngreso, List<Ingreso> ingresos) {
         for (Ingreso ingreso : ingresos) {
             if (ingreso.getCodigoUnico() == codigoIngreso) {
@@ -191,6 +245,12 @@ public class IngresoActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Procesa el ingreso con el código dado y muestra sus detalles en un diálogo.
+     * Muestra un mensaje de error si el ingreso no se encuentra.
+     *
+     * @param codigoSeleccionado El código del ingreso a procesar.
+     */
     private void procesarIngresoSeleccionado(int codigoSeleccionado) {
         Ingreso ingresoSeleccionado = buscarIngresoPorCodigo(codigoSeleccionado);
         if (ingresoSeleccionado != null) {
@@ -200,6 +260,12 @@ public class IngresoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Muestra un diálogo con los datos del ingreso seleccionado.
+     * Permite modificar el ingreso si se confirma una alerta sobre la fecha.
+     *
+     * @param ingresoSeleccionado El ingreso cuyas datos se mostrarán en el diálogo.
+     */
     private void mostrarDialogoDatosIngreso(Ingreso ingresoSeleccionado) {
         LinearLayout linearLayout = crearLayoutDatosIngreso(ingresoSeleccionado);
 
@@ -249,6 +315,14 @@ public class IngresoActivity extends AppCompatActivity {
         alertDialog1.show();
     }
 
+    /**
+     * Crea un `LinearLayout` que muestra los datos del ingreso seleccionado.
+     * Incluye información como código, valor neto, descripción, repetición,
+     * fecha de inicio y fecha de fin, y un botón para modificar la fecha de fin.
+     *
+     * @param ingresoSeleccionado El ingreso cuyas datos se mostrarán en el `LinearLayout`.
+     * @return Un `LinearLayout` con los datos del ingreso y un botón para modificar la fecha de fin.
+     */
     private LinearLayout crearLayoutDatosIngreso(Ingreso ingresoSeleccionado) {
         LinearLayout linearLayout = new LinearLayout(IngresoActivity.this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -293,6 +367,12 @@ public class IngresoActivity extends AppCompatActivity {
         return linearLayout;
     }
 
+    /**
+     * Crea un `TextView` con el texto especificado y un padding vertical.
+     *
+     * @param texto El texto que se mostrará en el `TextView`.
+     * @return Un `TextView` con el texto proporcionado y padding vertical.
+     */
     private TextView crearTextView(String texto) {
         TextView textView = new TextView(IngresoActivity.this);
         textView.setText(texto);
@@ -300,6 +380,13 @@ public class IngresoActivity extends AppCompatActivity {
         return textView;
     }
 
+    /**
+     * Modifica el ingreso seleccionado con los datos actualizados en el `LinearLayout`.
+     * Actualiza el ingreso en el archivo de movimientos y muestra un mensaje de éxito o error.
+     *
+     * @param ingresoSeleccionado El ingreso que se desea modificar.
+     * @param linearLayout El `LinearLayout` que contiene los datos actualizados.
+     */
     private void modificarIngreso(Ingreso ingresoSeleccionado, LinearLayout linearLayout) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -316,6 +403,14 @@ public class IngresoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Verifica si la fecha de fin proporcionada es mayor que la fecha de inicio del ingreso seleccionado.
+     * Muestra un mensaje de error si la fecha de fin no es válida.
+     *
+     * @param ingresoSeleccionado El ingreso cuyo rango de fechas se debe verificar.
+     * @param linearLayout El `LinearLayout` que contiene la fecha de fin proporcionada.
+     * @return {@code true} si la fecha de fin es mayor que la fecha de inicio; {@code false} en caso contrario.
+     */
     private boolean esFechaMayor(Ingreso ingresoSeleccionado, LinearLayout linearLayout) {
         boolean esMayor;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -337,7 +432,11 @@ public class IngresoActivity extends AppCompatActivity {
         return esMayor;
     }
 
-
+    /**
+     * Muestra un `DatePickerDialog` para seleccionar una fecha y actualiza el `TextView` con la fecha seleccionada.
+     *
+     * @param txtview El `TextView` que se actualizará con la fecha seleccionada en el formato "yyyy-MM-dd".
+     */
     private void ventanaFecha(TextView txtview){
         final Calendar c = Calendar.getInstance();
         int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -357,13 +456,21 @@ public class IngresoActivity extends AppCompatActivity {
         datePD.show();
     }
 
-
+    /**
+     * Se llama cuando la actividad se reanuda después de estar en pausa.
+     * Este método llama al método `llenarTabla` para actualizar la tabla con datos actuales.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         llenarTabla();
     }
 
+    /**
+     * Carga una lista de ingresos desde un archivo de movimientos.
+     *
+     * @return Lista de objetos {@link Ingreso} cargados.
+     */
     public List<Ingreso> cargarListaIngresos() {
         List<Ingreso> listaIngreso = new ArrayList<>();
         try {
@@ -381,6 +488,11 @@ public class IngresoActivity extends AppCompatActivity {
         return listaIngreso;
     }
 
+    /**
+     * Limpia todas las filas de una tabla, excepto la fila de encabezado.
+     *
+     * @param table El {@link TableLayout} que se va a limpiar.
+     */
     public static void cleanTable(TableLayout table) {
         int childCount = table.getChildCount();
         if (childCount > 1) {
@@ -388,6 +500,14 @@ public class IngresoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Llena la tabla con los ingresos cargados.
+     * Cada fila de la tabla muestra los detalles de un ingreso,
+     * incluyendo código, fecha de inicio, categoría, valor,
+     * descripción, fecha de fin y tipo de repetición.
+     * También añade un botón para eliminar cada ingreso,
+     * con una confirmación de eliminación.
+     */
     private void llenarTabla() {
         listaIngreso = cargarListaIngresos();
         Log.d("IngresoActivity", "Número de ingresos cargados: " + listaIngreso.size());
@@ -478,6 +598,13 @@ public class IngresoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Elimina un ingreso de la lista y del almacenamiento.
+     * Intenta eliminar el ingreso usando el método `eliminarMovimiento`.
+     * Si la eliminación es exitosa, también lo elimina de la lista local `listaIngreso`.
+     *
+     * @param ingreso El objeto `Ingreso` a eliminar.
+     */
     private void eliminarIngreso(Ingreso ingreso) {
         boolean eliminado = Movimiento.eliminarMovimiento(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), ingreso);
         if (eliminado) {
@@ -488,6 +615,13 @@ public class IngresoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Busca un ingreso en la lista por su código único.
+     * Recorre la lista de ingresos y devuelve el ingreso que coincide con el código proporcionado.
+     *
+     * @param codigo El código único del ingreso a buscar.
+     * @return El objeto `Ingreso` correspondiente al código, o `null` si no se encuentra.
+     */
     public Ingreso buscarIngresoPorCodigo(int codigo) {
         for (Ingreso ingreso : listaIngreso) {
             if (ingreso.getCodigoUnico() == codigo) {

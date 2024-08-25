@@ -59,7 +59,7 @@ public class CuentaFinanciera implements Serializable {
     /**
      * Nombre del Archivo serializado de las CuentasFinancieras
      */
-    public static final String nomArchivo = "cuentas_financieras.ser";
+    public static final String nomArchivo = "CuentasFinancieras.ser";
     
     /**
      * <h3>Constructor de la clase CuentaFinanciera</h3>
