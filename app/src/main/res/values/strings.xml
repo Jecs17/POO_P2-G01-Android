@@ -85,6 +85,9 @@
     <string name="btn_fecha_inicio">Fecha Inicio Pago</string>
     <string name="btn_fecha_fin">Fecha Fin Pago</string>
 
+    <!--  String in the tablelayout  -->
+    <string name="tituloProyeccionGasto">Proyección de Gastos</string>
+
 
     <!--  String in the tablelayout  -->
     <string name="tabla_codigo">Código</string>
@@ -99,6 +102,8 @@
     <string name="tabla_descripcion">Descripción</string>
     <string name="tabla_fecha_prestamo">Fecha Préstamo</string>
     <string name="tabla_cuota">Cuota</string>
+    <string name="tabla_categorias">Categorías</string>
+    <string name="tabla_mes">MES</string>
 
     <!--  String in the accesibility button  -->
     <string name="btn_regresar_content">Botón de Regresar a la pestaña principal</string>

@@ -1,5 +1,6 @@
 package com.example.poo_p2_g01_android.ControladorReporte;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +21,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.poo_p2_g01_android.ControladorCategoria.CategoryActivity;
 import com.example.poo_p2_g01_android.IngresoActivity;
 import com.example.poo_p2_g01_android.R;
 
@@ -34,8 +36,8 @@ import java.util.List;
 import enums.TipoRepeticion;
 import modelo.cuenta.CuentaFinanciera;
 import modelo.cuenta.CuentaxPagar;
+import modelo.movimiento.Categoria;
 import modelo.movimiento.Gasto;
-import modelo.movimiento.Ingreso;
 import modelo.movimiento.Movimiento;
 
 /**
@@ -91,7 +93,7 @@ public class TablaReporteGasto extends AppCompatActivity {
      * {@link #mostrarTablaAnioActual()} según el tipo de tabla.
      */
     private void obtenerIntentExtra() {
-        lstGasto = cargarListaGastos();
+        lstGasto = cargarListaGastos(this);
         String tipoTabla = getIntent().getStringExtra("tipoTabla");
         Log.e("Ingreso Activity", tipoTabla+"");
         if (tipoTabla != null) {
@@ -235,7 +237,7 @@ public class TablaReporteGasto extends AppCompatActivity {
      *
      * @return Lista de gastos ordenados por fecha de inicio.
      */
-    private List<Gasto> ordenarGastos(List<Gasto> lstGasto) {
+    private static List<Gasto> ordenarGastos(List<Gasto> lstGasto) {
         List<Gasto> lstGastosOrdenados = new ArrayList<>(lstGasto);
 
         // Ordenar la lista usando un Comparator
@@ -591,10 +593,10 @@ public class TablaReporteGasto extends AppCompatActivity {
      *
      * @return Lista de objetos `Gasto` cargados desde los movimientos.
      */
-    private List<Gasto> cargarListaGastos() {
+    private static List<Gasto> cargarListaGastos(Context context) {
         List<Gasto> listaGasto = new ArrayList<>();
         try {
-            List<Movimiento> listaMovimiento = Movimiento.cargarMovimientos(this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
+            List<Movimiento> listaMovimiento = Movimiento.cargarMovimientos(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));
             Log.d("TablaReporteGasto", listaMovimiento.toString());
             for(Movimiento movimiento: listaMovimiento) {
                 if(movimiento instanceof Gasto) {
@@ -621,6 +623,42 @@ public class TablaReporteGasto extends AppCompatActivity {
             Log.e("TablaReporteGasto", "Error al cargar los datos de cuentaxcobrar "+ e.getMessage());
         }
         return listaCuenta;
+    }
+
+    /**
+     * Obtiene los gastos por mes y misma categoría.
+     *
+     * @param mes Mes para el cual se desean obtener los gastos.
+     * @param context Contexto donde se llama el método.
+     * @return Lista de gastos por categoría para el mes especificado.
+     */
+    public static List<Gasto> gastosPorMesYMismaCategoria(Month mes,Context context) {
+        List<Gasto> gastosTotalesPorCategoria = new ArrayList<>();
+        LocalDate fechaActual = LocalDate.now();
+        int anioActual = fechaActual.getYear();
+        LocalDate inicioMes = LocalDate.of(anioActual, mes, 1);
+        LocalDate finMesActual = inicioMes.withDayOfMonth(inicioMes.lengthOfMonth());
+        for (Categoria categoria : CategoryActivity.leerDatosGasto(context)) {
+            List<Gasto> gastosCategoria = new ArrayList<>();
+            double valorNeto = 0;
+            for (Gasto gasto : ordenarGastos(cargarListaGastos(context))) {
+                DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate fechaInicio = gasto.getFechaInicio();
+                LocalDate fechaFin = LocalDate.parse(gasto.getFechaFin(), formato);
+
+                if ((fechaInicio.isBefore(finMesActual) || fechaInicio.isEqual(finMesActual)) &&
+                        (fechaFin.isAfter(inicioMes) || fechaFin.isEqual(inicioMes))) {
+                    if (categoria.equals(gasto.getCategoria())) {
+                        gastosCategoria.add(gasto);
+                    }
+                }
+            }
+            for (Gasto gasto : gastosCategoria) {
+                valorNeto += gasto.getValorNeto();
+            }
+            gastosTotalesPorCategoria.add(new Gasto(categoria, valorNeto, "", LocalDate.of(anioActual, mes, 1), null, TipoRepeticion.SIN_REPETICION));
+        }
+        return gastosTotalesPorCategoria;
     }
 
 }
