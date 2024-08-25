@@ -42,6 +42,7 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
     private Button btnRegistrarPersonaBanco, btnRegistrarCF;
     public static boolean esAcreedor = false;
     private Context context = this;
+    private String nombreObjetoRecuperado = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,11 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
     @Override
     protected void onResume() {
         super.onResume();
+        //TODO: REGRESO DEL VALOR DEL NOMBRE DEL OBJETO
+        Intent intent = getIntent();
+        nombreObjetoRecuperado = intent.getStringExtra("nombre");
+        editIdentificacion.setText(nombreObjetoRecuperado);
+        //
         comprobarIdentificacion();
         registrarDatos();
     }
@@ -194,18 +200,21 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
         btnDPersona.setOnClickListener((v) -> {
             Intent intent = new Intent( RegistrarCuentasFinancieras.this, RegistrarPersonaBanco.class);
             RegistrarPersonaBanco.esPersona = true;
+            intent.putExtra("desdeCuenta",true);
             startActivity(intent);
             dialogRegistrarPB.dismiss();
             editIdentificacion.setText("");
+            finish();
         });
 
         btnDBanco.setOnClickListener((v) -> {
             Intent intent = new Intent( RegistrarCuentasFinancieras.this, RegistrarPersonaBanco.class);
             RegistrarPersonaBanco.esPersona = false;
+            intent.putExtra("desdeCuenta",true);
             startActivity(intent);
             dialogRegistrarPB.dismiss();
             editIdentificacion.setText("");
-
+            finish();
         });
 
     }
@@ -220,8 +229,10 @@ public class RegistrarCuentasFinancieras extends AppCompatActivity implements Vi
                 btnRegistrarPersonaBanco.setOnClickListener(v -> {
                     Intent intent = new Intent( RegistrarCuentasFinancieras.this, RegistrarPersonaBanco.class);
                     RegistrarPersonaBanco.esPersona = true;
+                    intent.putExtra("desdeCuenta",true);
                     startActivity(intent);
                     editIdentificacion.setText("");
+                    finish();
                 });
             } else {
                 btnRegistrarPersonaBanco.setOnClickListener(v -> {

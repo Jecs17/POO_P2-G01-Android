@@ -1,6 +1,8 @@
 package com.example.poo_p2_g01_android;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.LabeledIntent;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -34,6 +36,7 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
     final boolean[] comprobacion = new boolean[]{false, false, false, false, false, false};
     private ColorStateList color_mal;
     private ColorStateList color_bien;
+    boolean desdeCuenta = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
         color_bien = ColorStateList.valueOf(this.getColor(R.color.md_theme_secondaryFixed_highContrast));
         regresar();
         cambiarVista();
+        Intent intent = getIntent();
+        desdeCuenta = intent.getBooleanExtra("desdeCuenta", false);
     }
 
     @Override
@@ -96,6 +101,10 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
     private void regresar(){
         btnRegreso = findViewById(R.id.btnRegresarRegistroPB);
         btnRegreso.setOnClickListener(v -> {
+            if(desdeCuenta){
+                Intent intentCuenta = new Intent(this, RegistrarCuentasFinancieras.class);
+                startActivity(intentCuenta);
+            }
             finish();
         });
     }
@@ -131,6 +140,11 @@ public class RegistrarPersonaBanco extends AppCompatActivity implements View.OnF
 
                 if(guardado){
                     Toast.makeText(getApplicationContext(),"Datos guardados", Toast.LENGTH_SHORT).show();
+                    if(desdeCuenta){
+                        Intent intentCuenta = new Intent(context, RegistrarCuentasFinancieras.class);
+                        intentCuenta.putExtra("nombre",nombre);
+                        startActivity(intentCuenta);
+                    }
                     finish();
                 }
             }
